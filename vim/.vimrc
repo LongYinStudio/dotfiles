@@ -13,4 +13,5 @@ set number "显示行号
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree' "vim旁边的路径目录
 call plug#end()
-
+"nerdtree设置快捷键Ctrl+e打开
+map <silent> <C-e> :NERDTreeToggle<CR>
