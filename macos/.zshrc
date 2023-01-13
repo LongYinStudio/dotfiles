@@ -1,8 +1,9 @@
+ZSH_DISABLE_COMPFIX="true"    # 有的版本有引号， 有的版本无引号，自己尝试
 export TERM='xterm-256color'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/longyinstudio/.oh-my-zsh"
+export ZSH="/Users/longyinstudio/.oh-my-zsh"
 
 # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
 # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -47,10 +48,10 @@ setopt HIST_IGNORE_DUPS #如果连续输入的命令相同，历史纪录中只�
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # 插件配置，zsh-syntax-highlighting和zsh-autosuggestions需要用包管理器安装
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract z themes tmux)
+plugins=(git sudo extract z themes tmux)
 # mac可能需要source一下(zsh-syntax-highlighting和zsh-autosuggestions)
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
