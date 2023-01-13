@@ -2,8 +2,7 @@ ZSH_DISABLE_COMPFIX="true"    # 有的版本有引号， 有的版本无引号�
 export TERM='xterm-256color'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/longyinstudio/.oh-my-zsh"
+export ZSH="/home/longyinstudio/.oh-my-zsh" #oh-my-zsh安装目录
 
 # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
 # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -35,7 +34,6 @@ export SAVEHIST=10000 #注销后保存的历史纪录条目数量
 setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
 setopt HIST_IGNORE_DUPS #如果连续输入的命令相同，历史纪录中只保留一个
 
-
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
@@ -47,11 +45,8 @@ setopt HIST_IGNORE_DUPS #如果连续输入的命令相同，历史纪录中只�
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# 插件配置，zsh-syntax-highlighting和zsh-autosuggestions需要用包管理器安装
-plugins=(git sudo extract z themes tmux)
-# mac可能需要source一下(zsh-syntax-highlighting和zsh-autosuggestions)
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# 插件配置，zsh-syntax-highlighting和zsh-autosuggestions安装/README.md安装
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract z tmux)
 
 source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
@@ -69,5 +64,4 @@ source $ZSH/oh-my-zsh.sh
 #fi
 
 # 设置别名(可以覆盖其他的)，run "alias"可以查看系统，插件，主题等等所有别名
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
