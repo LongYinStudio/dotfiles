@@ -31,3 +31,4 @@ map <leader>f :NERDTreeFind<CR>
 
 nmap <leader>w :w<CR> ";w --> 保存
 nmap <leader>q :q<CR> ";q --> 退出
+nmap <leader>t :set nohlsearch<CR> --> 退出搜索高亮
