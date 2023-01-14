@@ -2,7 +2,7 @@ ZSH_DISABLE_COMPFIX="true"    # 有的版本有引号， 有的版本无引号�
 export TERM='xterm-256color'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
 
-export ZSH="/home/longyinstudio/.oh-my-zsh" #oh-my-zsh安装目录
+export ZSH="/home/longyinstudio/.oh-my-zsh" # oh-my-zsh安装目录
 
 # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
 # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -65,3 +65,4 @@ source $ZSH/oh-my-zsh.sh
 
 # 设置别名(可以覆盖其他的)，run "alias"可以查看系统，插件，主题等等所有别名
 alias zshconfig="vim ~/.zshrc"
+alias sz="source ~/.zshrc"
