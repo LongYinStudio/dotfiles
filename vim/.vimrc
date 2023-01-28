@@ -37,7 +37,7 @@ nmap <leader>t :set nohlsearch<CR> --> 退出搜索高亮
 
 "snippets快捷键
 let g:UltiSnipsExpandTrigger="<c-t>"
-let g:UltiSnipsJumpForwardTrigger="<c-a>"
-let g:UltiSnipsJumpBackwardTrigger="<c-d>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-a>"
 let g:UltiSnipsEditSplit="vertical"
 " let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/'] 自定义snippets
