@@ -22,6 +22,8 @@ set clipboard=unnamed      " Vim -> 系统剪切版
 "先安装 vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree' "vim旁边的路径目录
+Plug 'SirVer/ultisnips' "snippets
+Plug 'honza/vim-snippets'
 call plug#end()
 
 let mapleader=";" "定义leader键
@@ -32,3 +34,10 @@ map <leader>f :NERDTreeFind<CR>
 nmap <leader>w :w<CR> ";w --> 保存
 nmap <leader>q :q<CR> ";q --> 退出
 nmap <leader>t :set nohlsearch<CR> --> 退出搜索高亮
+
+"snippets快捷键
+let g:UltiSnipsExpandTrigger="<c-t>"
+let g:UltiSnipsJumpForwardTrigger="<c-a>"
+let g:UltiSnipsJumpBackwardTrigger="<c-d>"
+let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/'] 自定义snippets
