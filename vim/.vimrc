@@ -24,6 +24,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree' "vim旁边的路径目录
 Plug 'SirVer/ultisnips' "snippets
 Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs' "自动补全()、{}等等
 call plug#end()
 
 let mapleader=";" "定义leader键
