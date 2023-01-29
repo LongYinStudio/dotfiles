@@ -12,7 +12,7 @@ set number "显示行号
 set tabstop=4 "按tap键自动缩进4个空格
 set softtabstop=4 "tap转为4个空格
 set shiftwidth=4 "按》增加一级缩进 按《取消一级缩机 按==取消全部缩进,每一级的字符数
-set autoindent "换行自动缩进
+set autoindent "换行自动缩
 set cindent "按照C语言语法缩进,自动调整缩机长度
 set cursorline "光标所在行高亮
 set ruler "在状态栏显示光标的当前位置（位于哪一行哪一列）
@@ -25,6 +25,7 @@ Plug 'preservim/nerdtree' "vim旁边的路径目录
 Plug 'SirVer/ultisnips' "snippets
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs' "自动补全()、{}等等
+Plug 'easymotion/vim-easymotion' "跳转
 call plug#end()
 
 let mapleader=";" "定义leader键
@@ -42,3 +43,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-d>"
 let g:UltiSnipsJumpBackwardTrigger="<c-a>"
 let g:UltiSnipsEditSplit="vertical"
 " let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/'] 自定义snippets
+
+" easymotion快捷键
+nmap ss <Plug>(easymotion-s2)
