@@ -2,7 +2,7 @@ ZSH_DISABLE_COMPFIX="true"    # 有的版本有引号， 有的版本无引号�
 export TERM='xterm-256color'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
 
-export ZSH="/home/longyinstudio/.oh-my-zsh" # oh-my-zsh安装目录
+export ZSH="/home/longyinstudio/.oh-my-zsh" #oh-my-zsh安装目录
 
 # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
 # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -46,7 +46,7 @@ setopt HIST_IGNORE_DUPS #如果连续输入的命令相同，历史纪录中只�
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # 插件配置，zsh-syntax-highlighting和zsh-autosuggestions安装/README.md安装
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract z tmux)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract z tmux vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
@@ -65,4 +65,14 @@ source $ZSH/oh-my-zsh.sh
 
 # 设置别名(可以覆盖其他的)，run "alias"可以查看系统，插件，主题等等所有别名
 alias zshconfig="vim ~/.zshrc"
-alias sz="source ~/.zshrc"
+
+export PATH=$PATH:/home/longyinstudio/dev-tools/node-v18.13.0-linux-x64/bin
+export JAVA_HOME=/home/longyinstudio/dev-tools/jdk1.8.0_351
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$JAVA_HOME/bin:$PATH                                  
+export JRE_HOME=$JAVA_HOME/jre 
+export PATH=/home/longyinstudio/bin:$PATH                                  
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
