@@ -1,4 +1,4 @@
-> ubuntu
+> ubuntu `别卸载系统软件，不上autoremove时可能系统崩坏`
 
 1. clash: 先下载客户端 [Fndroid/clash-win-docs-new (github.com)](https://github.com/Fndroid/clash-win-docs-new)，再运行（可自行创建clash.desktop，也可以开机自启）；.zshrc或.bashrc添加 （端口根据clash for windows定）
 
