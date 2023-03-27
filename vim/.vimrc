@@ -18,6 +18,7 @@ set cursorline "光标所在行高亮
 set ruler "在状态栏显示光标的当前位置（位于哪一行哪一列）
 set clipboard=unnamedplus    " 使用系统剪切版 -> Vim
 set clipboard=unnamed      " Vim -> 系统剪切版
+set ignorecase smartcase " 有一个或多个大写字母，进行大写敏感搜索
 
 "先安装 vim-plug
 call plug#begin('~/.vim/plugged')
