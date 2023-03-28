@@ -1,4 +1,5 @@
 "set t_Co=256 记得注释或删除
+set encoding=UTF-8
 if has("termguicolors")
 	set termguicolors
 endif
@@ -27,6 +28,8 @@ Plug 'SirVer/ultisnips' "snippets
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs' "自动补全()、{}等等
 Plug 'easymotion/vim-easymotion' "跳转
+Plug 'vim-airline/vim-airline' "airline
+Plug 'vim-airline/vim-airline-themes' "airline-theme
 call plug#end()
 
 let mapleader=";" "定义leader键
@@ -47,3 +50,18 @@ let g:UltiSnipsEditSplit="vertical"
 
 " easymotion快捷键
 nmap ss <Plug>(easymotion-s2)
+
+"vim-airline
+set laststatus=2 " 始终显示状态栏
+let g:airline#extensions#tabline#enabled=1 " 开启 tab 栏
+let g:airline_theme='simple' "airline theme
+
+nmap <leader>1 <Plug>AirlineSelectTab1 ";1 --> tab1
+nmap <leader>2 <Plug>AirlineSelectTab2 ";2 --> tab2
+nmap <leader>3 <Plug>AirlineSelectTab3 ";3 --> tab3
+nmap <leader>4 <Plug>AirlineSelectTab4 ";4 --> tab4
+nmap <leader>5 <Plug>AirlineSelectTab5 ";5 --> tab5
+nmap <leader>6 <Plug>AirlineSelectTab6 ";6 --> tab6
+nmap <leader>7 <Plug>AirlineSelectTab7 ";7 --> tab7
+nmap <leader>8 <Plug>AirlineSelectTab8 ";8 --> tab8
+nmap <leader>9 <Plug>AirlineSelectTab9 ";9 --> tab9
