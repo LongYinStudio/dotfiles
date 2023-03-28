@@ -1,4 +1,4 @@
-"set t_Co=256 记得注释或删除
+set t_Co=256 "记得注释或删除
 set encoding=UTF-8
 if has("termguicolors")
 	set termguicolors
@@ -30,6 +30,7 @@ Plug 'jiangmiao/auto-pairs' "自动补全()、{}等等
 Plug 'easymotion/vim-easymotion' "跳转
 Plug 'vim-airline/vim-airline' "airline
 Plug 'vim-airline/vim-airline-themes' "airline-theme
+Plug 'ryanoasis/vim-devicons' "图标
 call plug#end()
 
 let mapleader=";" "定义leader键
@@ -54,7 +55,7 @@ nmap ss <Plug>(easymotion-s2)
 "vim-airline
 set laststatus=2 " 始终显示状态栏
 let g:airline#extensions#tabline#enabled=1 " 开启 tab 栏
-let g:airline_theme='simple' "airline theme
+let g:airline_theme='simple' " airline theme
 
 nmap <leader>1 <Plug>AirlineSelectTab1 ";1 --> tab1
 nmap <leader>2 <Plug>AirlineSelectTab2 ";2 --> tab2
