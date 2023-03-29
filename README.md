@@ -20,6 +20,6 @@
    
 2.  vim
    
-   - 下载.vimrc放在~里，github搜索安装 `vim-plug`
+   - 下载.vimrc和.vim放在~里，github搜索安装 `vim-plug`
    - onedark主题配置：autoload/onedark.vim放在\~/.vim/autoload里，colors/onedark.vim放在\~/.vim/colors里
    - 插件安装：在.vim里用 `:PlugInstall`
