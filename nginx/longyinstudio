@@ -1,5 +1,6 @@
 server {
 	listen 443 ssl;
+	listen 80;
 
 	server_name longyinstudio.cn www.longyinstudio.cn;
 
@@ -16,10 +17,4 @@ server {
 	location / {
 		try_files $uri $uri/ =404;
 	}
-}
-
-server {
-	listen 80;
-	server_name longyinstudio.cn www.longyinstudio.cn;
-	rewrite ^(.*) https://$server_name$1 permanent;
 }
