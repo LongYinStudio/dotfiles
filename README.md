@@ -3,7 +3,9 @@
 
 ## 备注
 
-1. oh-my-zsh
+1. zsh/oh-my-zsh
+   - zsh安装参照网上教程
+   
    - zsh/my.zsh-theme是自定义的主题，zsh/.zshrc是配置文件
    
    - 1. 直接下载.zshrc放在~里
