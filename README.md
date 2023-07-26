@@ -1,27 +1,43 @@
 # myConfigFiles
-> 自己linux、macos的配置文件(.zshrc、.vimrc等等)
+
+> 自己 linux、macos 的配置文件(.zshrc、.vimrc 等等)
 
 ## 备注
 
 1. zsh/oh-my-zsh
-   - zsh安装参照网上教程
-   
-   - zsh/my.zsh-theme是自定义的主题，zsh/.zshrc是配置文件
-   
-   - 1. 直接下载.zshrc放在~里
-     
+
+   - zsh 安装参照网上教程
+
+   - zsh/my.zsh-theme 是自定义的主题，zsh/.zshrc 是配置文件
+
+   - 1. 直接下载.zshrc 放在~里
+
      2. 安装 `zsh-syntax-highlighting` 和 `zsh-autosuggestions` ：
-     
+
         执行 `git clone https://gitee.com/Annihilater/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` 安装 `zsh-syntax-highlighting`
-     
-        执行 `git clone https://gitee.com/phpxxo/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions` 安装 `zsh-autosuggestions` 
-     
-   - 主题放在\~/.oh-my-zsh/custom/themes或者\~/.oh-my-zsh/themes都行
-   
+
+        执行 `git clone https://gitee.com/phpxxo/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions` 安装 `zsh-autosuggestions`
+
+   - 主题
+
+     1. 自制主题(zsh/my.zsh-theme)放在\~/.oh-my-zsh/custom/themes 或者\~/.oh-my-zsh/themes 都行
+     2. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
+
    - <font color=red>export ZSH="/home/longyinstudio/.oh-my-zsh" 记得更换成自己的目录</font>
-   
-2.  vim
-   
-   - 下载.vimrc和.vim放在~里，github搜索安装 `vim-plug`
-   - onedark主题配置：autoload/onedark.vim放在\~/.vim/autoload里，colors/onedark.vim放在\~/.vim/colors里
-   - 插件安装：在.vim里用 `:PlugInstall`
+
+2. vim
+
+   - 下载.vimrc 和.vim 放在~里，github 搜索安装 `vim-plug`
+
+   - onedark 主题配置：autoload/onedark.vim 放在\~/.vim/autoload 里，colors/onedark.vim 放在\~/.vim/colors 里
+
+   - 插件安装：在.vim 里用 `:PlugInstall`
+
+
+3. neovim
+
+   - 安装 apt / brew / scoop等等包管理器直接可以安装，详细参考官网（[Home - Neovim](https://neovim.io/)）
+
+   - 将 nvim 复制到\~/.config/里
+   - neovim \~/.config/nvim/lua/plugins/plugins-setup.lua
+   - normal模式下:w就可以自动安装配置的插件
