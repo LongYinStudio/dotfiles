@@ -22,6 +22,10 @@ keymap.set("n", "<leader>nh", ":nohl<CR>")
 keymap.set("n", "<C-L>", ":bnext<CR>")
 keymap.set("n", "<C-H>", ":bprevious<CR>")
 
+-- bufferline 左右切换
+keymap.set("n", "<leader>h", ":BufferLineCyclePrev<CR>", opt)
+keymap.set("n", "<leader>l", ":BufferLineCycleNext<CR>", opt)
+
 -- ---------- 插件 ---------- ---
 -- nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
