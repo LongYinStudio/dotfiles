@@ -24,7 +24,7 @@ vim.cmd([[
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'folke/tokyonight.nvim' -- 主题
+  use 'navarasu/onedark.nvim' -- 主题
   use {
     'nvim-lualine/lualine.nvim',  -- 状态栏
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- 状态栏图标
@@ -36,6 +36,7 @@ return require('packer').startup(function(use)
     }
   }
   use "christoomey/vim-tmux-navigator" -- 用ctl-hjkl来定位窗口
+  use "nvim-treesitter/nvim-treesitter" -- 语法高亮
   use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
   use {
     "williamboman/mason.nvim",
