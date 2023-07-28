@@ -23,3 +23,6 @@ telescope.setup {
     file_ignore_patterns = {"./node_modules"},
   },
 }
+
+vim.cmd([[autocmd User TelescopePreviewerLoaded setlocal wrap]])
+

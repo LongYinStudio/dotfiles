@@ -51,6 +51,7 @@ return require('packer').startup(function(use)
   use "saadparwaiz1/cmp_luasnip"
   use "rafamadriz/friendly-snippets"
   use "hrsh7th/cmp-path" -- 文件路径
+  use "hrsh7th/cmp-cmdline" -- 补全底部命令行--->tab
 
   use "numToStr/Comment.nvim" -- gcc和gc注释
   use "windwp/nvim-autopairs" -- 自动补全括号
