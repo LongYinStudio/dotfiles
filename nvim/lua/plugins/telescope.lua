@@ -20,6 +20,6 @@ telescope.setup {
         ["l"] = actions.file_edit
       }
     },
-    file_ignore_patterns = {"./node_modules"}
+    file_ignore_patterns = {"./node_modules"},
   },
 }

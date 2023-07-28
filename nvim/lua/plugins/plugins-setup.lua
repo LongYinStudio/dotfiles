@@ -58,6 +58,8 @@ return require('packer').startup(function(use)
   use "akinsho/bufferline.nvim" -- buffer分割线
   use "lewis6991/gitsigns.nvim" -- 左则git提示
 
+  use({ "akinsho/toggleterm.nvim" })
+
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',  -- 文件检索
     requires = { {'nvim-lua/plenary.nvim'} }

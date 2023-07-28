@@ -4,6 +4,9 @@ local opt = vim.opt
 -- opt.relativenumber = true
 opt.number = true
 
+-- 设置'modifiable'选项为true
+opt.modifiable = true
+
 -- 缩进
 opt.tabstop = 2
 opt.shiftwidth = 2
