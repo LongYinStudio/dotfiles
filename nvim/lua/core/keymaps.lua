@@ -28,11 +28,11 @@ keymap.set("n", "<leader>l", ":BufferLineCycleNext<CR>", opt)
 
 -- ---------- 插件 ---------- ---
 -- nvim-lspconfig
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, bufopts)                             --定义
-vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, bufopts)                             --引用
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)                                 --重命名
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)                            --列出code action
-vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format { async = true } end, bufopts) --normal下格式
-vim.keymap.set("v", "<leader>cf", function() vim.lsp.buf.format { async = true } end, bufopts) --view下格式化
+keymap.set("n", "<leader>gd", vim.lsp.buf.definition, bufopts)                             --定义
+keymap.set("n", "<leader>gr", vim.lsp.buf.references, bufopts)                             --引用
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)                                 --重命名
+keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)                            --列出code action
+keymap.set("n", "<leader>cf", function() vim.lsp.buf.format { async = true } end, bufopts) --normal下格式
+keymap.set("v", "<leader>cf", function() vim.lsp.buf.format { async = true } end, bufopts) --view下格式化
 -- nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
