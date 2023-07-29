@@ -66,6 +66,8 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
+  use "mg979/vim-visual-multi" -- 多光标
+
   if packer_bootstrap then
     require('packer').sync()
   end
