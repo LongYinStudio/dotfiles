@@ -6,7 +6,7 @@
 
 1. zsh/oh-my-zsh
 
-   - zsh 安装参照网上教程
+   - zsh 和 oh-my-zsh 安装参照网上教程
 
    - zsh/my.zsh-theme 是自定义的主题，zsh/.zshrc 是配置文件
 
