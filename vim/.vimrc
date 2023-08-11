@@ -21,6 +21,9 @@ set clipboard=unnamedplus    " 使用系统剪切版 -> Vim
 set clipboard=unnamed      " Vim -> 系统剪切版
 set ignorecase smartcase " 有一个或多个大写字母，进行大写敏感搜索
 
+" 快捷退出insert
+inoremap jk <Esc>  
+
 "先安装 vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree' "vim旁边的路径目录
@@ -40,7 +43,7 @@ map <leader>f :NERDTreeFind<CR>
 
 nmap <leader>w :w<CR> ";w --> 保存
 nmap <leader>q :q<CR> ";q --> 退出
-nmap <leader>t :set nohlsearch<CR> --> 退出搜索高亮
+nmap <leader>nh :set nohlsearch<CR> "--> 退出搜索高亮
 
 "snippets快捷键
 let g:UltiSnipsExpandTrigger="<c-t>"
@@ -66,3 +69,8 @@ nmap <leader>6 <Plug>AirlineSelectTab6 ";6 --> tab6
 nmap <leader>7 <Plug>AirlineSelectTab7 ";7 --> tab7
 nmap <leader>8 <Plug>AirlineSelectTab8 ";8 --> tab8
 nmap <leader>9 <Plug>AirlineSelectTab9 ";9 --> tab9
+
+set nocompatible              " 去除编辑mode限制
+filetype off                  " 移除默认的filetype检测，必须位于插件包括之前
+
+" 配置vim-devicons
