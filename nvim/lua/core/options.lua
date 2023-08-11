@@ -13,6 +13,9 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 
+-- 补全增强
+opt.wildmenu = true
+
 -- 防止包裹
 opt.wrap = false
 
