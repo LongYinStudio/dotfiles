@@ -41,3 +41,7 @@
    - 将 nvim 复制到\~/.config/里
    - neovim \~/.config/nvim/lua/plugins/plugins-setup.lua
    - normal模式下:w就可以自动安装配置的插件
+
+---
+
+TODO:解决winbar symbol不显示

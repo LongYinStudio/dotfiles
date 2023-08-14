@@ -68,8 +68,15 @@ return require('packer').startup(function(use)
   }
 
   use "mg979/vim-visual-multi" -- 多光标
-  
-  use {'fgheng/winbar.nvim'}
+
+  use {
+    'fgheng/winbar.nvim',
+    requires = {
+      "SmiteshP/nvim-gps"
+    }
+  }
+  --use {'brunuh/winbar.nvim'}
+  --use {"SmiteshP/nvim-gps"}
 
   if packer_bootstrap then
     require('packer').sync()
