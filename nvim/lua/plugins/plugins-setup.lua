@@ -68,6 +68,8 @@ return require('packer').startup(function(use)
   }
 
   use "mg979/vim-visual-multi" -- 多光标
+  
+  use {'fgheng/winbar.nvim'}
 
   if packer_bootstrap then
     require('packer').sync()
