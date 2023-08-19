@@ -50,9 +50,9 @@
    
      1. Lazy：normal模式下:w就可以自动安装配置的插件 || :Lazy呼出Lazy管理界面
      1. packer：删除plugins-setup.lua，将plugins-setup.backup.lua重命名为plugins-setup.lua，normal模式下:w就可以自动安装配置的插件
-   
-
 
 ---
 
-TODO:解决winbar symbol不显示
+# Todo
+
+- [ ] 解决 dropbar除lua其他语言还不显示symbol
