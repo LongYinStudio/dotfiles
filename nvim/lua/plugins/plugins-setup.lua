@@ -58,14 +58,15 @@ local plugins = {
 
   "mg979/vim-visual-multi", -- 多光标
 
-  {
-    'fgheng/winbar.nvim',
-    dependencies = {
-      "SmiteshP/nvim-gps"
-    }
-  }
+  -- {
+  --   'fgheng/winbar.nvim',
+  --   dependencies = {
+  --     "SmiteshP/nvim-gps"
+  --   }
+  -- }
   --'brunuh/winbar.nvim'
   --"SmiteshP/nvim-gps"
+  { 'Bekaboo/dropbar.nvim' },
 }
 local opts = {} -- 注意要定义这个变量
 
