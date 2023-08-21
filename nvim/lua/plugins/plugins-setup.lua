@@ -16,7 +16,6 @@ local plugins = {
   'nvim-tree/nvim-web-devicons',
   {
     'nvim-lualine/lualine.nvim',                              -- 状态栏
-    -- dependencies = { 'kyazdani42/nvim-web-devicons', opt = true } -- 状态栏图标
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true } -- 状态栏图标
   },
   {
@@ -58,15 +57,8 @@ local plugins = {
 
   "mg979/vim-visual-multi", -- 多光标
 
-  -- {
-  --   'fgheng/winbar.nvim',
-  --   dependencies = {
-  --     "SmiteshP/nvim-gps"
-  --   }
-  -- }
-  --'brunuh/winbar.nvim'
-  --"SmiteshP/nvim-gps"
   { 'Bekaboo/dropbar.nvim' },
+
 }
 local opts = {} -- 注意要定义这个变量
 

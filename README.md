@@ -55,4 +55,4 @@
 
 # Todo
 
-- [ ] 解决 dropbar除lua其他语言还不显示symbol
+- [ ] 新加nvim插件
