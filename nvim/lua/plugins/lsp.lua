@@ -1,3 +1,4 @@
+
 require("mason").setup({
   ui = {
     icons = {
@@ -14,12 +15,15 @@ local languages = {
   "cssls",
   "tsserver",
   "vuels",
+  "volar",
   "clangd",
+  "jsonls",
 }
 
 require("mason-lspconfig").setup({
   -- 确保安装，根据需要填写
   ensure_installed = languages,
+  automatic_installation = true, --自动安装
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
