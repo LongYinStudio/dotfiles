@@ -1,4 +1,3 @@
-
 require("mason").setup({
   ui = {
     icons = {
@@ -12,12 +11,18 @@ require("mason").setup({
 local languages = {
   "lua_ls",
   "html",
+  "emmet_ls",
   "cssls",
   "tsserver",
   "vuels",
   "volar",
   "clangd",
   "jsonls",
+  "tailwindcss",
+  "bashls",
+  "dockerls",
+  "pyright",
+  "yamlls",
 }
 
 require("mason-lspconfig").setup({
