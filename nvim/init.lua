@@ -17,3 +17,5 @@ require("plugins/toggleterm")
 require("plugins/autotag")
 require("plugins/dropbar")
 require("plugins/wilder")
+
+vim.notify("notify 测试")

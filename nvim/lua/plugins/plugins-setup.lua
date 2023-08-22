@@ -59,8 +59,12 @@ local plugins = {
 
   { 'Bekaboo/dropbar.nvim' },
 
-  'gelguy/wilder.nvim' -- :cmdline & /搜索
+  'gelguy/wilder.nvim', -- :cmdline & /搜索
 
+  {
+    'rcarriga/nvim-notify', -- 消息提醒
+    init = function() vim.notify = require('notify') end
+  }
 }
 local opts = {} -- 注意要定义这个变量
 
