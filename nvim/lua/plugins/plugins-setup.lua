@@ -68,6 +68,8 @@ local plugins = {
   },
 
   'sbdchd/neoformat',
+
+  'norcalli/nvim-colorizer.lua', --显示颜色
 }
 local opts = {} -- 注意要定义这个变量
 
