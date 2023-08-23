@@ -18,4 +18,4 @@ require("plugins/autotag")
 require("plugins/dropbar")
 require("plugins/wilder")
 
-vim.notify("notify 测试")
+vim.notify("所有文件已加载","info",{title = "notify测试"})
