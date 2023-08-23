@@ -1,5 +1,3 @@
-require("neodev").setup({}) -- F 查看函数详情
-
 require("mason").setup({
   ui = {
     icons = {

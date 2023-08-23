@@ -32,6 +32,13 @@ local plugins = {
     "williamboman/mason-lspconfig.nvim", -- 这个相当于mason.nvim和lspconfig的桥梁
     "neovim/nvim-lspconfig"
   },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "folke/neodev.nvim",
+      config = true,
+    }
+  },
   -- 自动补全
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
@@ -41,8 +48,6 @@ local plugins = {
   "hrsh7th/cmp-path",        -- 文件路径
   "hrsh7th/cmp-cmdline",     -- 补全底部命令行--->tab
   'VidocqH/lsp-lens.nvim',   -- 显示definition/references/implements
-
-  "folke/neodev.nvim",
 
   "numToStr/Comment.nvim",   -- gcc和gc注释
   "windwp/nvim-autopairs",   -- 自动补全括号
