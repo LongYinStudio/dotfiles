@@ -40,6 +40,7 @@ local plugins = {
   "rafamadriz/friendly-snippets",
   "hrsh7th/cmp-path",        -- 文件路径
   "hrsh7th/cmp-cmdline",     -- 补全底部命令行--->tab
+  'VidocqH/lsp-lens.nvim',   -- 显示definition/references/implements
 
   "numToStr/Comment.nvim",   -- gcc和gc注释
   "windwp/nvim-autopairs",   -- 自动补全括号
