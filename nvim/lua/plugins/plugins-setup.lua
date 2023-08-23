@@ -42,6 +42,8 @@ local plugins = {
   "hrsh7th/cmp-cmdline",     -- 补全底部命令行--->tab
   'VidocqH/lsp-lens.nvim',   -- 显示definition/references/implements
 
+  "folke/neodev.nvim",
+
   "numToStr/Comment.nvim",   -- gcc和gc注释
   "windwp/nvim-autopairs",   -- 自动补全括号
   "windwp/nvim-ts-autotag",  -- 自动补全标签
