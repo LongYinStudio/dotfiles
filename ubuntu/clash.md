@@ -41,9 +41,9 @@ export all_proxy=socks5://127.0.0.1:7890
      ```
 
 
-      - ```bash
-        clash -f 节点文件.yaml # 指定节点文件
-        ```
+   - ```bash
+     clash -f 节点文件.yaml # 指定节点文件
+     ```
 
 6. 配置成服务
 
