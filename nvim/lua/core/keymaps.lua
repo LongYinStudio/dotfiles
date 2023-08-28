@@ -38,6 +38,7 @@ keymap("n", "<leader>l", ":BufferLineCycleNext<CR>", opt)
 keymap("n", "<leader>gd", vim.lsp.buf.definition, bufopts)                             --定义
 keymap("n", "<leader>gr", vim.lsp.buf.references, bufopts)                             --引用
 keymap("n", "<leader>rn", vim.lsp.buf.rename, bufopts)                                 --重命名
+keymap("n", "<F2>", vim.lsp.buf.rename, bufopts)                                 --重命名
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)                            --列出code action
 keymap("n", "<leader>cf", function() vim.lsp.buf.format { async = true } end, bufopts) --normal下格式
 keymap("v", "<leader>cf", function() vim.lsp.buf.format { async = true } end, bufopts) --view下格式化
