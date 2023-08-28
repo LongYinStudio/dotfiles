@@ -20,4 +20,7 @@ require("plugins/dropbar")
 require("plugins/wilder")
 require("plugins/colorizer")
 
+-- 其他
+require("others.wsl")
+
 vim.notify("所有文件已加载","info",{title = "notify测试"})
