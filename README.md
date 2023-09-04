@@ -1,4 +1,4 @@
-# myConfigFiles
+# dotfiles
 
 > 自己 linux、macos 的配置文件(.zshrc、.vimrc 等等)
 
