@@ -8,15 +8,13 @@
 
    - zsh 和 oh-my-zsh 安装参照网上教程
 
-   - zsh/my.zsh-theme 是自定义的主题，zsh/.zshrc 是配置文件
+   - 复制 zsh/.zshrc 和 zsh/.my-zsh 到 ~/
 
-   - 1. 直接下载.zshrc 放在~里
+   - 安装 `zsh-syntax-highlighting` 和 `zsh-autosuggestions` ：
 
-     2. 安装 `zsh-syntax-highlighting` 和 `zsh-autosuggestions` ：
+     执行 `git clone https://gitee.com/Annihilater/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` 安装 `zsh-syntax-highlighting`
 
-        执行 `git clone https://gitee.com/Annihilater/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` 安装 `zsh-syntax-highlighting`
-
-        执行 `git clone https://gitee.com/phpxxo/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions` 安装 `zsh-autosuggestions`
+     执行 `git clone https://gitee.com/phpxxo/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions` 安装 `zsh-autosuggestions`
 
    - 主题
 
@@ -24,6 +22,8 @@
      2. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
 
    - <font color=red>export ZSH="/home/longyinstudio/.oh-my-zsh" 记得更换成自己的目录</font>
+
+   - 最后 `source ~/.zshrc`
 
 2. vim
 
