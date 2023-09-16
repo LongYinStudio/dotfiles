@@ -23,7 +23,18 @@ setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
 setopt HIST_IGNORE_DUPS #如果连续输入的命令相同，历史纪录中只保留一个
 
 # 插件配置，zsh-syntax-highlighting和zsh-autosuggestions安装/README.md安装
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract z tmux vi-mode command-not-found)
+plugins=(
+    git # git aliases
+    zsh-syntax-highlighting # 命令高亮
+    zsh-autosuggestions # 命令补全
+    sudo # 双击esc-->sudo
+    extract # x解压
+    universalarchive # 压缩集合，使用ua+压缩包(如:名称.tar.gz)+压缩对象
+    z # z 跳转目录
+    tmux # tmux aliases
+    vi-mode # 命令行vim
+    command-not-found # 命令没安装，显示如何安装
+)
 
 source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
