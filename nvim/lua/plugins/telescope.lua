@@ -1,7 +1,6 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local status, actions = pcall(require, "telescope.actions")
-local previewers = require('telescope.previewers')
 local action_layout = require("telescope.actions.layout")
 if (not status) then
   return
@@ -29,7 +28,10 @@ telescope.setup({
         ["?"] = action_layout.toggle_preview,
       },
     },
-    file_ignore_patterns = {"./node_modules"},
+    file_ignore_patterns = {
+      "node_modules",
+      ".git"
+    },
   },
 })
 
