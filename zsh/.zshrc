@@ -15,6 +15,8 @@ export ZSH="/home/longyinstudio/.oh-my-zsh" #oh-my-zsh安装目录
 # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export EDITOR=vim #编辑器
 export HISTSIZE=10000 #历史纪录条目数量
@@ -39,26 +41,36 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
 
-# 命令别名
-if [ -e ~/.my-zsh/aliases.zsh ]; then  
-  source ~/.my-zsh/aliases.zsh
-fi
+# umask 0077 #修改umask值
 
-# 环境变量
-if [[ -e ~/.my-zsh/env.zsh ]]; then
-  source ~/.my-zsh/env.zsh 
-fi
+# alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
+alias zshconfig="vim ~/.zshrc"
+# cd
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~"
+# apt
+alias apti="sudo apt install"
+alias aptp="sudo apt purge"
+alias aptar="sudo apt autoremove"
+alias apts="apt search"
 
-# 其他
-if [[ -e ~/.my-zsh/others.zsh ]]; then
-  source ~/.my-zsh/others.zsh 
-fi
+# path 环境变量 node 使用的nvm
+bin="/home/longyinstudio/bin"
+go="/home/longyinstudio/dev-tools/go/bin"
+mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
+export JAVA_HOME=/home/longyinstudio/dev-tools/jdk1.8.0_351
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export JRE_HOME=$JAVA_HOME/jre 
+
+export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# mac brew 安装的nvm
+# source $(brew --prefix nvm)/nvm.sh
+# export NVM_DIR="~/.nvm"
 
-# umask 0077 #修改umask值
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

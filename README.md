@@ -8,7 +8,7 @@
 
    - zsh 和 oh-my-zsh 安装参照网上教程
 
-   - 复制 zsh/.zshrc 和 zsh/.my-zsh 到 ~/
+   - 复制 zsh/.zshrc 到 ~/
 
    - 安装 `zsh-syntax-highlighting` 和 `zsh-autosuggestions` ：
 
@@ -23,7 +23,7 @@
 
    - <font color=red>export ZSH="/home/longyinstudio/.oh-my-zsh" 记得更换成自己的目录</font>
 
-   - 最后 `source ~/.zshrc`
+   - 最后 `source ~/.zshrc`
 
 2. vim
 
