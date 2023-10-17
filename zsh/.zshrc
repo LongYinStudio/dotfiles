@@ -31,7 +31,7 @@ plugins=(
     zsh-autosuggestions # 命令补全
     sudo # 双击esc-->sudo
     extract # x解压
-    universalarchive # 压缩集合，使用ua+压缩包(如:名称.tar.gz)+压缩对象
+    universalarchive # 压缩集合，使用ua+压缩后缀(如:tar.gz、zip等等)+压缩对象
     z # z 跳转目录
     tmux # tmux aliases
     vi-mode # 命令行vim
