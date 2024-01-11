@@ -70,3 +70,19 @@ export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# 开启代理函数
+function openvpn() {
+    export https_proxy=http://127.0.0.1:7890
+    export http_proxy=http://127.0.0.1:7890
+    export all_proxy=socks5://127.0.0.1:7890
+    echo "代理已开"
+}
+
+# 关闭代理函数
+function closevpn() {
+    unset https_proxy
+    unset http_proxy
+    unset all_proxy
+    echo "代理已关"
+}
