@@ -6,6 +6,10 @@ a. clash 桌面:
 
 2. 配置代理(四种方式) :
 
+- `最推荐的:` 在设置中修改**网络代理**
+
+- 终端执行软件并带上参数 `--proxy-server=http://127.0.0.1:7890`
+
 - 在.zshrc 或.bashrc 添加 （端口根据 clash for windows 定）,记得 source ,使用后删除三个 export 并再次 source
 
 ```shell
@@ -14,11 +18,7 @@ export http_proxy=http://127.0.0.1:7890
 export all_proxy=socks5://127.0.0.1:7890
 ```
 
-- `最推荐的:` 用 zsh/.zshrc 里定义的 openvpn 和 closevpn 函数(命令)
-
-- 终端执行软件并带上参数 `--proxy-server=http://127.0.0.1:7890`
-
-- 在设置中修改**网络代理**
+- 用 zsh/.zshrc 里定义的 openvpn 和 closevpn 函数(命令)
 
 b. clash 服务器下:
 
@@ -48,13 +48,13 @@ b. clash 服务器下:
    [Unit]
    Description=clash service
    After=network.target
-   
+
    [Service]
    Type=simple
    User=root
    ExecStart=/usr/local/bin/clash
    Restart=on-failure # or always, on-abort, etc
-   
+
    [Install]
    WantedBy=multi-user.target
    ```
@@ -70,14 +70,14 @@ b. clash 服务器下:
 
 - 在.zshrc 或.bashrc 添加 （端口根据 clash for windows 定）,记得 source ,使用后删除三个 export 并再次 source
 
+- `最推荐的:` 用 zsh/.zshrc 里定义的 openvpn 和 closevpn 函数(命令)
+
 ```shell
 export https_proxy=http://127.0.0.1:7890
 export http_proxy=http://127.0.0.1:7890
 export all_proxy=socks5://127.0.0.1:7890
 ```
 
-- `最推荐的:` 用 zsh/.zshrc 里定义的 openvpn 和 closevpn 函数(命令)
-
-7. 可以搭配面板控制
+1. 可以搭配面板控制
 
    [haishanh/yacd: Yet Another Clash Dashboard (github.com)](https://github.com/haishanh/yacd)
