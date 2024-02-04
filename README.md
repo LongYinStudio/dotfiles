@@ -47,6 +47,7 @@
 
      1. Lazy：normal模式下:w就可以自动安装配置的插件 || :Lazy呼出Lazy管理界面
      1. packer：删除plugins-setup.lua，将plugins-setup.backup.lua重命名为plugins-setup.lua，normal模式下:w就可以自动安装配置的插件
+   - 安装\~/.config/nvim/lua/plugins/conform.lua里用到的formatters
 
 4. [ubuntu (ubuntu/README.md)](ubuntu/README.md)
 

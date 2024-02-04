@@ -19,6 +19,7 @@ require("plugins/autotag")
 require("plugins/dropbar")
 require("plugins/wilder")
 require("plugins/colorizer")
+require("plugins/conform")
 
 -- 其他
 require("others.wsl")
