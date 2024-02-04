@@ -4,6 +4,9 @@ local opts = { noremap = true, silent = true }
 
 local keymap = vim.keymap.set
 
+-- 配置删除(d)不复制
+keymap({ "n", "v"}, "d", '"_d')
+
 -- ---------- 插入模式 ---------- ---
 keymap("i", "jk", "<ESC>")
 
