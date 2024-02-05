@@ -93,10 +93,13 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 # 开启代理函数
+PROXY_HTTP="http://127.0.0.1:7890"
 function openvpn() {
-    export https_proxy=http://127.0.0.1:7890
-    export http_proxy=http://127.0.0.1:7890
+    export http_proxy="${PROXY_HTTP}"
+    export https_proxy="${PROXY_HTTP}"
     export all_proxy=socks5://127.0.0.1:7890
+    git config --global http.proxy "${PROXY_HTTP}"
+    git config --global https.proxy "${PROXY_HTTP}"
     echo "代理已开"
 }
 
@@ -105,5 +108,7 @@ function closevpn() {
     unset https_proxy
     unset http_proxy
     unset all_proxy
+    git config --global --unset http.proxy
+    git config --global --unset https.proxy
     echo "代理已关"
 }
