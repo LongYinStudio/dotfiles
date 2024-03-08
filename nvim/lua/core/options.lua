@@ -29,6 +29,9 @@ opt.splitbelow = true
 opt.ignorecase = true
 opt.smartcase = true
 
+-- 折叠
+vim.opt.foldmethod = "manual"
+
 -- 外观
 opt.termguicolors = true
 opt.signcolumn = "yes"
