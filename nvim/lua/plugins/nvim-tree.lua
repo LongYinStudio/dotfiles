@@ -38,9 +38,9 @@ require("nvim-tree").setup({
 		},
 	},
 	filters = {
-		-- 隐藏 .文件(H显示)
-		dotfiles = true,
+		-- 隐藏 .文件(H进行切换)
+		dotfiles = false,
 		-- 隐藏 node_modules 文件夹
-		-- custom = { "node_modules" },
+		custom = { "node_modules" },
 	},
 })
