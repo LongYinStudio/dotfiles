@@ -33,22 +33,16 @@
 
    - 插件安装：在.vim 里用 `:PlugInstall`
 
-
 3. neovim
 
-   > 现已使用Lazy.nvim来管理neovim插件，就可以删除 \~/.config/nvim/plugin/packer_compiled.lua
-   >
-   > 当然也可继续用packer
-
-   - 安装 apt / brew / scoop等等包管理器直接可以安装，详细参考官网（[Home - Neovim](https://neovim.io/)）
+   - 安装 apt / brew / scoop 等等包管理器直接可以安装，详细参考官网（[Home - Neovim](https://neovim.io/)）
    - 将 nvim 复制到\~/.config/里
-   - neovim \~/.config/nvim/lua/plugins/plugins-setup.lua
-   - 插件安装: 
+   - 插件安装:
+     1. neovim \~/.config/nvim/lua/plugins/plugins-setup.lua
+     2. normal 模式下:w 就可以自动安装配置的插件 || :Lazy 呼出 Lazy 管理界面
 
-     1. Lazy：normal模式下:w就可以自动安装配置的插件 || :Lazy呼出Lazy管理界面
-     1. packer：删除plugins-setup.lua，将plugins-setup.backup.lua重命名为plugins-setup.lua，normal模式下:w就可以自动安装配置的插件
-   - 安装\~/.config/nvim/lua/plugins/conform.lua里用到的formatters
+- 安装\~/.config/nvim/lua/plugins/conform.lua 里用到的 formatters
 
-4. [ubuntu (ubuntu/README.md)](ubuntu/README.md)
+1. [ubuntu (ubuntu/README.md)](ubuntu/README.md)
 
-   - [clash配置 (ubuntu/clash.md)](ubuntu/clash.md)
+   - [clash 配置 (ubuntu/clash.md)](ubuntu/clash.md)
