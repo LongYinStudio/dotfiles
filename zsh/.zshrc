@@ -9,7 +9,7 @@ ZSH_DISABLE_COMPFIX="true"    # 有的版本有引号， 有的版本无引号�
 export TERM='xterm-256color'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
 
-export ZSH="/home/longyinstudio/.oh-my-zsh" #oh-my-zsh安装目录
+export ZSH="$HOME/.oh-my-zsh" #oh-my-zsh安装目录
 
 # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
 # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -58,10 +58,10 @@ alias aptar="sudo apt autoremove"
 alias apts="apt search"
 
 # path 环境变量 node 使用的nvm
-bin="/home/longyinstudio/bin"
-go="/home/longyinstudio/dev-tools/go/bin"
+bin="$HOME/bin"
+go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
-export JAVA_HOME=/home/longyinstudio/dev-tools/jdk1.8.0_351
+export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_351
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JRE_HOME=$JAVA_HOME/jre 
 
@@ -75,10 +75,8 @@ autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
-
   if [ -n "$nvmrc_path" ]; then
     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
     if [ "$nvmrc_node_version" = "N/A" ]; then
       nvm install
     elif [ "$nvmrc_node_version" != "$node_version" ]; then

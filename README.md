@@ -21,8 +21,6 @@
      1. 自制主题(zsh/my.zsh-theme)放在\~/.oh-my-zsh/custom/themes 或者\~/.oh-my-zsh/themes 都行
      2. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
 
-   - <font color=red>export ZSH="/home/longyinstudio/.oh-my-zsh" 记得更换成自己的目录</font>
-
    - 最后 `source ~/.zshrc`
 
 2. vim
