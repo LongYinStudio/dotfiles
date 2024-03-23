@@ -1,5 +1,9 @@
 local opt = vim.opt
 
+-- 字符编码
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+
 -- 行号
 opt.relativenumber = true
 opt.number = true
