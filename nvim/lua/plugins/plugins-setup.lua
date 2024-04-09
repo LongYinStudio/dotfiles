@@ -77,9 +77,11 @@ local plugins = {
 		end,
 	},
 
-  "stevearc/conform.nvim", --格式化
+	"stevearc/conform.nvim", --格式化
 
 	"norcalli/nvim-colorizer.lua", --显示颜色
+
+	require("plugins.flash"), -- 快速跳转
 }
 local opts = {} -- 注意要定义这个变量
 
