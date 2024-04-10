@@ -81,6 +81,7 @@ local plugins = {
 	"norcalli/nvim-colorizer.lua", --显示颜色
 
 	require("plugins.flash"), -- 快速跳转
+	require("plugins.scrollbar"),
 }
 local opts = {} -- 注意要定义这个变量
 
