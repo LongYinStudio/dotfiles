@@ -54,9 +54,8 @@ local plugins = {
 	"windwp/nvim-ts-autotag", -- 自动补全标签
 
 	"akinsho/bufferline.nvim", -- buffer分割线
-	"lewis6991/gitsigns.nvim", -- 左则git提示
-
-	"akinsho/toggleterm.nvim",
+	require("plugins.gitsigns"), -- 左则git提示
+	require("plugins.toggleterm"), --终端
 
 	{
 		"nvim-telescope/telescope.nvim",
