@@ -60,8 +60,7 @@ local plugins = {
 
 	"gelguy/wilder.nvim", -- :cmdline & /搜索
 
-	"stevearc/conform.nvim", --格式化
-
+	require("plugins.conform"), --格式化
 	require("plugins.bufferline"), -- buffer分割线
 	require("plugins.lualine"), -- 状态栏
 	require("plugins.comment"), -- gcc和gc注释
