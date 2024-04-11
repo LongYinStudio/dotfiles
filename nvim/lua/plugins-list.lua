@@ -82,6 +82,7 @@ local plugins = {
 
 	require("plugins.flash"), -- 快速跳转
 	require("plugins.scrollbar"),
+  require("plugins.surround")
 }
 local opts = {} -- 注意要定义这个变量
 
