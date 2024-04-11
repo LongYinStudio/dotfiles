@@ -15,7 +15,7 @@ local plugins = {
 	"navarasu/onedark.nvim", -- 主题
 	"nvim-tree/nvim-web-devicons",
 	"christoomey/vim-tmux-navigator", -- 用ctl-hjkl来定位窗口
-		"p00f/nvim-ts-rainbow", -- 配合treesitter，不同括号颜色区分
+	"p00f/nvim-ts-rainbow", -- 配合treesitter，不同括号颜色区分
 	{
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim", -- 这个相当于mason.nvim和lspconfig的桥梁
@@ -39,7 +39,7 @@ local plugins = {
 	"VidocqH/lsp-lens.nvim", -- 显示definition/references/implements
 	"mg979/vim-visual-multi", -- 多光标
 
-  require("plugins.treesitter"), -- 语法高亮
+	require("plugins.treesitter"), -- 语法高亮
 	require("plugins.autopairs"), -- 自动补全括号
 	require("plugins.autotag"), -- 自动补全标签
 	require("plugins.nvim-tree"), -- 文件浏览
@@ -57,6 +57,7 @@ local plugins = {
 	require("plugins.flash"), -- 快速跳转
 	require("plugins.scrollbar"),
 	require("plugins.surround"),
+	require("plugins.indent-blankline"),
 }
 local opts = {} -- 注意要定义这个变量
 
