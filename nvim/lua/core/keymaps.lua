@@ -41,8 +41,6 @@ keymap("n", "<leader>gr", vim.lsp.buf.references, opts) --引用
 keymap("n", "<leader>rn", vim.lsp.buf.rename, opts) --重命名
 keymap("n", "<F2>", vim.lsp.buf.rename, opts) --重命名
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts) --列出code action
--- nvim-tree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>")
 -- bufferline 左右切换
 keymap("n", "<leader>h", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>l", ":BufferLineCycleNext<CR>", opts)

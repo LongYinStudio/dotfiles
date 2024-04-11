@@ -14,12 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	"navarasu/onedark.nvim", -- 主题
 	"nvim-tree/nvim-web-devicons",
-	{
-		"nvim-tree/nvim-tree.lua", -- 文档树
-		dependencies = {
-			"nvim-tree/nvim-web-devicons", -- 文档树图标
-		},
-	},
 	"christoomey/vim-tmux-navigator", -- 用ctl-hjkl来定位窗口
 	"nvim-treesitter/nvim-treesitter", -- 语法高亮
 	"p00f/nvim-ts-rainbow", -- 配合treesitter，不同括号颜色区分
@@ -50,6 +44,7 @@ local plugins = {
 
 	"mg979/vim-visual-multi", -- 多光标
 
+	require("plugins.nvim-tree"), -- 文件浏览
 	require("plugins.wilder"), -- :cmdline & /搜索
 	require("plugins.telescope"), -- 全局搜搜
 	require("plugins.conform"), --格式化
