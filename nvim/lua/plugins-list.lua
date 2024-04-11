@@ -14,10 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	"navarasu/onedark.nvim", -- 主题
 	"nvim-tree/nvim-web-devicons",
-	{
-		"nvim-lualine/lualine.nvim", -- 状态栏
-		dependencies = { "nvim-tree/nvim-web-devicons", opt = true }, -- 状态栏图标
-	},
+	require("plugins.lualine"), -- 状态栏
 	{
 		"nvim-tree/nvim-tree.lua", -- 文档树
 		dependencies = {
@@ -82,7 +79,7 @@ local plugins = {
 
 	require("plugins.flash"), -- 快速跳转
 	require("plugins.scrollbar"),
-  require("plugins.surround")
+	require("plugins.surround"),
 }
 local opts = {} -- 注意要定义这个变量
 
