@@ -48,16 +48,11 @@ local plugins = {
 	"windwp/nvim-autopairs", -- 自动补全括号
 	"windwp/nvim-ts-autotag", -- 自动补全标签
 
-	{
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1", -- 文件检索
-		dependencies = { { "nvim-lua/plenary.nvim" } },
-	},
-
 	"mg979/vim-visual-multi", -- 多光标
 
 	"gelguy/wilder.nvim", -- :cmdline & /搜索
 
+	require("plugins.telescope"), -- 全局搜搜
 	require("plugins.conform"), --格式化
 	require("plugins.bufferline"), -- buffer分割线
 	require("plugins.dropbar"),
