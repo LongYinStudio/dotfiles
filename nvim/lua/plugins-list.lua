@@ -38,12 +38,10 @@ local plugins = {
 	"hrsh7th/cmp-path", -- 文件路径
 	"hrsh7th/cmp-cmdline", -- 补全底部命令行--->tab
 	"VidocqH/lsp-lens.nvim", -- 显示definition/references/implements
-
-	"windwp/nvim-autopairs", -- 自动补全括号
-	"windwp/nvim-ts-autotag", -- 自动补全标签
-
 	"mg979/vim-visual-multi", -- 多光标
 
+	require("plugins.autopairs"), -- 自动补全括号
+	require("plugins.autotag"), -- 自动补全标签
 	require("plugins.nvim-tree"), -- 文件浏览
 	require("plugins.wilder"), -- :cmdline & /搜索
 	require("plugins.telescope"), -- 全局搜搜
