@@ -10,7 +10,6 @@ require("plugins/lsp")
 require("plugins/cmp")
 require("plugins/autopairs")
 require("plugins/autotag")
-require("plugins/wilder")
 
 -- 其他
 require("others.wsl")

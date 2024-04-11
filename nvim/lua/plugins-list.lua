@@ -50,8 +50,7 @@ local plugins = {
 
 	"mg979/vim-visual-multi", -- 多光标
 
-	"gelguy/wilder.nvim", -- :cmdline & /搜索
-
+	require("plugins.wilder"), -- :cmdline & /搜索
 	require("plugins.telescope"), -- 全局搜搜
 	require("plugins.conform"), --格式化
 	require("plugins.bufferline"), -- buffer分割线
