@@ -48,8 +48,6 @@ local plugins = {
 	"windwp/nvim-autopairs", -- 自动补全括号
 	"windwp/nvim-ts-autotag", -- 自动补全标签
 
-	"akinsho/bufferline.nvim", -- buffer分割线
-
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1", -- 文件检索
@@ -64,6 +62,7 @@ local plugins = {
 
 	"stevearc/conform.nvim", --格式化
 
+	require("plugins.bufferline"), -- buffer分割线
 	require("plugins.lualine"), -- 状态栏
 	require("plugins.comment"), -- gcc和gc注释
 	require("plugins.gitsigns"), -- 左则git提示
