@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	"navarasu/onedark.nvim", -- 主题
 	"nvim-tree/nvim-web-devicons",
-	require("plugins.lualine"), -- 状态栏
 	{
 		"nvim-tree/nvim-tree.lua", -- 文档树
 		dependencies = {
@@ -46,13 +45,10 @@ local plugins = {
 	"hrsh7th/cmp-cmdline", -- 补全底部命令行--->tab
 	"VidocqH/lsp-lens.nvim", -- 显示definition/references/implements
 
-	require("plugins.comment"), -- gcc和gc注释
 	"windwp/nvim-autopairs", -- 自动补全括号
 	"windwp/nvim-ts-autotag", -- 自动补全标签
 
 	"akinsho/bufferline.nvim", -- buffer分割线
-	require("plugins.gitsigns"), -- 左则git提示
-	require("plugins.toggleterm"), --终端
 
 	{
 		"nvim-telescope/telescope.nvim",
@@ -66,15 +62,13 @@ local plugins = {
 
 	"gelguy/wilder.nvim", -- :cmdline & /搜索
 
-	{
-		"rcarriga/nvim-notify", -- 消息提醒
-		init = function()
-			vim.notify = require("notify")
-		end,
-	},
-
 	"stevearc/conform.nvim", --格式化
 
+	require("plugins.lualine"), -- 状态栏
+	require("plugins.comment"), -- gcc和gc注释
+	require("plugins.gitsigns"), -- 左则git提示
+	require("plugins.toggleterm"), --终端
+	require("plugins.notify"), -- 消息提醒
 	require("plugins.colorizer"), --显示颜色
 	require("plugins.flash"), -- 快速跳转
 	require("plugins.scrollbar"),
