@@ -11,7 +11,6 @@ require("plugins/cmp")
 require("plugins/autopairs")
 require("plugins/telescope")
 require("plugins/autotag")
-require("plugins/dropbar")
 require("plugins/wilder")
 
 -- 其他

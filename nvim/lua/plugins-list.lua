@@ -56,12 +56,11 @@ local plugins = {
 
 	"mg979/vim-visual-multi", -- 多光标
 
-	{ "Bekaboo/dropbar.nvim" },
-
 	"gelguy/wilder.nvim", -- :cmdline & /搜索
 
 	require("plugins.conform"), --格式化
 	require("plugins.bufferline"), -- buffer分割线
+	require("plugins.dropbar"),
 	require("plugins.lualine"), -- 状态栏
 	require("plugins.comment"), -- gcc和gc注释
 	require("plugins.gitsigns"), -- 左则git提示
