@@ -39,4 +39,3 @@ vim.opt.foldmethod = "manual"
 -- 外观
 opt.termguicolors = true
 opt.signcolumn = "yes"
-vim.cmd([[colorscheme onedark]])

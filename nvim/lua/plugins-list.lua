@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-	"navarasu/onedark.nvim", -- 主题
 	"nvim-tree/nvim-web-devicons",
 	"christoomey/vim-tmux-navigator", -- 用ctl-hjkl来定位窗口
 	"p00f/nvim-ts-rainbow", -- 配合treesitter，不同括号颜色区分
@@ -59,6 +58,7 @@ local plugins = {
 	require("plugins.surround"),
 	require("plugins.indent-blankline"),
 	require("plugins.markdown-preview"),
+	require("plugins.colorscheme"),
 }
 local opts = {} -- 注意要定义这个变量
 
