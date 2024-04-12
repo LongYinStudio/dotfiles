@@ -58,6 +58,7 @@ local plugins = {
 	require("plugins.scrollbar"),
 	require("plugins.surround"),
 	require("plugins.indent-blankline"),
+	require("plugins.markdown-preview"),
 }
 local opts = {} -- 注意要定义这个变量
 
