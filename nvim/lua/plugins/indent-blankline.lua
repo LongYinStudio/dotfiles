@@ -12,6 +12,16 @@ return {
 			"RainbowCyan",
 		}
 
+		local highlightIndent = {
+			"RainbowRedIndent",
+			"RainbowYellowIndent",
+			"RainbowBlueIndent",
+			"RainbowOrangeIndent",
+			"RainbowGreenIndent",
+			"RainbowVioletIndent",
+			"RainbowCyanIndent",
+		}
+
 		local hooks = require("ibl.hooks")
 		-- create the highlight groups in the highlight setup hook, so they are reset
 		-- every time the colorscheme changes
@@ -23,8 +33,21 @@ return {
 			vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
 			vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
 			vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+			vim.api.nvim_set_hl(0, "RainbowRedIndent", { fg = "#6e171e" })
+			vim.api.nvim_set_hl(0, "RainbowYellowIndent", { fg = "#765517" })
+			vim.api.nvim_set_hl(0, "RainbowBlueIndent", { fg = "#0c497a" })
+			vim.api.nvim_set_hl(0, "RainbowOrangeIndent", { fg = "#603d1d" })
+			vim.api.nvim_set_hl(0, "RainbowGreenIndent", { fg = "#3b5727" })
+			vim.api.nvim_set_hl(0, "RainbowVioletIndent", { fg = "#5a1b6d" })
+			vim.api.nvim_set_hl(0, "RainbowCyanIndent", { fg = "#1e4c52" })
 		end)
 
-		require("ibl").setup({ indent = { highlight = highlight } })
+		vim.g.rainbow_delimiters = { highlight = highlight }
+		require("ibl").setup({
+			scope = { highlight = highlight, char = "┃" },
+			indent = { highlight = highlightIndent, char = "╎" },
+		})
+
+		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 	end,
 }
