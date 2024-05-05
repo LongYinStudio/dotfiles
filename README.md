@@ -40,10 +40,15 @@
      2. normal 模式下:w 就可以自动安装配置的插件 || :Lazy 呼出 Lazy 管理界面
    
    - 安装\~/.config/nvim/lua/plugins/conform.lua 里用到的 formatters
+   
 4. tmux
    - 用包管理器安装tmux
    - 复制 tmux/.tmux.conf 到 ~/
-
+   - 运行：
+     1. 执行 tmux 命令
+     2. - 执行 Ctrl+B :source-file ~/.tmux.conf 
+        - 或者 直接在tmux的终端里执行 tmux source-file ~/.tmux.conf
+   
 1. [ubuntu (ubuntu/README.md)](ubuntu/README.md)
    
    - [clash 配置 (ubuntu/clash.md)](ubuntu/clash.md)
