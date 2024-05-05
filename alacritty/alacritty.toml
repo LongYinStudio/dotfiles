@@ -1,0 +1,74 @@
+# 实时加载配置
+live_config_reload=true
+
+[mouse]
+# 打字时隐藏鼠标
+hide_when_typing = true
+
+[cursor.style]
+#   - ▇ Block
+#   - _ Underline
+#   - | Beam
+shape = "Block"
+# Values for `blinking`:
+#   - Never: 防止光标闪烁
+#   - Off: 默认情况下禁用闪烁
+#   - On: 默认情况下启用闪烁
+#   - Always: 强制光标始终闪烁
+blinking = "Always"
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"  # 语义转义字符
+save_to_clipboard = true                       # 保存到剪贴板
+
+[font]
+normal = {family = 'JetBrainsMono Nerd Font', style = 'Regular'}
+bold = {family = 'JetBrainsMono Nerd Font', style = 'Bold'}
+italic = {family = 'JetBrainsMono Nerd Font', style = 'Italic'}
+size = 14.0
+
+[window]
+# 窗口的尺寸 160 45
+dimensions = {columns = 80, lines = 40}
+# 窗口的启动位置
+position = {x = 100, y = 0}
+# 窗口的边界空白
+padding = {x = 5, y = 5}
+dynamic_padding = true
+# Full 窗口的装饰，边框和标题栏 苹果系统可以添加为Buttonless  
+decorations = 'Full'
+# 透明度
+opacity = 0.8
+# 启动模式 窗口化启动
+startup_mode = 'windowed'
+# 动态标题
+dynamic_title = true
+decorations_theme_variant = 'Dark'
+resize_increments = true
+
+# 主题
+# Colors (One Dark)
+# Default colors
+[colors.primary]
+background = '#282c34'
+foreground = '#abb2bf'
+# Normal colors
+[colors.normal]
+black   = '#1e2127'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#abb2bf'
+# Bright colors
+[colors.bright]
+black   = '#5c6370'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#ffffff'
