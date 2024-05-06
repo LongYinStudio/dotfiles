@@ -36,7 +36,6 @@ local plugins = {
 	"hrsh7th/cmp-path", -- 文件路径
 	"hrsh7th/cmp-cmdline", -- 补全底部命令行--->tab
 	"VidocqH/lsp-lens.nvim", -- 显示definition/references/implements
-	"mg979/vim-visual-multi", -- 多光标
 
 	require("plugins.treesitter"), -- 语法高亮
 	require("plugins.autopairs"), -- 自动补全括号
@@ -59,6 +58,7 @@ local plugins = {
 	require("plugins.indent-blankline"),
 	require("plugins.markdown-preview"),
 	require("plugins.colorscheme"),
+	require("plugins.vim-visual-multi"), -- 多光标
 }
 local opts = {} -- 注意要定义这个变量
 
