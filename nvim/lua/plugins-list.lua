@@ -59,6 +59,7 @@ local plugins = {
 	require("plugins.markdown-preview"),
 	require("plugins.colorscheme"),
 	require("plugins.vim-visual-multi"), -- 多光标
+	require("plugins.lspkind"), -- lsp 图标
 }
 local opts = {} -- 注意要定义这个变量
 
