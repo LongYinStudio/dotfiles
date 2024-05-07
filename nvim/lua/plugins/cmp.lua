@@ -8,6 +8,8 @@ if not snip_status_ok then
 	return
 end
 
+local compare = require("cmp.config.compare")
+
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- 下面会用到这个函数
@@ -92,5 +94,20 @@ cmp.setup({
 			vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
 			return vim_item
 		end,
+	},
+
+	sorting = {
+		-- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+		priority_weight = 1,
+		comparators = {
+			compare.exact, -- 精准匹配
+			compare.recently_used, -- 最近用过的靠前
+			compare.kind,
+			compare.score, -- 得分高靠前
+			compare.order,
+			compare.offset,
+			compare.length, -- 短的靠前
+			compare.sort_test,
+		},
 	},
 })
