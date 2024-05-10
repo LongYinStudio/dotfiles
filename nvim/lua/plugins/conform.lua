@@ -20,7 +20,7 @@ return {
 				xml = { "prettier" },
 				xhtml = { "prettier" },
 				markdown = { "prettier", "markdownlint" },
-				css = { "stylelint", "prettier" },
+				css = { "prettier", "stylelint" },
 				scss = { "prettier" },
 				sass = { "prettier" },
 				less = { "prettier" },
