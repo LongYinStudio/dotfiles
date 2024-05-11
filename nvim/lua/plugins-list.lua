@@ -61,6 +61,7 @@ local plugins = {
 	require("plugins.vim-visual-multi"), -- 多光标
 	require("plugins.lspkind"), -- lsp 图标
 	require("plugins.numb"), -- :{number} 预览
+	require("plugins.vim-illuminate"), -- 高亮相同字符
 }
 local opts = {} -- 注意要定义这个变量
 
