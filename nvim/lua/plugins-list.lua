@@ -60,6 +60,7 @@ local plugins = {
 	require("plugins.colorscheme"),
 	require("plugins.vim-visual-multi"), -- 多光标
 	require("plugins.lspkind"), -- lsp 图标
+	require("plugins.numb"), -- :{number} 预览
 }
 local opts = {} -- 注意要定义这个变量
 
