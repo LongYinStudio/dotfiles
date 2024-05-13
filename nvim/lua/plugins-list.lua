@@ -58,7 +58,7 @@ local plugins = {
 	require("plugins.indent-blankline"),
 	require("plugins.markdown-preview"),
 	require("plugins.colorscheme"),
-	require("plugins.vim-visual-multi"), -- 多光标
+	require("plugins.vim-visual-multi"), -- 多光标[ctrl+n，(neo)vim自带的*就够用了]
 	require("plugins.lspkind"), -- lsp 图标
 	require("plugins.numb"), -- :{number} 预览
 	require("plugins.vim-illuminate"), -- 高亮相同字符
