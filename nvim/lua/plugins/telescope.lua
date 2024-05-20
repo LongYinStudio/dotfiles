@@ -1,7 +1,6 @@
 -- 进入telescope页面会是插入模式，回到正常模式就可以用j和k来移动了
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.1", -- 文件检索
 	dependencies = { { "nvim-lua/plenary.nvim" } },
 	config = function()
 		local telescope = require("telescope")
