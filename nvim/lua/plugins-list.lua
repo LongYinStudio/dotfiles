@@ -62,6 +62,7 @@ local plugins = {
 	require("plugins.lspkind"), -- lsp 图标
 	require("plugins.numb"), -- :{number} 预览
 	require("plugins.vim-illuminate"), -- 高亮相同字符
+	require("plugins.which-key"), -- 快捷键提示
 }
 local opts = {} -- 注意要定义这个变量
 

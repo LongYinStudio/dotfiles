@@ -25,8 +25,8 @@ keymap("v", "L", "$", opts)
 
 -- ---------- 正常模式 ---------- ---
 -- 窗口
-keymap("n", "<leader>sv", "<C-w>v") -- 水平新增窗口
-keymap("n", "<leader>sh", "<C-w>s") -- 垂直新增窗口
+keymap("n", "<leader>sv", "<C-w>v", { desc = "Split vertical" }) -- 水平新增窗口
+keymap("n", "<leader>sh", "<C-w>s", { desc = "Split horizontal" }) -- 垂直新增窗口
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", opts)
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opts)
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opts)
@@ -36,11 +36,11 @@ keymap("n", "<leader>nh", ":nohl<CR>")
 
 -- ---------- 插件 ---------- ---
 -- nvim-lspconfig
-keymap("n", "<leader>gd", vim.lsp.buf.definition, opts) --定义
-keymap("n", "<leader>gr", vim.lsp.buf.references, opts) --引用
-keymap("n", "<leader>rn", vim.lsp.buf.rename, opts) --重命名
-keymap("n", "<F2>", vim.lsp.buf.rename, opts) --重命名
-keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts) --列出code action
+keymap("n", "<leader>gd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Goto Definition" }) --定义
+keymap("n", "<leader>gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "Goto References" }) --引用
+keymap("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
+keymap("n", "<F2>", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
+keymap("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code Action" }) --列出code action
 -- bufferline 左右切换
 keymap("n", "<leader>h", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>l", ":BufferLineCycleNext<CR>", opts)

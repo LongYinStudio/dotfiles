@@ -37,8 +37,18 @@ return {
 			"nvim-tree/nvim-web-devicons", -- 文档树图标
 		},
 		config = function()
-			vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
-			vim.keymap.set("n", "<leader>f", "<cmd>NvimTreeFocus<CR>", { noremap = true, silent = true })
+			vim.keymap.set(
+				"n",
+				"<leader>e",
+				"<cmd>NvimTreeToggle<CR>",
+				{ noremap = true, silent = true, desc = "Nvimtree Toggle window" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>f",
+				"<cmd>NvimTreeFocus<CR>",
+				{ noremap = true, silent = true, desc = "Nvimtree Focus window" }
+			)
 			require("nvim-tree").setup({
 				git = { enable = true },
 				-- 完全禁止内置netrw
