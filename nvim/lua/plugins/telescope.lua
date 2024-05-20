@@ -11,10 +11,18 @@ return {
 			return
 		end
 
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" }) -- 环境里要安装ripgrep
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope Find Files" })
+		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope Live Grep" }) -- 环境里要安装ripgrep
+		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope Find Buffers" })
+		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope Help Tags" })
+		vim.keymap.set(
+			"n",
+			"<leader>fa",
+			"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+			{ desc = "Telescope Find all files" }
+		)
+		vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits" })
+		vim.keymap.set("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "Telescope Git status" })
 
 		telescope.setup({
 			defaults = {
