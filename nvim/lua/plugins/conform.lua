@@ -7,7 +7,6 @@ return {
 				lsp_fallback = false,
 			},
 			formatters_by_ft = {
-				-- prettier用node包管理器(npm,pnpm,cnpm,yarn)安装
 				vue = { "prettier" },
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
@@ -24,7 +23,7 @@ return {
 				scss = { "prettier" },
 				sass = { "prettier" },
 				less = { "prettier" },
-				lua = { "stylua" }, --cagro
+				lua = { "stylua" },
 				-- apt/brew install clang-format
 				c = { "clang_format" },
 				cpp = { "clang_format" },

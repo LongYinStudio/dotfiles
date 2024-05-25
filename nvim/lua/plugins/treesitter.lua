@@ -1,4 +1,3 @@
--- 依赖: npm install -g tree-sitter-cli
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
