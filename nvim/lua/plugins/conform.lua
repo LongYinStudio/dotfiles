@@ -24,10 +24,8 @@ return {
 				sass = { "prettier" },
 				less = { "prettier" },
 				lua = { "stylua" },
-				-- apt/brew install clang-format
 				c = { "clang_format" },
 				cpp = { "clang_format" },
-				-- apt/brew install + 名
 				rust = { "rustfmt" },
 				sh = { "shellcheck", "shfmt" },
 				zsh = { "shfmt", "shellcheck" },
