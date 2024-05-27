@@ -63,6 +63,7 @@ local plugins = {
 	require("plugins.vim-illuminate"), -- 高亮相同字符
 	require("plugins.which-key"), -- 快捷键提示
 	require("plugins.todo-comments"),
+	require("plugins.eagle"), -- 鼠标悬浮，查看当前函数、关键字等来自lsp的描述
 }
 local opts = {} -- 注意要定义这个变量
 
