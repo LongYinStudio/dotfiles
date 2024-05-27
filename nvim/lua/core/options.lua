@@ -33,8 +33,14 @@ opt.splitbelow = true
 opt.ignorecase = true
 opt.smartcase = true
 
--- 折叠
-vim.opt.foldmethod = "manual"
+-- 折叠 nvim-ufo 插件
+opt.foldmethod = "manual"
+opt.foldcolumn = "1"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
+-- opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep:│,foldclose:]]
 
 -- 外观
 opt.termguicolors = true

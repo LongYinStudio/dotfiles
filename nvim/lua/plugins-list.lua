@@ -65,6 +65,7 @@ local plugins = {
 	require("plugins.todo-comments"),
 	require("plugins.eagle"), -- 鼠标悬浮，查看当前函数、关键字等来自lsp的描述
 	require("plugins.trouble"),
+	require("plugins.nvim-ufo"),
 }
 local opts = {} -- 注意要定义这个变量
 
