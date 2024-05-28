@@ -8,6 +8,38 @@ return {
 			config = function()
 				local builtin = require("statuscol.builtin")
 				require("statuscol").setup({
+					ft_ignore = {
+						"neo-tree",
+						"NvimTree",
+						"alpha",
+						"undotree",
+						"diff",
+						"git",
+						"fzf",
+						"toggleterm",
+						"dashboard",
+						"dapui_watches",
+						"dap-repl",
+						"dapui_console",
+						"dapui_stacks",
+						"dapui_breakpoints",
+						"dapui_scopes",
+						"help",
+						"vim",
+						"dashboard",
+						"Trouble",
+						"noice",
+						"lazy",
+						"nvdash",
+						"toggleterm",
+						"Outline",
+						"neotest",
+						"neotest-summary",
+						"neotest-output-panel",
+						"spectre_panel",
+						"TelescopePrompt",
+						"TelescopeResults",
+					},
 					relculright = true,
 					segments = {
 						{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
@@ -19,7 +51,7 @@ return {
 		},
 	},
 	keys = {
-		-- NOTE: 最常用的是za（切换当前/全部），zc/zC（折叠当前/全部）zo/zO（打开当前/全部） 
+		-- NOTE: 最常用的是za（切换当前/全部），zc/zC（折叠当前/全部）zo/zO（打开当前/全部）
 		-- NOTE: 还有很多快捷键没有自定义，按z后which-key会提示
 		{
 			"zR",
