@@ -1,5 +1,6 @@
 return {
 	"kevinhwang91/nvim-ufo",
+	event = { "BufRead" },
 	dependencies = {
 		"kevinhwang91/promise-async",
 		{
@@ -18,6 +19,8 @@ return {
 		},
 	},
 	keys = {
+		-- NOTE: 最常用的是za（切换当前/全部），zc/zC（折叠当前/全部）zo/zO（打开当前/全部） 
+		-- NOTE: 还有很多快捷键没有自定义，按z后which-key会提示
 		{
 			"zR",
 			function()
@@ -47,7 +50,7 @@ return {
 			desc = "󱃄 Fold more",
 		},
 		{
-			"zZ",
+			"zp",
 			function()
 				require("ufo").peekFoldedLinesUnderCursor()
 			end,
@@ -83,6 +86,35 @@ return {
 		},
 	},
 	opts = {
+		provider_selector = function()
+			return { "treesitter", "indent" }
+		end,
+		fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+			local newVirtText = {}
+			local suffix = (" 󰡏 %d "):format(endLnum - lnum)
+			local sufWidth = vim.fn.strdisplaywidth(suffix)
+			local targetWidth = width - sufWidth
+			local curWidth = 0
+			for _, chunk in ipairs(virtText) do
+				local chunkText = chunk[1]
+				local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+				if targetWidth > curWidth + chunkWidth then
+					table.insert(newVirtText, chunk)
+				else
+					chunkText = truncate(chunkText, targetWidth - curWidth)
+					local hlGroup = chunk[2]
+					table.insert(newVirtText, { chunkText, hlGroup })
+					chunkWidth = vim.fn.strdisplaywidth(chunkText)
+					if curWidth + chunkWidth < targetWidth then
+						suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+					end
+					break
+				end
+				curWidth = curWidth + chunkWidth
+			end
+			table.insert(newVirtText, { suffix, "MoreMsg" })
+			return newVirtText
+		end,
 		preview = {
 			win_config = {
 				border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
@@ -90,10 +122,17 @@ return {
 				winhighlight = "Normal:LazyNormal",
 			},
 			mappings = {
+				scrollB = "<C-b>",
+				scrollF = "<C-f>",
 				scrollU = "<C-u>",
 				scrollD = "<C-d>",
-				jumpTop = "[",
-				jumpBot = "]",
+				scrollE = "<C-e>",
+				scrollY = "<C-y>",
+				jumpTop = "gg",
+				jumpBot = "G",
+				close = "q",
+				switch = "K",
+				trace = "<CR>",
 			},
 		},
 	},
