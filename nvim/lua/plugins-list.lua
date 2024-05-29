@@ -50,7 +50,7 @@ local plugins = {
 	require("plugins.gitsigns"), -- 左则git提示
 	require("plugins.toggleterm"), --终端
 	require("plugins.notify"), -- 消息提醒
-	require("plugins.colorizer"), --显示颜色
+	require("plugins.highlight-colors"), --显示颜色
 	require("plugins.flash"), -- 快速跳转
 	require("plugins.scrollbar"),
 	require("plugins.surround"),
