@@ -44,18 +44,31 @@ source $ZSH/oh-my-zsh.sh
 # umask 0077 #修改umask值
 
 # alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
-alias zshconfig="vim ~/.zshrc"
-# cd
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~"
 # apt
 alias apti="sudo apt install"
 alias aptp="sudo apt purge"
 alias aptar="sudo apt autoremove"
 alias apts="apt search"
+# System
+alias zshconfig="vim ~/.zshrc"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~"
+alias q="exit"
+alias c="clear"
+alias ip="ip -color"
+alias o="open ."
+if command -v exa &> /dev/null; then
+    alias ls="exa --icons"
+    alias ll="exa -lah --icons"
+    alias lt="exa --tree --long --icons -I 'node_modules|.git'"
+fi
+if command -v bat &> /dev/null; then alias cat="bat"; fi
+# Dev
+alias lg="lazygit"
+alias p="pnpm"
 
 # path 环境变量 node 使用的nvm
 bin="$HOME/bin"
