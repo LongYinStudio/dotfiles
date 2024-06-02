@@ -1,0 +1,177 @@
+/* ---- Configuration ---- */
+configuration{
+    modi: "drun,run,window,filebrowser";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "wezterm";
+    drun-display-format: "{icon} {name}";
+    window-format: "{w} | {c} | {t}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-filebrowser: "  Files";
+    display-window: " 﩯  Window";
+    display-Network: " 󰤨  Network";
+    hover-select: true;
+    sidebar-mode: true;
+	me-select-entry: "MouseSecondary";
+	me-accept-entry: "MousePrimary";
+    dpi: 1;
+
+    kb-element-prev: "Shift+Tab,Alt+k"; //上一个结果
+    kb-element-next: "Tab,Alt+j"; //下一个结果
+    kb-mode-previous: "Shift+Left,Alt+h"; //上一个modi 
+    kb-mode-next: "Shift+Right,Alt+l"; //下一个modi
+}
+
+/* ---- Window ---- */
+window {
+    width: 46%;
+    // height: 66%;
+    spacing: 0px;
+    margin: 0px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+/* ---- MainBox ---- */
+mainbox {
+    children: [ "inputbar", "message", "listview", "mode-switcher" ];
+    background-color: transparent;
+}
+
+/* ---- InputBar ---- */
+inputbar {
+    children: [ "prompt", "entry" ];
+    border-radius: 12px;
+    // background-color: red;
+    text-color: #333;
+    spacing: 12px;
+    margin: 0%;
+    padding: 14px 0px;
+    border-radius: 6px;
+}
+
+/* ---- Prompt ---- */
+prompt {
+    padding: 14px;
+    border: 1px solid;
+    border-radius: 12px;
+    border-color: transparent;
+    background-color: #60ADED;
+    text-color: #fff;
+}
+
+/* ---- Entry ---- */
+entry {
+    enabled: true;
+    expand: true;
+    width: 100%;
+    placeholder: "Search ";
+    text-color: inherit;
+    cursor: inherit;
+    placeholder-color: inherit;
+    vertical-align: 0.5;
+}
+
+/* ---- ListBox ---- */
+listbox {
+    border-radius: 12px;
+    spacing: 10px;
+    padding: 10px;
+    background-color: transparent;
+    orientation: vertical;
+    children: [ "message", "listview" ];
+}
+
+/* ---- ListView ---- */
+listview {
+    columns: 3;
+    lines: 6;
+    spacing: 4px;
+    padding: 6px 0px;
+}
+
+/* ---- ScrollBar ---- */
+scrollbar {
+    margin: 0px 4px;
+    handle-width: 8px;
+    handle-color: #586875;
+    background-color: #eeeeee;
+    border-radius: 4px;
+}
+
+/* ---- Mode Switcher ---- */
+mode-switcher{
+    enabled: true;
+    background-color: transparent;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    spacing: 12px;
+}
+
+button {
+    padding: 12px 0px;
+    border-radius: 12px;
+    background-color: transparent;
+    text-color: #000;
+    cursor: pointer;
+}
+
+button selected {
+    background-color: #60ADED;
+    border: 1px solid;
+    border-color: transparent;
+    text-color: #fff;
+}
+
+/* ---- Elements ---- */
+element {
+    padding: 20px;
+    border-radius: 6px;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: #000;
+}
+
+element selected.normal {
+    background-color: transparent;
+    text-color: #008c8c;
+    border: 1px solid;
+    border-color: #aaa;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: inherit;
+    cursor: inherit;
+}
+
+/* ---- Message ---- */
+textbox {
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #008c8c;
+    text-color: #fff;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+}
+
+message {
+    background-color: transparent;
+    border: 0px;
+}
+
+error-message {
+    padding: 12px;
+    border-radius: 20px;
+    background-color: #008c8c;
+    text-color: #fff;
+}
