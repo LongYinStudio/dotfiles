@@ -33,6 +33,7 @@ vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opts)
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", opts)
 -- 取消高亮
 keymap("n", "<leader>nh", ":nohl<CR>")
+keymap("n", "<ESC>", ":nohl<CR>")
 
 -- ---------- 插件 ---------- ---
 -- nvim-lspconfig
