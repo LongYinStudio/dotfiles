@@ -43,10 +43,10 @@ return {
 						["?"] = action_layout.toggle_preview,
 					},
 				},
-				file_ignore_patterns = {
-					"node_modules",
-					".git",
-				},
+				-- telescope 会根据.gitignore忽略
+				-- file_ignore_patterns = {
+
+				-- },
 			},
 		})
 	end,
