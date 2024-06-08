@@ -55,7 +55,7 @@ local plugins = {
 	require("plugins.scrollbar"),
 	require("plugins.surround"),
 	require("plugins.indent-blankline"),
-	require("plugins.markdown-preview"),
+	require("plugins.markdown"), -- markdown相关的插件（预览、高亮等等）
 	require("plugins.colorscheme"),
 	require("plugins.vim-visual-multi"), -- 多光标[ctrl+n，(neo)vim自带的*就够用了]
 	require("plugins.lspkind"), -- lsp 图标
@@ -68,6 +68,7 @@ local plugins = {
 	require("plugins.nvim-ufo"),
 	require("plugins.highlight-undo"), -- 高亮撤销和恢复
 	require("plugins.nvim-hlslens"), -- 高亮搜搜结果，显示当前是第几个
+	require("plugins.url-open"),
 }
 local opts = {} -- 注意要定义这个变量
 
