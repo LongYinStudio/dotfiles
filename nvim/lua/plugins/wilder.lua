@@ -50,24 +50,10 @@ return {
 			vim.api.nvim_set_hl(0, "WilderAccent", { fg = "#5f87ff" })
 			vim.api.nvim_set_hl(0, "WilderSelectedAccent", { fg = "#5f87ff", bg = "#4e4e4e" })
 			-- 设置快捷键
-			vim.api.nvim_set_keymap(
-				"c",
-				"<tab>",
-				[[wilder#in_context() ? wilder#next() : '<tab>']],
-				{ noremap = true, expr = true }
-			)
-			vim.api.nvim_set_keymap(
-				"c",
-				"<Down>",
-				[[wilder#in_context() ? wilder#next() : '<down>']],
-				{ noremap = true, expr = true }
-			)
-			vim.api.nvim_set_keymap(
-				"c",
-				"<up>",
-				[[wilder#in_context() ? wilder#previous() : '<up>']],
-				{ noremap = true, expr = true }
-			)
+			local opts = { noremap = true, expr = true }
+			vim.api.nvim_set_keymap("c", "<tab>", [[wilder#in_context() ? wilder#next() : '<tab>']], opts)
+			vim.api.nvim_set_keymap("c", "<Down>", [[wilder#in_context() ? wilder#next() : '<down>']], opts)
+			vim.api.nvim_set_keymap("c", "<up>", [[wilder#in_context() ? wilder#previous() : '<up>']], opts)
 			vim.api.nvim_set_keymap("c", "0", "0", {}) -- 不清楚原因导致0无法使用 强制覆盖
 		end,
 	},
