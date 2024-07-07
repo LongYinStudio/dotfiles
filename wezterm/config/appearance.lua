@@ -35,7 +35,7 @@ return {
    },
 
    -- scrollbar
-   enable_scroll_bar = true,
+   enable_scroll_bar = false,
    min_scroll_bar_height = "3cell",
    colors = {
       scrollbar_thumb = '#174040',
@@ -64,10 +64,10 @@ return {
    initial_cols = 120,
    initial_rows = 24,
    window_padding = {
-      left = 5,
-      right = 10,
-      top = 12,
-      bottom = 7,
+      left = 0,
+      right = 0,
+      top = 0,
+      bottom = 0,
    },
    window_close_confirmation = 'AlwaysPrompt',
    window_frame = {
