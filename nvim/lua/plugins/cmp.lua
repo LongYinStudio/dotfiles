@@ -24,6 +24,10 @@ local M = {
 				"rafamadriz/friendly-snippets",
 			},
 		},
+		{
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			event = "InsertEnter",
+		},
 	},
 	event = "InsertEnter",
 }
@@ -104,6 +108,7 @@ function M.config()
 			{ name = "luasnip" },
 			{ name = "path" },
 			{ name = "buffer" },
+			{ name = "nvim_lsp_signature_help" },
 		}),
 
 		formatting = {
