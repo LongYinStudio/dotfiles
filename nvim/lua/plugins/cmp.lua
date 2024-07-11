@@ -38,6 +38,7 @@ function M.config()
 	local compare = require("cmp.config.compare")
 
 	require("luasnip.loaders.from_vscode").lazy_load()
+	require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snippets" } }) -- 自定义代码片段
 
 	-- 下面会用到这个函数
 	local check_backspace = function()
