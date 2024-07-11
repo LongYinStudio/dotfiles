@@ -50,6 +50,7 @@ local plugins = {
 	require("plugins.highlight-undo"), -- 高亮撤销和恢复
 	require("plugins.nvim-hlslens"), -- 高亮搜搜结果，显示当前是第几个
 	require("plugins.url-open"),
+	require("plugins.neogen"), -- 快捷生成 class、function 等等注释
 }
 local opts = {} -- 注意要定义这个变量
 
