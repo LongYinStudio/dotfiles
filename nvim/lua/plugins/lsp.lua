@@ -47,6 +47,7 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			{ "folke/neodev.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
