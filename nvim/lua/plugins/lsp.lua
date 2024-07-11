@@ -1,13 +1,3 @@
-require("mason").setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
-})
-
 local languages = {
 	"lua_ls",
 	"html",
@@ -25,31 +15,63 @@ local languages = {
 	"yamlls",
 }
 
-require("mason-lspconfig").setup({
-	-- 确保安装，根据需要填写
-	ensure_installed = languages,
-	automatic_installation = true, --自动安装
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- 必须想下面这样配置每个语言，不上未配置语言的dropbar symbol不显示
-
-for _, language in ipairs(languages) do
-	require("lspconfig")[language].setup({
-		capabilities = capabilities,
-	})
-end
-
-require("lsp-lens").setup({
-	enable = true,
-	include_declaration = true, -- Reference include declaration
-	sections = { -- Enable / Disable specific request
-		definition = true,
-		references = true,
-		implements = true,
+return {
+	-- lsp installation
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			cmd = "Mason",
+			opts = {
+				ui = {
+					border = "rounded",
+					width = 0.8,
+					height = 0.7,
+					icons = {
+						package_installed = "󰺧",
+						package_pending = "",
+						package_uninstalled = "󰺭",
+					},
+				},
+			},
+		},
+		opts = {
+			ensure_installed = languages,
+			automatic_installation = true,
+		},
 	},
-	ignore_filetype = {
-		"prisma",
+
+	-- lsp
+	{
+		"neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		dependencies = {
+			{ "folke/neodev.nvim", opts = {} },
+		},
+		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			for _, language in ipairs(languages) do
+				require("lspconfig")[language].setup({
+					capabilities = capabilities,
+				})
+			end
+		end,
 	},
-})
+	{
+		"VidocqH/lsp-lens.nvim", -- 显示definition/references/implements
+		config = function()
+			require("lsp-lens").setup({
+				enable = true,
+				include_declaration = true, -- Reference include declaration
+				sections = { -- Enable / Disable specific request
+					definition = true,
+					references = true,
+					implements = true,
+				},
+				ignore_filetype = {
+					"prisma",
+				},
+			})
+		end,
+	},
+}
