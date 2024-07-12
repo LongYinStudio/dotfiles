@@ -4,7 +4,7 @@ local languages = {
 	"emmet_ls",
 	"cssls",
 	"tsserver",
-	"vuels",
+	-- "vuels",
 	"volar",
 	"clangd",
 	"jsonls",
@@ -56,6 +56,16 @@ return {
 					capabilities = capabilities,
 				})
 			end
+			require("lspconfig")["volar"].setup({
+				capabilities = capabilities,
+				init_options = {
+					typescript = {
+						tsdk = vim.fn.expand(
+							"$HOME/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
+						),
+					},
+				},
+			})
 		end,
 	},
 	{
