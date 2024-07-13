@@ -51,6 +51,7 @@ local plugins = {
 	require("plugins.nvim-hlslens"), -- 高亮搜搜结果，显示当前是第几个
 	require("plugins.url-open"),
 	require("plugins.neogen"), -- 快捷生成 class、function 等等注释
+	require("plugins.auto-save"),
 }
 local opts = {} -- 注意要定义这个变量
 
