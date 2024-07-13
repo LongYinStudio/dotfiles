@@ -52,6 +52,7 @@ local plugins = {
 	require("plugins.url-open"),
 	require("plugins.neogen"), -- 快捷生成 class、function 等等注释
 	require("plugins.auto-save"),
+	require("plugins.lazygit"),
 }
 local opts = {} -- 注意要定义这个变量
 
