@@ -1,3 +1,22 @@
+local icons = {
+	SemiCircleLeft = "",
+	SemiCircleRight = "",
+	Formatter = "󰉢",
+	LSP = "",
+	FileSize = "",
+	Location = "",
+	Left = " ",
+	Right = "",
+	Branch = "",
+	File = "",
+	diagnostics = {
+		Error = "",
+		Warning = "",
+		Hint = "󰌵",
+		Info = "",
+	},
+}
+
 return {
 	{
 		"nvim-lualine/lualine.nvim", -- 状态栏
@@ -5,45 +24,82 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = {
-					theme = "onedark",
+					theme = "auto",
+					globalstatus = true,
 					component_separators = {
 						left = "|",
 						right = "|",
 					},
-					-- https://github.com/ryanoasis/powerline-extra-symbols
-					section_separators = {
-						left = " ",
-						right = "",
-					},
-					globalstatus = true,
+					disabled_filetypes = { "alpha", "dashboard", "Outline" },
+					always_divide_middle = true,
 				},
 				extensions = { "nvim-tree" },
 				sections = {
+					lualine_a = {
+						"mode",
+					},
+					lualine_b = {
+						{ "filename", icon = icons.File },
+						{ "branch", icon = icons.Branch },
+					},
 					lualine_c = {
-						"filename",
 						{
-							"lsp_progress",
-							spinner_symbols = { " ", " ", " ", " ", " ", " " },
+							"diagnostics",
+							sources = {
+								-- "nvim_diagnostic",
+								"nvim_lsp",
+							},
+							sections = {
+								"info",
+								"error",
+								"warn",
+								"hint",
+							},
+							diagnostic_color = {
+								error = { fg = "DiaganosticError" },
+								warn = { fg = "DiagnosticWarn" },
+								info = { fg = "DiaganosticInfo" },
+								hint = { fg = "DiaganosticHint" },
+							},
+							colored = true,
+							update_in_insert = true,
+							always_visible = true,
+							symbols = icons.diagnostic,
 						},
 					},
 					lualine_x = {
-						"filesize",
 						{
 							"fileformat",
 							symbols = {
-								unix = "", -- e712
-								dos = "", -- e70f
-								mac = "", -- e711
+								unix = " - LF", -- e712
+								dos = " - CRLF", -- e70f
+								mac = " - CR", -- e711
 							},
-							-- symbols = {
-							-- 	unix = "LF",
-							-- 	dos = "CRLF",
-							-- 	mac = "CR",
-							-- },
+							separator = { left = icons.SemiCircleLeft, right = icons.SemiCircleRight },
+							color = { bg = "#B4BEFE", fg = "#eeeeee", gui = "bold" },
 						},
-						"encoding",
-						"filetype",
+						{
+							"filesize",
+							icon = icons.FileSize,
+						},
 					},
+					lualine_y = { "filetype", "encoding" },
+					lualine_z = {
+						"progress",
+						{
+							"location",
+							icon = icons.Location,
+							color = { gui = "bold" },
+						},
+					},
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = {},
+					lualine_x = {},
+					lualine_y = {},
+					lualine_z = {},
 				},
 			})
 		end,
