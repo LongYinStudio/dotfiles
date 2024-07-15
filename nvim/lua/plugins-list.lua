@@ -53,6 +53,7 @@ local plugins = {
 	require("plugins.neogen"), -- 快捷生成 class、function 等等注释
 	require("plugins.auto-save"),
 	require("plugins.lazygit"),
+	require("plugins.dashboard"),
 }
 local opts = {} -- 注意要定义这个变量
 
