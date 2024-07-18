@@ -19,7 +19,7 @@ return {
 					yaml = { "prettier" },
 					xml = { "prettier" },
 					xhtml = { "prettier" },
-					markdown = { "prettier", "markdownlint" },
+					markdown = { "prettier" },
 					css = { "prettier", "stylelint" },
 					scss = { "prettier" },
 					sass = { "prettier" },
@@ -42,7 +42,6 @@ return {
 				ensure_installed = {
 					-- Linter & Formatter (conform 配置)
 					"prettier",
-					"markdownlint",
 					"stylelint",
 					"stylua",
 					"clang-format",

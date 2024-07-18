@@ -30,7 +30,7 @@
    - 插件安装:
      1. neovim \~/.config/nvim/lua/plugins/plugins-setup.lua
      2. normal 模式下:w 就可以自动安装配置的插件 || :Lazy 呼出 Lazy 管理界面
-   - 安装\~/.config/nvim/lua/plugins/conform.lua 里用到的 formatters
+   - 手动用rustup安装 rustfmt 不能由mason自动安装，用不了 (rustup component add rustfmt)
 
 4. tmux
    - 用包管理器安装tmux
