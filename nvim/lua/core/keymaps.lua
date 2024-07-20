@@ -4,8 +4,13 @@ local opts = { noremap = true, silent = true }
 
 local keymap = vim.keymap.set
 
--- 配置删除(d)不复制
-keymap({ "n", "v" }, "d", '"_d')
+-- 使用黑洞寄存器配置 c, C, d, D, s, S 命令
+keymap({ "n", "v" }, "c", '"_c', opts)
+keymap({ "n", "v" }, "C", '"_C', opts)
+keymap({ "n", "v" }, "d", '"_d', opts)
+keymap({ "n", "v" }, "D", '"_D', opts)
+-- keymap({ "n", "v" }, "s", '"_s', opts)
+-- keymap({ "n", "v" }, "S", '"_S', opts)
 
 -- 单行或多行移动
 keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
