@@ -46,7 +46,7 @@ return {
 						action = "Telescope oldfiles",
 						desc = " Recent files",
 						desc_hl = "Number",
-						icon = " ",
+						icon = " ", -- 
 						icon_hl = "Number",
 						key = "r",
 						key_format = " %s",
