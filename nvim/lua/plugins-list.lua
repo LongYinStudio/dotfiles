@@ -55,6 +55,12 @@ local plugins = {
 	require("plugins.lazygit"),
 	require("plugins.dashboard"),
 }
-local opts = {} -- 注意要定义这个变量
+local opts = {
+	ui = {
+		border = "rounded",
+		title = "Plugin Manager",
+		title_pos = "center",
+	},
+} -- 注意要定义这个变量
 
 require("lazy").setup(plugins, opts)
