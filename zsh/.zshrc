@@ -123,3 +123,12 @@ function closevpn() {
     git config --global --unset https.proxy
     echo "代理已关"
 }
+
+# FZF
+if command -v fzf &> /dev/null; then
+    source <(fzf --zsh)  # Set up fzf key bindings and fuzzy completion (版本0.54以上)
+    alias fv='vim $(fzf)'
+    alias fn='nvim $(fzf)'
+    alias fp="fzf --preview 'bat --color=always {}'"
+    alias fh='history | fzf'
+fi
