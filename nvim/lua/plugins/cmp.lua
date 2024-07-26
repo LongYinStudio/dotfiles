@@ -35,12 +35,10 @@ local M = {
 function M.config()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
-	local compare = require("cmp.config.compare")
 
 	require("luasnip.loaders.from_vscode").lazy_load()
 	require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snippets" } }) -- 自定义代码片段
 
-	-- 下面会用到这个函数
 	local check_backspace = function()
 		local col = vim.fn.col(".") - 1
 		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -67,14 +65,20 @@ function M.config()
 			end,
 		},
 		window = {
-			completion = cmp.config.window.bordered(),
-			documentation = cmp.config.window.bordered(),
+			completion = {
+				border = "rounded",
+				winhighlight = "Normal:CmpDocumentation,FloatBorder:CmpDocumentation,Search:None",
+			},
+			documentation = {
+				border = "rounded",
+				winhighlight = "Normal:CmpDocumentation,FloatBorder:CmpDocumentation,Search:None",
+			},
 		},
 		mapping = cmp.mapping.preset.insert({
 			["<C-b>"] = cmp.mapping.scroll_docs(-4),
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(), -- 取消补全，esc也可以退出
-			["<CR>"] = cmp.mapping.confirm({ select = true }),
+			["<CR>"] = cmp.mapping.confirm({ select = false }),
 
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
@@ -107,7 +111,6 @@ function M.config()
 			}),
 		}),
 
-		-- 这里重要
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp" },
 			{ name = "luasnip" },
@@ -126,20 +129,21 @@ function M.config()
 				vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
 				return vim_item
 			end,
+			expandable_indicator = true, -- Boolean to show the `~` expandable indicator in cmp's floating window.
 		},
 
 		sorting = {
 			-- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
 			priority_weight = 1,
 			comparators = {
-				compare.exact, -- 精准匹配
-				compare.recently_used, -- 最近用过的靠前
-				compare.kind,
-				compare.score, -- 得分高靠前
-				compare.order,
-				compare.offset,
-				compare.length, -- 短的靠前
-				compare.sort_test,
+				cmp.config.compare.exact, -- 精准匹配
+				cmp.config.compare.recently_used, -- 最近用过的靠前
+				cmp.config.compare.kind,
+				cmp.config.compare.score, -- 得分高靠前
+				cmp.config.compare.order,
+				cmp.config.compare.offset,
+				cmp.config.compare.length, -- 短的靠前
+				cmp.config.compare.sort_text,
 			},
 		},
 	})
