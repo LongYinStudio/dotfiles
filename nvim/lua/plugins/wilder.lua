@@ -1,3 +1,4 @@
+-- :cmdline & /搜索
 return {
 	{
 		"gelguy/wilder.nvim",

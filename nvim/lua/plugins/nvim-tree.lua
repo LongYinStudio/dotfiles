@@ -30,6 +30,7 @@ vim.cmd([[
 --   highlight NvimTreeGitMerge guifg=#e4676b
 -- ]])
 
+-- 文件浏览
 return {
 	{
 		"nvim-tree/nvim-tree.lua", -- 文档树

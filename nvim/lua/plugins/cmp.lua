@@ -1,3 +1,4 @@
+-- 自动补全
 local M = {
 	"hrsh7th/nvim-cmp",
 	dependencies = {

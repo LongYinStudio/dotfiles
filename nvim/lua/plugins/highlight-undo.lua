@@ -1,3 +1,4 @@
+-- 高亮撤销和恢复
 return {
 	"tzachar/highlight-undo.nvim",
 	keys = { "u", "<c-r>" },

@@ -1,3 +1,4 @@
+-- lsp 图标
 return {
 	"onsails/lspkind.nvim",
 	config = function()

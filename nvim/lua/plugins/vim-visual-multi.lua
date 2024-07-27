@@ -1,3 +1,4 @@
+-- 多光标[ctrl+n，(neo)vim自带的*就够用了]
 return {
 	"mg979/vim-visual-multi",
 	branch = "master",

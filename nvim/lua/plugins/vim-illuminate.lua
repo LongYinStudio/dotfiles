@@ -1,3 +1,4 @@
+-- 高亮相同字符
 return {
 	"RRethy/vim-illuminate",
 	event = "BufEnter",

@@ -1,3 +1,4 @@
+-- 语法高亮
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",

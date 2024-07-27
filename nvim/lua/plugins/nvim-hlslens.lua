@@ -1,3 +1,4 @@
+-- 高亮搜搜结果，显示当前是第几个
 -- TODO: 加入联动nvim-ufo、vim-visual-multi配置（参照github）
 return {
 	"kevinhwang91/nvim-hlslens",

@@ -1,3 +1,4 @@
+-- 快捷键提示
 return {
 	{
 		"folke/which-key.nvim",

@@ -1,3 +1,4 @@
+-- 快捷生成 class、function 等等注释
 return {
 	"danymat/neogen",
 	dependencies = "nvim-treesitter/nvim-treesitter",
