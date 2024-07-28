@@ -38,7 +38,7 @@ plugins=(
     command-not-found # 命令没安装，显示如何安装
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH"/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
 
 # umask 0077 #修改umask值
@@ -69,6 +69,12 @@ if command -v bat &> /dev/null; then alias cat="bat"; fi
 # Dev
 alias lg="lazygit"
 alias p="pnpm"
+# Neovim
+alias v="nvim"
+alias vi="nvim"
+alias lv="NVIM_APPNAME=LazyVim nvim" # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
+alias nv="NVIM_APPNAME=NvChad nvim" # git clone https://github.com/NvChad/starter ~/.config/NvChad
+alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
 
 # path 环境变量 node 使用的nvm
 bin="$HOME/bin"
