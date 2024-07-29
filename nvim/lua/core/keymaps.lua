@@ -64,9 +64,3 @@ keymap("n", "<leader>gr", vim.lsp.buf.references, { noremap = true, silent = tru
 keymap("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
 keymap("n", "<F2>", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code Action" }) --列出code action
--- toggleterm
-keymap("n", "<leader>`", "<Cmd>ToggleTerm<CR>", { desc = "ToggleTerm" })
-keymap("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "ToggleTerm float" })
-keymap("n", "<leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>", { desc = "ToggleTerm horizontal split" })
-keymap("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "ToggleTerm vertical split" })
-keymap("n", "<leader>tt", "<Cmd>ToggleTerm direction=tab<CR>", { desc = "ToggleTerm tab split" })
