@@ -1,4 +1,4 @@
-vim.g.mapleader = ";"
+vim.g.mapleader = " "
 
 local opts = { noremap = true, silent = true }
 
@@ -36,9 +36,8 @@ keymap("v", ">", ">gv")
 
 -- ---------- 正常模式 ---------- ---
 -- 窗口
-keymap("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
-keymap("n", "<leader>sv", "<C-w>v", { desc = "Split vertical" }) -- 水平新增窗口
-keymap("n", "<leader>sh", "<C-w>s", { desc = "Split horizontal" }) -- 垂直新增窗口
+keymap("n", "<leader>wv", "<C-w>v", { desc = "Split Window vertical" }) -- 水平新增窗口
+keymap("n", "<leader>wh", "<C-w>s", { desc = "Split Window horizontal" }) -- 垂直新增窗口
 keymap("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 -- Move to window using the <ctrl> hjkl keys
 keymap("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
@@ -52,15 +51,20 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 -- 取消高亮
-keymap("n", "<leader>nh", ":nohl<CR>")
+keymap("n", "<leader>nh", ":nohl<CR>", { desc = "no highlight search" })
 keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 -- new file
 keymap("n", "<leader>nf", "<cmd>enew<cr>", { desc = "New File" })
+-- number
+-- keymap("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
+-- keymap("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 
 -- ---------- 插件 ---------- ---
 -- nvim-lspconfig
-keymap("n", "<leader>gd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Goto Definition" }) --定义
-keymap("n", "<leader>gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "Goto References" }) --引用
+keymap("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Goto Definition" }) --定义
+keymap("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "Goto References" }) --引用
 keymap("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
 keymap("n", "<F2>", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code Action" }) --列出code action
+
+-- TODO: 参照 AstroNvim astrocore.toggles 配置各种功能的开关
