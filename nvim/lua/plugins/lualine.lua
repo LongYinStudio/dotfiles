@@ -2,7 +2,7 @@ local icons = {
 	SemiCircleLeft = "",
 	SemiCircleRight = "",
 	Formatter = "󰉢",
-	LSP = "",
+	LSP = " ",
 	FileSize = "",
 	Location = "",
 	Left = " ",
@@ -16,6 +16,14 @@ local icons = {
 		Info = "",
 	},
 }
+
+local get_lsp_str = function()
+	local lsps = {}
+	for _, lsp in ipairs(vim.lsp.get_clients()) do
+		table.insert(lsps, lsp.name)
+	end
+	return icons.LSP .. "[" .. table.concat(lsps, ", ") .. "]"
+end
 
 return {
 	{
@@ -82,6 +90,7 @@ return {
 						},
 					},
 					lualine_x = {
+						{ get_lsp_str },
 						{
 							"fileformat",
 							symbols = {
