@@ -54,7 +54,7 @@ return {
 					-- better descriptions
 					-- { "gx", desc = "Open with system app" },
 					{ "K", desc = "Documentation", icon = "" },
-					{ "<leader>rn", desc = "Rename", icon = { icon = "󰑕 ", color = "purple" } },
+					{ "<leader>cr", desc = "Rename", icon = { icon = "󰑕 ", color = "purple" } },
 					{ "<leader>L", "<cmd>Lazy<CR>", desc = "Lazy", icon = "󰒲 " },
 					{ "<leader>M", "<cmd>Mason<CR>", desc = "Mason", icon = " " },
 				},

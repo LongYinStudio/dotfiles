@@ -14,7 +14,7 @@ return {
 
 		local keymap = vim.keymap.set
 		keymap("n", "<leader>ff", builtin.find_files, { desc = "Telescope Find Files" })
-		keymap("n", "<leader>fg", builtin.live_grep, { desc = "Telescope Live Grep" }) -- 环境里要安装ripgrep
+		keymap("n", "<leader>fw", builtin.live_grep, { desc = "Telescope Live Grep" }) -- 环境里要安装ripgrep
 		keymap("n", "<leader>fb", builtin.buffers, { desc = "Telescope Find Buffers" })
 		keymap("n", "<leader>fh", builtin.help_tags, { desc = "Telescope Help Tags" })
 		keymap(
@@ -23,6 +23,10 @@ return {
 			"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
 			{ desc = "Telescope Find all files" }
 		)
+		keymap("n", "<leader>ft", function()
+			require("telescope.builtin").colorscheme({ enable_preview = true, ignore_builtins = true })
+		end, { desc = "Telescope find themes" })
+		keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
 		keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Telescope Git branches" })
 		keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits (repository)" })
 		keymap("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", { desc = "Telescope Git commits (current file)" })
@@ -52,6 +56,8 @@ return {
 
 				-- },
 			},
+			extensions_list = { "themes", "terms" },
+			extensions = {},
 		})
 	end,
 }

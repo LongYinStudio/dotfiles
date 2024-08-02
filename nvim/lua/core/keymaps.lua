@@ -51,20 +51,30 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 -- 取消高亮
-keymap("n", "<leader>nh", ":nohl<CR>", { desc = "no highlight search" })
+keymap("n", "<leader>H", ":nohl<CR>", { desc = "no highlight search" })
 keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 -- new file
-keymap("n", "<leader>nf", "<cmd>enew<cr>", { desc = "New File" })
+keymap("n", "<leader>F", "<cmd>enew<cr>", { desc = "New File" })
 -- number
--- keymap("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
--- keymap("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+-- keymap("n", "<leader>Tn", "<cmd>set nu!<CR>", { desc = "toggle line number" })
+-- keymap("n", "<leader>TN", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+
+-- -------- toggles --------- ---
+keymap("n", "<leader>Tw", function()
+	require("utils.toggles").wrap()
+end, { desc = "Toggle wrap" })
+keymap("n", "<leader>Ts", function()
+	require("utils.toggles").spell()
+end, { desc = "Toggle spell" })
+keymap("n", "<leader>Tn", function()
+	require("utils.toggles").number()
+end, { desc = "Toggle number" })
 
 -- ---------- 插件 ---------- ---
 -- nvim-lspconfig
+-- TODO: 查看LazyVim 的rename_file
 keymap("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Goto Definition" }) --定义
 keymap("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "Goto References" }) --引用
-keymap("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
+keymap("n", "<leader>cr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
 keymap("n", "<F2>", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code Action" }) --列出code action
-
--- TODO: 参照 AstroNvim astrocore.toggles 配置各种功能的开关
