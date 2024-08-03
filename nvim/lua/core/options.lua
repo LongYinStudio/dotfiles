@@ -44,3 +44,7 @@ opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep:│,foldclose:]]
 -- 外观
 opt.termguicolors = true
 opt.signcolumn = "yes"
+
+-- 拼写检查 快捷键参考spell/cheatsheets.txt
+opt.spell = false -- <leader>Ts 切换
+opt.spelllang = { "en_us" }

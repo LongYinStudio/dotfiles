@@ -11,7 +11,6 @@ function M.wrap()
 	vim.notify(("wrap %s"):format(bool2str(vim.wo.wrap)))
 end
 
--- TODO: 配置spell
 --- Toggle spell
 function M.spell()
 	vim.wo.spell = not vim.wo.spell -- local to window
