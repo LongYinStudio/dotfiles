@@ -1,0 +1,94 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 1
+        color_good = '#88b090'
+        color_degraded = '#ffb52a'
+        color_bad = '#e60053'
+}
+
+order += "ethernet _first_"
+order += "wireless _first_"
+order += "path_exists VPN"
+order += "volume master"
+order += "battery all"
+order += "disk /"
+order += "memory"
+order += "cpu_usage"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "  (%quality at %essid) %ip"
+        format_down = ""
+}
+
+ethernet _first_ {
+        format_up = "  %ip (%speed)"
+        format_down = ""
+}
+
+# path_exists VPN {
+#         # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+#         path = "/proc/sys/net/ipv4/conf/tun0"
+#         format = " vpn %status"
+# }
+
+volume master {
+        format = "󰕾  %volume"
+        format_muted = "󰖁  %volume"
+        # format = "󰕾 (%devicename): %volume"
+        # format_muted = "󰖁 (%devicename): %volume"
+        # format = "  %volume"
+        # format_muted = " "
+        # format_muted = " %volume"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+battery all {
+        # format = "%status %percentage"
+        format = "%status %percentage %remaining"
+        format_down = "No battery"
+        status_chr = " "
+        status_bat = " "
+        status_unk = " "
+        status_full = " "
+        last_full_capacity = true
+        integer_battery_capacity = true
+        threshold_type = percentage
+        hide_seconds = true
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+disk "/" {
+        format = " disk %percentage_used"
+}
+
+cpu_usage {
+        format = " cpu %usage"
+        # format = "🚀 %usage "
+        max_threshold = 75
+}
+
+# cpu_temperature 0 {
+# 	format = " %degrees°C"
+# }
+
+memory {
+        format = " mem %percentage_used"
+        threshold_degraded = "10%"
+        format_degraded = " < %available"
+}
+
+tztime local {
+        # format = " %Y-%m-%d %H:%M:%S"
+        # format = " 📅 %Y-%m-%d  🕑 %H:%M:%S "
+        format = "%Y-%m-%d %H:%M:%S"
+}
