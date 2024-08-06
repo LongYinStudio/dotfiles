@@ -1,5 +1,6 @@
 /* ---- Configuration ---- */
 configuration{
+    font: "JetbrainsMono Nerd Font 12";
     modi: "drun,run,window,filebrowser";
     icon-theme: "Oranchelo";
     show-icons: true;
@@ -12,12 +13,12 @@ configuration{
     display-drun: "   Apps ";
     display-run: "   Run ";
     display-filebrowser: "  Files";
-    display-window: " 﩯  Window";
+    display-window: "  Window";
     display-Network: " 󰤨  Network";
     hover-select: true;
     sidebar-mode: true;
-	me-select-entry: "MouseSecondary";
-	me-accept-entry: "MousePrimary";
+  	me-select-entry: "MouseSecondary";
+    me-accept-entry: "MousePrimary";
     dpi: 1;
 
     kb-element-prev: "Shift+Tab,Alt+k"; //上一个结果

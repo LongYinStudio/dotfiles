@@ -227,7 +227,9 @@ mode "exit: [0]lock, [1]logout, [2]reboot, [3]shutdown" {
   bindsym Return mode "default"
 }
 
-bindsym $mod+x mode "exit: [0]lock, [1]logout, [2]reboot, [3]shutdown"
+# bindsym $mod+x mode "exit: [0]lock, [1]logout, [2]reboot, [3]shutdown"
+
+bindsym $mod+x exec --no-startup-id ~/.config/rofi/powermenu/powermenu
 
 # Window Settings
 for_window [class="Clash-verge"]      floating enable, resize set 800 px 600 px
