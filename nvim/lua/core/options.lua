@@ -47,4 +47,6 @@ opt.signcolumn = "yes"
 
 -- 拼写检查 快捷键参考spell/cheatsheets.txt
 opt.spell = false -- <leader>Ts 切换
-opt.spelllang = { "en_us" }
+opt.spelllang = { "en_us", "cjk" } -- 如果包含名称“cjk”，则排除东亚字符拼写检查
+opt.spelloptions = "camel" -- 识别驼峰命名法
+-- colorscheme 里定义拼写下划线的样式
