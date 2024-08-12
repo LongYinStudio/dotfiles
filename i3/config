@@ -88,7 +88,7 @@ bindsym $alt+F4 kill
 floating_modifier $mod
 
 # start a terminal (alacritty,kitty,wezterm)
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec wezterm
 
 # change focus
@@ -233,7 +233,6 @@ bindsym $mod+x exec --no-startup-id ~/.config/rofi/powermenu/powermenu
 
 # Window Settings
 for_window [class="Clash-verge"]      floating enable, resize set 800 px 600 px
-for_window [class="Alacritty"]        floating enable, resize set 800 px 600 px
 for_window [class="mpv"]              floating enable, resize set 800 px 600 px
 for_window [class="Nautilus"]         floating enable, resize set 800 px 600 px
 for_window [class="firefox"]          move to workspace $ws3
