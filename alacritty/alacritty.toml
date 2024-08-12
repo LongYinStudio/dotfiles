@@ -1,52 +1,72 @@
+import =  [
+"~/.config/alacritty/linux.toml",
+# "~/.config/alacritty/mac.toml",
+# "C:\\Users\\LongYinStudio\\AppData\\Roaming\\alacritty\\windows.toml",
+]
 # 实时加载配置
 live_config_reload=true
 
-[mouse]
-# 打字时隐藏鼠标
-hide_when_typing = true
+[env]
+TERM = "xterm-256color"
 
-[cursor.style]
-#   - ▇ Block
-#   - _ Underline
-#   - | Beam
-shape = "Block"
-# Values for `blinking`:
-#   - Never: 防止光标闪烁
-#   - Off: 默认情况下禁用闪烁
-#   - On: 默认情况下启用闪烁
-#   - Always: 强制光标始终闪烁
-blinking = "Always"
+[window]
+# 窗口的尺寸 160 45
+dimensions = {columns = 80, lines = 40}
+# 窗口的启动位置
+position = {x = 400, y = 200}
+# 窗口的边界空白
+padding = {x = 0, y = 0}
+# 动态填充 在终端内容周围均匀分布额外的填充
+dynamic_padding = true
+# full: 边框和标题栏
+# none: 无边框或标题栏
+# transparent(mac only): 标题栏、透明背景和标题栏按钮
+# buttonless(mac only): 标题栏、透明背景和无标题栏按钮
+decorations = 'Full'
+# 透明度
+opacity = 0.8
+# Request compositor to blur content behind transparent windows.
+# Default: false
+# blur = true | false # (works on macOS/KDE Wayland)
+# 启动模式 窗口化启动(Default: "Windowed")
+# Windowed: 常规窗口
+# Maximized: 最大化
+# Fullscreen: 全屏
+# SimpleFullscreen(mac only): 与Fullscreen相同，但您可以将窗口堆叠在顶部。
+startup_mode = 'Windowed'
+# 标题(Default: "Alacritty")
+title = "Alacritty"
+# 动态标题(Default: true)
+dynamic_title = true
+# class = { instance = "<string>", general = "<string>" } # (Linux/BSD only)
+# Window class.
+# On Wayland, general is used as app_id and instance is ignored.
+# Default: { instance = "Alacritty", general = "Alacritty" }
+# 主题("Dark" | "Light" | "None")(Default: "None")
+decorations_theme_variant = 'Dark'
+# 调整大小(Default: false)
+resize_increments = true
+# Make Option key behave as Alt.("OnlyLeft" | "OnlyRight" | "Both" | "None") (macos only) Default: "None"
+# option_as_alt = "Both"
 
-[selection]
-semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"  # 语义转义字符
-save_to_clipboard = true                       # 保存到剪贴板
+# history = <integer>
+# Maximum number of lines in the scrollback buffer. 
+# Specifying 0 will disable scrolling. Limited to 100000.(Default: 10000)
+# multiplier = <integer>
+# Number of line scrolled for every input scroll increment.(Default: 3)
+[scrolling]
+history = 10000
+multiplier = 3
 
+# 字体 normal | bold | italic | bold_italic
+# other config: offset、glyph_offset、builtin_box_drawing
 [font]
 normal = {family = 'JetBrainsMono Nerd Font', style = 'Regular'}
 bold = {family = 'JetBrainsMono Nerd Font', style = 'Bold'}
 italic = {family = 'JetBrainsMono Nerd Font', style = 'Italic'}
 size = 14.0
 
-[window]
-# 窗口的尺寸 160 45
-dimensions = {columns = 80, lines = 40}
-# 窗口的启动位置
-position = {x = 100, y = 0}
-# 窗口的边界空白
-padding = {x = 5, y = 5}
-dynamic_padding = true
-# Full 窗口的装饰，边框和标题栏 苹果系统可以添加为Buttonless  
-decorations = 'Full'
-# 透明度
-opacity = 0.8
-# 启动模式 窗口化启动
-startup_mode = 'windowed'
-# 动态标题
-dynamic_title = true
-decorations_theme_variant = 'Dark'
-resize_increments = true
-
-# 主题
+# 主题(颜色配置项很多,参照官网)
 # Colors (One Dark)
 # Default colors
 [colors.primary]
@@ -72,3 +92,48 @@ blue    = '#61afef'
 magenta = '#c678dd'
 cyan    = '#56b6c2'
 white   = '#ffffff'
+
+# Bell配置(配置项很多,参照官网)
+[bell]
+
+# 选择 使用默认值
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"  # 语义转义字符
+save_to_clipboard = true                       # 保存到剪贴板
+
+[cursor.style]
+#   - ▇ Block
+#   - _ Underline
+#   - | Beam
+shape = "Block"
+# Values for `blinking`:
+#   - Never: 防止光标闪烁
+#   - Off: 默认情况下禁用闪烁
+#   - On: 默认情况下启用闪烁
+#   - Always: 强制光标始终闪烁
+blinking = "Always"
+# others
+# vi_mode_style = { <shape>, <blinking> } | "None"
+# blink_interval = <integer>
+# blink_timeout = <integer>
+# unfocused_hollow = true | false
+# thickness = <float>
+
+# 终端
+[terminal]
+# osc52 = "Disabled" | "OnlyCopy" | "OnlyPaste" | "CopyPaste" (Default: OnlyCopy)
+osc52 = "CopyPaste"
+
+# 鼠标
+[mouse]
+# 打字时隐藏鼠标
+hide_when_typing = true
+# bindings = [{ <mouse>, <mods>, <mode>, <action> | <chars> },]
+
+# 提示
+[hints]
+# alphabet = "<string>"
+# enabled = [{ <regex>, <hyperlinks>, <post_processing>, <persist>, <action>, <command> <binding>, <mouse> },]
+
+# 调试
+[debug]

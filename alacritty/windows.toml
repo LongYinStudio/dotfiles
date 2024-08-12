@@ -1,0 +1,23 @@
+[shell]
+# program = "cmd.exe"
+# program = "powershell.exe"
+program = "pwsh.exe"
+# program = "wsl.exe"
+
+# working_directory = "C:\\Users\\LongYinStudio\\Code"
+
+[keyboard]
+bindings = [
+  { key = "Escape", mods = "Control", action = "ToggleViMode" },
+  { key = "Return", mods = "Alt", action = "ToggleFullscreen" },
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+  { key = "N", mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "Up", mods = "Control", action = "ScrollPageUp" },
+  { key = "Down", mods = "Control", action = "ScrollPageDown" },
+  { key = "Left", mods = "Control", action = "ScrollToTop" },
+  { key = "Right", mods = "Control", action = "ScrollToBottom" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+]
+

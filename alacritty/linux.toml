@@ -1,0 +1,25 @@
+[shell]
+program = "/bin/zsh"
+args = ["-l"]
+
+# working_directory = "~/Code"
+
+# ipc_socket = true | false # (unix only)
+# Offer IPC using alacritty msg
+# Default: true
+
+[keyboard]
+bindings = [
+  { key = "Escape", mods = "Control", action = "ToggleViMode" },
+  { key = "Return", mods = "Alt", action = "ToggleFullscreen" },
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+  { key = "N", mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "Up", mods = "Control", action = "ScrollPageUp" },
+  { key = "Down", mods = "Control", action = "ScrollPageDown" },
+  { key = "Left", mods = "Control", action = "ScrollToTop" },
+  { key = "Right", mods = "Control", action = "ScrollToBottom" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+]
+
