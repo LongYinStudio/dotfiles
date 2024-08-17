@@ -71,6 +71,10 @@ exec --no-startup-id xset dpms 300
 exec --no-startup-id xset r rate 300 45
 # HDMI设置
 exec --no-startup-id xrandr --output DVI-0 --right-of DVI-1
+# 输入法
+# exec --no-startup-id fcitx -d
+# fcitx5-im fcitx5-chinese-addons (主题: https://github.com/catppuccin/fcitx5)
+exec --no-startup-id fcitx5 -d -r
 # 支持透明
 # exec_always --no-startup-id picom --experimental-backends &
 # exec picom --config ~/.config/picom/picom.conf &
