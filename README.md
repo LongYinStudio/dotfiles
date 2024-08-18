@@ -14,6 +14,7 @@
 
      1. 自制主题(zsh/my.zsh-theme)放在\~/.oh-my-zsh/custom/themes 或者\~/.oh-my-zsh/themes 都行
      2. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
+     3. [starship](https://starship.rs/zh-CN/) 现在在用
 
    - 最后 `source ~/.zshrc`
 

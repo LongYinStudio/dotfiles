@@ -1,41 +1,41 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
-ZSH_DISABLE_COMPFIX="true"    # 有的版本有引号， 有的版本无引号，自己尝试
+ZSH_DISABLE_COMPFIX="true" # 有的版本有引号， 有的版本无引号，自己尝试
 export TERM='xterm-256color'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
 
 export ZSH="$HOME/.oh-my-zsh" #oh-my-zsh安装目录
 
-# 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
-# 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
+# # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export EDITOR=vim #编辑器
-export HISTSIZE=10000 #历史纪录条目数量
-export SAVEHIST=10000 #注销后保存的历史纪录条目数量
+export EDITOR=vim         #编辑器
+export HISTSIZE=10000     #历史纪录条目数量
+export SAVEHIST=10000     #注销后保存的历史纪录条目数量
 setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
-setopt HIST_IGNORE_DUPS #如果连续输入的命令相同，历史纪录中只保留一个
+setopt HIST_IGNORE_DUPS   #如果连续输入的命令相同，历史纪录中只保留一个
 
 # 插件配置，zsh-syntax-highlighting和zsh-autosuggestions安装/README.md安装
 plugins=(
-    git # git aliases
-    zsh-syntax-highlighting # 命令高亮
-    zsh-autosuggestions # 命令补全
-    sudo # 双击esc-->sudo
-    extract # x解压
-    universalarchive # 压缩集合，使用ua+压缩后缀(如:tar.gz、zip等等)+压缩对象
-    z # z 跳转目录
-    tmux # tmux aliases
-    vi-mode # 命令行vim
-    command-not-found # 命令没安装，显示如何安装
+	git                     # git aliases
+	zsh-syntax-highlighting # 命令高亮
+	zsh-autosuggestions     # 命令补全
+	sudo                    # 双击esc-->sudo
+	extract                 # x解压
+	universalarchive        # 压缩集合，使用ua+压缩后缀(如:tar.gz、zip等等)+压缩对象
+	z                       # z 跳转目录
+	tmux                    # tmux aliases
+	vi-mode                 # 命令行vim
+	command-not-found       # 命令没安装，显示如何安装
 )
 
 source "$ZSH"/oh-my-zsh.sh
@@ -60,20 +60,20 @@ alias q="exit"
 alias c="clear"
 alias ip="ip -color"
 alias o="open ."
-if command -v exa &> /dev/null; then
-    alias ls="exa --icons"
-    alias ll="exa -lah --icons"
-    alias lt="exa --tree --long --icons -I 'node_modules|.git'"
+if command -v exa &>/dev/null; then
+	alias ls="exa --icons"
+	alias ll="exa -lah --icons"
+	alias lt="exa --tree --long --icons -I 'node_modules|.git'"
 fi
-if command -v bat &> /dev/null; then alias cat="bat"; fi
+if command -v bat &>/dev/null; then alias cat="bat"; fi
 # Dev
 alias lg="lazygit"
 alias p="pnpm"
 # Neovim
 alias v="nvim"
 alias vi="nvim"
-alias lv="NVIM_APPNAME=LazyVim nvim" # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
-alias nv="NVIM_APPNAME=NvChad nvim" # git clone https://github.com/NvChad/starter ~/.config/NvChad
+alias lv="NVIM_APPNAME=LazyVim nvim"   # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
+alias nv="NVIM_APPNAME=NvChad nvim"    # git clone https://github.com/NvChad/starter ~/.config/NvChad
 alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
 
 # path 环境变量 node 使用的nvm
@@ -82,29 +82,29 @@ go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
 export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_351
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export JRE_HOME=$JAVA_HOME/jre 
+export JRE_HOME=$JAVA_HOME/jre
 
 export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 # place this after nvm initialization!
 autoload -U add-zsh-hook
 load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
+	local node_version="$(nvm version)"
+	local nvmrc_path="$(nvm_find_nvmrc)"
+	if [ -n "$nvmrc_path" ]; then
+		local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+		if [ "$nvmrc_node_version" = "N/A" ]; then
+			nvm install
+		elif [ "$nvmrc_node_version" != "$node_version" ]; then
+			nvm use
+		fi
+	elif [ "$node_version" != "$(nvm version default)" ]; then
+		echo "Reverting to nvm default version"
+		nvm use default
+	fi
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
@@ -112,29 +112,32 @@ load-nvmrc
 # 开启代理函数
 PROXY_HTTP="http://127.0.0.1:7890"
 function openvpn() {
-    export http_proxy="${PROXY_HTTP}"
-    export https_proxy="${PROXY_HTTP}"
-    export all_proxy=socks5://127.0.0.1:7890
-    git config --global http.proxy "${PROXY_HTTP}"
-    git config --global https.proxy "${PROXY_HTTP}"
-    echo "代理已开"
+	export http_proxy="${PROXY_HTTP}"
+	export https_proxy="${PROXY_HTTP}"
+	export all_proxy=socks5://127.0.0.1:7890
+	git config --global http.proxy "${PROXY_HTTP}"
+	git config --global https.proxy "${PROXY_HTTP}"
+	echo "代理已开"
 }
 
 # 关闭代理函数
 function closevpn() {
-    unset https_proxy
-    unset http_proxy
-    unset all_proxy
-    git config --global --unset http.proxy
-    git config --global --unset https.proxy
-    echo "代理已关"
+	unset https_proxy
+	unset http_proxy
+	unset all_proxy
+	git config --global --unset http.proxy
+	git config --global --unset https.proxy
+	echo "代理已关"
 }
 
 # FZF
-if command -v fzf &> /dev/null; then
-    source <(fzf --zsh)  # Set up fzf key bindings and fuzzy completion (版本0.54以上)
-    alias fv='vim $(fzf)'
-    alias fn='nvim $(fzf)'
-    alias fp="fzf --preview 'bat --color=always {}'"
-    alias fh='history | fzf'
+if command -v fzf &>/dev/null; then
+	source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion (版本0.54以上)
+	alias fv='vim $(fzf)'
+	alias fn='nvim $(fzf)'
+	alias fp="fzf --preview 'bat --color=always {}'"
+	alias fh='history | fzf'
 fi
+
+# starship 不需要source .zshrc,随便输个命令,就会重新加载配置
+eval "$(starship init zsh)"
