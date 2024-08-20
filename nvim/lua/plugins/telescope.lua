@@ -39,7 +39,7 @@ return {
 				selection_caret = "▍ ",
 				-- selection_caret = "  ",
 				layout_config = {
-					preview_width = 0.6, -- 预览窗口相对于列表窗口的宽度，默认值为 0.5
+					-- preview_width = 0.6, -- 预览窗口相对于列表窗口的宽度，默认值为 0.5
 					preview_cutoff = 100, -- 预览窗口显示的最大行数，默认值为 80
 				},
 				mappings = {

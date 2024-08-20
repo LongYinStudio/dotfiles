@@ -40,6 +40,7 @@ return {
 					{ "<leader>c", group = "Code", icon = { icon = "󱃖 " } },
 					{ "<leader>f", group = "Find", icon = { icon = "󰈞 " } }, -- 
 					{ "<leader>g", group = "Git", icon = { icon = " " } }, --   
+					{ "<leader>i", group = "Icon", icon = { icon = "󰥷 " } },
 					-- { "<leader>s", group = "search/replace", icon = " " },
 					{ "<leader>t", group = "ToggleTerm", icon = { icon = " " } },
 					{ "<leader>T", group = "Toggle", icon = { icon = "  " } },
