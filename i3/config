@@ -74,6 +74,9 @@ exec --no-startup-id xrandr --output DVI-0 --right-of DVI-1
 # 输入法
 # exec --no-startup-id fcitx -d
 exec --no-startup-id fcitx5 -d -r
+# 授权管理
+# exec  /usr/lib/polkit-kde-authentication-agent-1
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # 支持透明
 # exec_always --no-startup-id picom --experimental-backends &
@@ -100,8 +103,6 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -112,8 +113,6 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -129,9 +128,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -192,12 +191,15 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+# rofi
 bindsym $mod+d exec --no-startup-id rofi -show drun
-
-# switching window with win+tab
 bindsym $mod+Tab exec --no-startup-id rofi -show window
 # 截图
 bindsym Print exec --no-startup-id flameshot gui
+# 文件管理器
+bindsym $mod+e exec --no-startup-id dolphin
+# vscode
+bindsym $mod+c exec --no-startup-id code
 
 # resize window (you can also use the mouse for that)
 set $resize : [h]  [j]  [k]  [l]
@@ -235,10 +237,12 @@ mode "exit: [0]lock, [1]logout, [2]reboot, [3]shutdown" {
 
 bindsym $mod+x exec --no-startup-id ~/.config/rofi/powermenu/powermenu
 
-# Window Settings
+# Window Settings (class 通过xprop获取)
 for_window [class="Clash-verge"]      floating enable, resize set 800 px 600 px
 for_window [class="mpv"]              floating enable, resize set 800 px 600 px
-for_window [class="Nautilus"]         floating enable, resize set 800 px 600 px
+for_window [class="Nautilus"]         floating enable, resize set 800 px 600 px, move position center
+for_window [class="dolphin"]          floating enable, resize set 800 px 600 px, move position center
+for_window [class="Thunar"]           floating enable, resize set 800 px 600 px, move position center
 for_window [class="firefox"]          move to workspace $ws3
 for_window [class="Google-chrome"]    move to workspace $ws3
 for_window [class="Chromium"]         move to workspace $ws3

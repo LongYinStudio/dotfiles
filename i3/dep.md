@@ -6,6 +6,7 @@
 6. 网络托盘: nm-applet
 7. 截图: flameshot
 8. 终端: alacritty、kitty、wezterm
-9. others:
-   - i3/i3-gaps、i3status、polybar、rofi(自行编译支持中文的)
-   - 自定义外观: lxappearance
+9. 文件管理器: dolphin
+10. others:
+    - i3/i3-gaps、i3status、polybar、rofi(自行编译支持中文的)
+    - 自定义外观: lxappearance
