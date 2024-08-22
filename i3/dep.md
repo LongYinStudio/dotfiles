@@ -1,5 +1,6 @@
 1. 输入法: fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki (主题: https://github.com/catppuccin/fcitx5)
-2. 剪贴板: xclip
+   - 如果fcitx5-im没包含fcitx5-configtool,需要单独安装
+2. 剪贴板: xclip、copyq
 3. 壁纸: feh
 4. 通知: dunst
 5. 透明: picom
