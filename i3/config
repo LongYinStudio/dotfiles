@@ -234,14 +234,17 @@ mode "exit: [0]lock, [1]logout, [2]reboot, [3]shutdown" {
 
 bindsym $mod+x exec --no-startup-id ~/.config/rofi/powermenu/powermenu
 
-# Window Settings (class 通过xprop获取)
+# Window Settings (xprop获取class)
 for_window [class="copyq"]            floating enable, resize set 800 px 600 px, move position center
 for_window [class="Clash-verge"]      floating enable, resize set 800 px 600 px
 for_window [class="mpv"]              floating enable, resize set 800 px 600 px
 for_window [class="Nautilus"]         floating enable, resize set 800 px 600 px, move position center
 for_window [class="dolphin"]          floating enable, resize set 800 px 600 px, move position center
 for_window [class="Thunar"]           floating enable, resize set 800 px 600 px, move position center
+for_window [class="Lxappearance"]     floating enable border normal
+for_window [class="Code"]             move to workspace $ws2
 for_window [class="firefox"]          move to workspace $ws3
 for_window [class="Google-chrome"]    move to workspace $ws3
 for_window [class="Chromium"]         move to workspace $ws3
-for_window [class="Lxappearance"]     floating enable border normal
+for_window [class="QQ"]               floating enable, # move to workspace $ws8
+for_window [class="weixin"]           floating enable, # move to workspace $ws8
