@@ -42,12 +42,6 @@ return {
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- Linter & Formatter (conform 配置)
-					"prettier",
-					"stylelint",
-					"stylua",
-					"clang-format",
-					"shellcheck",
-					"shfmt",
 					"google-java-format",
 				},
 
