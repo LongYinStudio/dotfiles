@@ -1,8 +1,19 @@
+-- Modes
+--  normal_mode = "n",
+--  insert_mode = "i",
+--  visual_mode = "v",
+--  visual_block_mode = "x",
+--  term_mode = "t",
+--  command_mode = "c",
+
 vim.g.mapleader = " "
 
 local opts = { noremap = true, silent = true }
 
 local keymap = vim.keymap.set
+
+-- 将分号映射为冒号
+keymap({ "n", "x" }, ";", ":")
 
 -- 使用黑洞寄存器配置 c, C, d, D, s, S 命令
 keymap({ "n", "v" }, "c", '"_c', opts)
