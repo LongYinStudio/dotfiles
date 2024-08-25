@@ -25,10 +25,12 @@ pacMan=$(get_package_manager)
 
 $pacMan luarocks shellcheck shfmt ripgrep
 
+# neovim 现在需要lua5.1
 if command -v apt-get >/dev/null 2>&1; then
-	sudo apt-get install -y lua5.4 fd-find clang-format
+	sudo apt-get install -y lua5.1 fd-find clang-format
 elif command -v pacman >/dev/null 2>&1; then
-	sudo pacman -S --needed lua fd clang-format
+	# clang包含clang-format
+	sudo pacman -S --needed lua51 fd clang
 elif command -v brew >/dev/null 2>&1; then
-	brew install lua fd clang-format
+	brew install lua@5.1 fd clang-format
 fi
