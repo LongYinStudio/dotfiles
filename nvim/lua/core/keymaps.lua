@@ -80,12 +80,3 @@ end, { desc = "Toggle spell" })
 keymap("n", "<leader>Tn", function()
 	require("utils.toggles").number()
 end, { desc = "Toggle number" })
-
--- ---------- 插件 ---------- ---
--- nvim-lspconfig
--- TODO: 查看LazyVim 的rename_file
-keymap("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Goto Definition" }) --定义
-keymap("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "Goto References" }) --引用
-keymap("n", "<leader>cr", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
-keymap("n", "<F2>", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Rename" }) --重命名
-keymap("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Code Action" }) --列出code action
