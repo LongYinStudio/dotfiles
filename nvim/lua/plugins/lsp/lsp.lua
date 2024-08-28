@@ -16,16 +16,7 @@ local languages = {
 	cssls = {},
 	tsserver = {},
 	vuels = {},
-	-- TODO: volar 2.0.x 无法使用，需要重新配置
-	volar = {
-		init_options = {
-			typescript = {
-				tsdk = vim.fn.expand(
-					"$HOME/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
-				),
-			},
-		},
-	},
+	volar = {},
 	clangd = {},
 	jsonls = {},
 	tailwindcss = {},
@@ -36,6 +27,7 @@ local languages = {
 }
 
 -- 取消部分lsp的自动安装
+-- volar单独安装，最新版本2.0.x在neovim不好配置 MasonInstall vue-language-server@1.8.27
 local autoinstall_excluded_servers = { "volar", "vuels", "dockerls", "tailwindcss", "pyright", "yamlls" }
 
 return {
@@ -136,6 +128,7 @@ return {
 					server.on_attach = on_attach
 					require("lspconfig")[server_name].setup(server)
 				end,
+				-- 下面是为了解决volar@2.0.x，已弃用，改用老版本volar@1.8.27
 				-- 手动配置 volar
 				-- volar = function()
 				-- 	require("lspconfig").volar.setup({
