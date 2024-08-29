@@ -105,7 +105,8 @@ return {
 
 				-- See `:help K` for why this keymap
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-				nmap("L", vim.lsp.buf.signature_help, "Signature Documentation")
+				-- P(arameter) L键已经被lualine使用，详情执行 :verbose map L
+				nmap("P", vim.lsp.buf.signature_help, "Signature Documentation")
 
 				-- Lesser used LSP functionality
 				-- nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")

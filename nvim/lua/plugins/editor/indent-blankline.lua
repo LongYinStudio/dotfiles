@@ -52,6 +52,7 @@ return {
 						["*"] = { "*" },
 					},
 				},
+				-- func/class.. 底部char 行空间不够，需要设置终端，没法直接取消显示
 				show_start = false,
 			},
 			indent = { highlight = highlightIndent, char = "╎" },
