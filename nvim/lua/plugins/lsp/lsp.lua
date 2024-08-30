@@ -120,6 +120,17 @@ return {
 					local reversed_value = not vim.lsp.inlay_hint.is_enabled({})
 					vim.lsp.inlay_hint.enable(reversed_value)
 				end, "Toggle Inlay Iint")
+
+				vim.api.nvim_buf_create_user_command(bufnr, "LspFormat", function(_)
+					if vim.lsp.buf.format then
+						vim.lsp.buf.format()
+					elseif vim.lsp.buf.formatting then
+						vim.lsp.buf.formatting()
+					end
+				end, { desc = "Format current buffer with LSP" })
+				-- Format on save
+				-- vim.cmd("autocmd BufWritePre <buffer> LspFormat")
+				nmap("<leader>cf", "<cmd>LspFormat<cr>")
 			end
 
 			mason_lspconfig.setup_handlers({
@@ -145,6 +156,12 @@ return {
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 			end
+
+			vim.diagnostic.config({
+				virtual_text = {
+					prefix = "●",
+				},
+			})
 		end,
 	},
 }
