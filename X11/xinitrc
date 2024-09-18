@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# 重载配置 此脚本 ~/.xinitrc
+
+[ -f /etc/xprofile ] && source /etc/xprofile
+[ -f ~/.xprofile ] && source ~/.xprofile
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+if [ -f $sysresources ]; then
+	xrdb -merge $sysresources
+fi
+
+if [ -f $sysmodmap ]; then
+	xmodmap $sysmodmap
+fi
+
+if [ -f "$userresources" ]; then
+	xrdb -merge "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+	xmodmap "$usermodmap"
+fi
+
+# 开机自启的程序
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+	for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
+
+# exec fusuma & # 触摸板
+# exec cfw &
+# exec redshift &
+# exec utools &
+# exec blueman-manager &
+# exec /usr/bin/startplasma-x11
+
+# TODO: 调教笔记本的触控板

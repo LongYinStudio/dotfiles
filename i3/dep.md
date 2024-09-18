@@ -14,3 +14,4 @@
 10. others:
     - i3/i3-gaps、i3status、polybar、rofi(自行编译支持中文的)
     - 自定义外观: lxappearance
+    - 授权管理: https://wiki.archlinuxcn.org/wiki/Polkit 用的polkit-gnome

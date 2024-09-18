@@ -1,0 +1,10 @@
+! setxkbmap 可以重置到默认
+! 修改capslock为esc
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
+add Lock = Caps_Lock
+! ! 交换capslock和esc
+! remove Lock = Caps_Lock
+! keysym Escape = Caps_Lock
+! keysym Caps_Lock = Escape
+! add Lock = Caps_Lock
