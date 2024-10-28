@@ -12,6 +12,7 @@
   "dashboard-nvim": { "branch": "master", "commit": "fabf5feec96185817c732d47d363f34034212685" },
   "dressing.nvim": { "branch": "master", "commit": "c5775a888adbc50652cb370073fcfec963eca93e" },
   "dropbar.nvim": { "branch": "master", "commit": "79847a78ec0c58f5e5c0360192b03d0cee803e95" },
+  "duplicate.nvim": { "branch": "main", "commit": "ab057af7872c44e6fbd48df9b03983c8e67c50a7" },
   "eagle.nvim": { "branch": "main", "commit": "509cccee17eb165bfdd99d2366f6433745c70287" },
   "fcitx.nvim": { "branch": "master", "commit": "dcb6b70888aa893d3d223bb777d4117bbdac06a7" },
   "fidget.nvim": { "branch": "main", "commit": "c12f8a58ee472ce5983c3a3f3aad0ff6c49a6a83" },

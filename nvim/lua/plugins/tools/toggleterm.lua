@@ -21,7 +21,7 @@ return {
 						require("nvim-tree.api").tree.toggle({ find_file = false, focus = false })
 					end
 				end,
-				-- open_mapping = [[<C-t>]],
+				open_mapping = [[<C-t>]],
 				start_in_insert = true,
 				direction = "horizontal", --float/vertical/tab
 				float_opts = {
@@ -35,7 +35,7 @@ return {
 				insert_mappings = true,
 				shading_factor = -10,
 			})
-			vim.keymap.set({ "n", "t" }, "<leader>`", "<Cmd>ToggleTerm<CR>", { desc = "ToggleTerm" })
+			-- vim.keymap.set({ "n", "t" }, "<leader>`", "<Cmd>ToggleTerm<CR>", { desc = "ToggleTerm" })
 			vim.keymap.set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "ToggleTerm Float" })
 			vim.keymap.set(
 				"n",
