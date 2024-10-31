@@ -1,15 +1,16 @@
 local languages = {
 	lua_ls = {
-		settings = {
-			Lua = {
-				diagnostics = {
-					-- Get the language server to recognize the `vim` global
-					globals = {
-						"vim",
-					},
-				},
-			},
-		},
+		-- 已安装folke/lazydev.nvim，下面的配置不需要
+		-- settings = {
+		-- 	Lua = {
+		-- 		diagnostics = {
+		-- 			-- Get the language server to recognize the `vim` global
+		-- 			globals = {
+		-- 				"vim",
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
 	},
 	html = {},
 	emmet_ls = {},
@@ -92,6 +93,7 @@ return {
 				nmap("gt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
 
 				-- Diagnostic keymaps
+				nmap("<leader>cD", require("telescope.builtin").diagnostics, "Diagnostics")
 				nmap("]d", vim.diagnostic.goto_next, "Next Diagnostic")
 				nmap("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
 				nmap("]e", function()
@@ -103,7 +105,7 @@ return {
 				nmap("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
 				nmap("<leader>cq", vim.diagnostic.setloclist, "Set Loc List")
 
-				-- See `:help K` for why this keymap
+				-- See `:help K` for why this keymap  使用KK聚焦到hover弹框，q隐藏
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 				-- P(arameter) L键已经被lualine使用，详情执行 :verbose map L
 				nmap("P", vim.lsp.buf.signature_help, "Signature Documentation")

@@ -119,6 +119,9 @@ function M.config()
 			{ name = "buffer" },
 			{ name = "nvim_lsp_signature_help" },
 		}),
+		experimental = {
+			ghost_text = true, -- 提示显示第一项全部，灰色显示后半部分
+		},
 
 		formatting = {
 			fields = { "kind", "abbr", "menu" },

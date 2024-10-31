@@ -18,7 +18,8 @@ export ZSH="$HOME/.oh-my-zsh" #oh-my-zsh安装目录
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export EDITOR=vim         #编辑器
+# export EDITOR=vim         #编辑器
+export EDITOR=nvim        #编辑器
 export HISTSIZE=10000     #历史纪录条目数量
 export SAVEHIST=10000     #注销后保存的历史纪录条目数量
 setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录

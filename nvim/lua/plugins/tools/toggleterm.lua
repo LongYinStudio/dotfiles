@@ -21,7 +21,7 @@ return {
 						require("nvim-tree.api").tree.toggle({ find_file = false, focus = false })
 					end
 				end,
-				open_mapping = [[<C-t>]],
+				open_mapping = [[<C-t>]], -- 0-9 加 C-t 可以切换终端, :ToggleTermToggleAll 可以查看所有
 				start_in_insert = true,
 				direction = "horizontal", --float/vertical/tab
 				float_opts = {
@@ -35,21 +35,18 @@ return {
 				insert_mappings = true,
 				shading_factor = -10,
 			})
-			-- vim.keymap.set({ "n", "t" }, "<leader>`", "<Cmd>ToggleTerm<CR>", { desc = "ToggleTerm" })
-			vim.keymap.set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "ToggleTerm Float" })
-			vim.keymap.set(
+			local keymap = vim.keymap.set
+			-- keymap({ "n", "t" }, "<leader>`", "<Cmd>ToggleTerm<CR>", { desc = "ToggleTerm" })
+			keymap("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { desc = "ToggleTerm Float" })
+			keymap(
 				"n",
 				"<leader>th",
 				"<Cmd>ToggleTerm direction=horizontal<CR>",
 				{ desc = "ToggleTerm Horizontal split" }
 			)
-			vim.keymap.set(
-				"n",
-				"<leader>tv",
-				"<Cmd>ToggleTerm direction=vertical<CR>",
-				{ desc = "ToggleTerm Vertical split" }
-			)
-			vim.keymap.set("n", "<leader>tt", "<Cmd>ToggleTerm direction=tab<CR>", { desc = "ToggleTerm Tab split" })
+			keymap("n", "<leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "ToggleTerm Vertical split" })
+			keymap("n", "<leader>tt", "<Cmd>ToggleTerm direction=tab<CR>", { desc = "ToggleTerm Tab split" })
+			keymap("n", "<leader>ta", "<Cmd>ToggleTermToggleAll<CR>", { desc = "ToggleTerm ToggleAll" })
 		end,
 	},
 }
