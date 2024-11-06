@@ -7,19 +7,19 @@
 
 ZSH_DISABLE_COMPFIX="true" # 有的版本有引号， 有的版本无引号，自己尝试
 export TERM='xterm-256color'
-# export PATH=$HOME/bin:/usr/local/bin:$PATH # 从bash过来，可能需要修改$PATH
+export ZSH="$HOME/.oh-my-zsh" # oh-my-zsh安装目录
 
-export ZSH="$HOME/.oh-my-zsh" #oh-my-zsh安装目录
-
-# # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称))
+# # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称)) # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-# # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# ZSH_THEME="powerlevel10k/powerlevel10k" # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# export EDITOR=vim         #编辑器
-export EDITOR=nvim        #编辑器
+# 编辑器
+if command -v nvim &>/dev/null; then
+	export EDITOR=nvim
+else
+	export EDITOR=vim
+fi
 export HISTSIZE=10000     #历史纪录条目数量
 export SAVEHIST=10000     #注销后保存的历史纪录条目数量
 setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
@@ -66,7 +66,7 @@ if command -v exa &>/dev/null; then
 	alias ll="exa -lah --icons"
 	alias lt="exa --tree --long --icons -I 'node_modules|.git'"
 fi
-if command -v bat &>/dev/null; then alias cat="bat"; fi
+[[ $(command -v bat) ]] && alias cat="bat"
 # Dev
 alias lg="lazygit"
 alias p="pnpm"
@@ -78,6 +78,8 @@ alias nv="NVIM_APPNAME=NvChad nvim"    # git clone https://github.com/NvChad/sta
 alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
 
 # path 环境变量 node 使用的nvm
+source "/etc/environment"
+source "$HOME/.cargo/env"
 bin="$HOME/bin"
 go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
@@ -87,28 +89,33 @@ export JRE_HOME=$JAVA_HOME/jre
 
 export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-	local node_version="$(nvm version)"
-	local nvmrc_path="$(nvm_find_nvmrc)"
-	if [ -n "$nvmrc_path" ]; then
-		local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-		if [ "$nvmrc_node_version" = "N/A" ]; then
-			nvm install
-		elif [ "$nvmrc_node_version" != "$node_version" ]; then
-			nvm use
-		fi
-	elif [ "$node_version" != "$(nvm version default)" ]; then
-		echo "Reverting to nvm default version"
-		nvm use default
-	fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+# # place this after nvm initialization!
+# autoload -U add-zsh-hook
+# load-nvmrc() {
+# 	local node_version="$(nvm version)"
+# 	local nvmrc_path="$(nvm_find_nvmrc)"
+# 	if [ -n "$nvmrc_path" ]; then
+# 		local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+# 		if [ "$nvmrc_node_version" = "N/A" ]; then
+# 			nvm install
+# 		elif [ "$nvmrc_node_version" != "$node_version" ]; then
+# 			nvm use
+# 		fi
+# 	elif [ "$node_version" != "$(nvm version default)" ]; then
+# 		echo "Reverting to nvm default version"
+# 		nvm use default
+# 	fi
+# }
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
+# 换用fnm
+# curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.fnm" --skip-shell
+export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
+export PATH="$HOME/.fnm:$PATH"
+eval "$(fnm env --use-on-cd)"
 
 # 开启代理函数
 PROXY_HTTP="http://127.0.0.1:7890"
@@ -131,6 +138,15 @@ function closevpn() {
 	echo "代理已关"
 }
 
+# TODO: 修改fzf complete
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # 补全不区分大小写
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'cat'
+
 # FZF
 if command -v fzf &>/dev/null; then
 	source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion (版本0.54以上)
@@ -140,5 +156,14 @@ if command -v fzf &>/dev/null; then
 	alias fh='history | fzf'
 fi
 
+# homebrew
+if command -v brew &>/dev/null; then
+	export HOMEBREW_INSTALL_FROM_API=1
+	export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+	export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+	export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+	export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+fi
+
 # starship 不需要source .zshrc,随便输个命令,就会重新加载配置
-eval "$(starship init zsh)"
+[[ $(command -v starship) ]] &&	eval "$(starship init zsh)"
