@@ -46,6 +46,8 @@ return {
 					{ "<leader>T", group = "Toggle", icon = { icon = "  " } },
 					{ "<leader>u", group = "URL", icon = { icon = "󰌷 ", color = "cyan" } },
 					{ "<leader>w", group = "Window", icon = { icon = " ", color = "blue" } },
+					{ "<leader>wv", icon = { icon = " ", color = "blue" } },
+					{ "<leader>wh", icon = { icon = " ", color = "blue" } },
 					{ "<leader>x", group = "Diagnostics/Quickfix", icon = { icon = "󱖫 ", color = "green" } },
 					{ "[", group = "prev" },
 					{ "]", group = "next" },
@@ -63,7 +65,7 @@ return {
 			icons = {
 				-- 加入新rules，不会覆盖插件自带的 (pattern用小写)
 				rules = {
-					{ pattern = "split window", icon = "", color = "blue" },
+					{ pattern = "window", icon = "", color = "blue" },
 					{ pattern = "nvimtree", icon = "" },
 					{ pattern = "indent right", icon = "󰔰 ", hl = "Function" },
 					{ pattern = "indent left", icon = "󰶢 ", hl = "Function" },

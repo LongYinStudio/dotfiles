@@ -6,13 +6,10 @@
 
 1. zsh/oh-my-zsh
 
-   - 安装oh-my-zsh：参照官方github文档，将它安装在$HOME/.oh-my-zsh
-   - 复制 zsh/.zshrc 到 ~/
-   - 安装 `zsh-syntax-highlighting`：执行 `git clone https://gitee.com/Annihilater/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
-   - 安装 `zsh-autosuggestions`：执行 `git clone https://gitee.com/phpxxo/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`
+   - 运行zsh/install.sh
    - 主题
 
-     1. 自制主题(zsh/my.zsh-theme)放在\~/.oh-my-zsh/custom/themes 或者\~/.oh-my-zsh/themes 都行
+     1. 自制主题(zsh/my.zsh-theme) 改 ZSH_THEME="my"
      2. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
      3. [starship](https://starship.rs/zh-CN/) 现在在用
 
