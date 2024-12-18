@@ -25,23 +25,30 @@ $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
 $pacMan btop htop cpufetch        # plasma-systemmonitor
 $pacMan zsh ffmpeg tree tmux tldr # kdeconnect
-# exa 可以换成 eza
 $pacMan figlet net-tools ripgrep fzf jq bat exa curl git wget vim \
-	neofetch onefetch trash-cli imagemagick transmission-cli
+	neofetch onefetch trash-cli imagemagick transmission-cli \
+	unzip unrar p7zip
 #       文件转换
 $pacMan pandoc
-# git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-# ~/.fzf/install
-# https://github.com/iawia002/lux?tab=readme-ov-file#installation
-# https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation
-# https://yazi-rs.github.io/docs/installation/
 
 if command -v apt-get >/dev/null 2>&1; then
 	sudo apt-get install -y fd-find network-manager traceroute sqlite3 # kitty
-	# ubuntu 需要手动安装最新的neovim
+	# ubuntu 需要手动安装 neovim(包旧) lux
 elif command -v pacman >/dev/null 2>&1; then
-	sudo pacman -S --needed fd networkmanager traceroute neovim sqlite # ttf-nerd-fonts-symbols-mono kitty wezterm
+	sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl # ttf-nerd-fonts-symbols-mono kitty wezterm
 elif command -v brew >/dev/null 2>&1; then
-	brew install fd neovim sqlite
+	# mac 内置traceroute
+	brew install fd neovim sqlite lux
 	# brew install --cask kitty wezterm
 fi
+
+[ -d "$HOME/.fzf" ] || (git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf && "$HOME"/.fzf/install)
+[ -x "$(command -v cargo)" ] || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+[ -x "$(command -v zoxide)" ] || cargo install zoxide
+[ -x "$(command -v rg)" ] || cargo install ripgrep
+[ -x "$(command -v eza)" ] || cargo install eza # 使用eza替代exa，因为eza基于rust且更新频繁
+[ -x "$(command -v fd)" ] || cargo install fd-find
+[ -x "$(command -v dust)" ] || cargo install du-dust
+[ -x "$(command -v mdcat)" ] || cargo install mdcat
+# [ -x "$(command -v yazi)" ] || cargo install --locked yazi-fm yazi-cli
+# [ -x "$(command -v starship)" ] || curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir $HOME/.local/bin

@@ -33,7 +33,7 @@ plugins=(
 	sudo                    # 双击esc-->sudo
 	extract                 # x解压
 	universalarchive        # 压缩集合，使用ua+压缩后缀(如:tar.gz、zip等等)+压缩对象
-	z                       # z 跳转目录
+  z                       # z 跳转目录
 	tmux                    # tmux aliases
 	vi-mode                 # 命令行vim
 	command-not-found       # 命令没安装，显示如何安装
@@ -61,10 +61,10 @@ alias q="exit"
 alias c="clear"
 alias ip="ip -color"
 alias o="open ."
-if command -v exa &>/dev/null; then
-	alias ls="exa --icons"
-	alias ll="exa -lah --icons"
-	alias lt="exa --tree --long --icons -I 'node_modules|.git'"
+if command -v eza &>/dev/null; then # 使用eza替代exa，因为eza基于rust且更新频繁
+	alias ls="eza --icons"
+	alias ll="eza -lah --icons"
+	alias lt="eza --tree --long --icons -I 'node_modules|.git'"
 fi
 [[ $(command -v bat) ]] && alias cat="bat"
 # Dev
@@ -148,6 +148,11 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'cat'
 
 # FZF
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+export FZF_DEFAULT_OPTS=" \
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 if command -v fzf &>/dev/null; then
 	source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion (版本0.54以上)
 	alias fv='vim $(fzf)'
@@ -167,3 +172,4 @@ fi
 
 # starship 不需要source .zshrc,随便输个命令,就会重新加载配置
 [[ $(command -v starship) ]] &&	eval "$(starship init zsh)"
+# [ -x "$(command -v zoxide)" ] && eval "$(zoxide init zsh)"

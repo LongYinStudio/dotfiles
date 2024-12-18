@@ -32,3 +32,9 @@ Open the Browser Toolbox
 
     Press alt, "Tools", "Web Developer" then "Browser Toolbox".
     Alternate: Press ctrlaltshifti
+
+抛弃同步国内版:
+在about:config里修改identity.fxaccounts.autoconfig.uri的值
+国际服务器:https://accounts.firefox.com
+国内:https://accounts.firefox.com.cn 现在使用
+修改后需要重新登录
