@@ -1,7 +1,9 @@
 1. 输入法: fcitx5-im(fcitx5、fcitx5-configtool、fcitx5-gtk、fcitx5-qt) fcitx5-chinese-addons
    - 词库: fcitx5-pinyin-zhwiki citx5-pinyin-moegirl
      - 其他词库： fcitx5-pinyin-custom-pinyin-dictionary(aur | https://github.com/wuhgit/CustomPinyinDictionary)
-   - 主题: https://github.com/catppuccin/fcitx5
+   - 主题: 
+     1. catppuccin-fcitx5-git(aur | https://github.com/catppuccin/fcitx5)
+     2. fcitx5-mellow-themes-git(aur | https://github.com/sanweiya/fcitx5-mellow-themes)
    - 其他：fcitx5-table-extra fcitx5-table-other
 2. 剪贴板: xclip、copyq
 3. 壁纸: feh

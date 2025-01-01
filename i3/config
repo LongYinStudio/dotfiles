@@ -32,7 +32,9 @@ for_window [class="^.*"] border pixel 5
 bindsym $mod+u border toggle
 
 bar {
-    status_command          i3status
+    # i3status默认配置~/.config/i3status/config
+    # status_command          i3status
+    status_command          i3status ~/.config/i3/i3status.conf
     # i3bar_command ~/.config/polybar/launch.sh
     position                top
     tray_output             primary
