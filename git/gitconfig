@@ -1,0 +1,52 @@
+[user]
+	email = 1606776851@qq.com
+	name = LongYinStudio
+[core]
+  editor = nvim
+# 执行tools_install.sh用cargo安装，默认不启用
+#  pager = delta
+
+# delta 配置
+[delta]
+  side-by-side = true
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
+[interactive]
+  diffFilter = delta --color-only
+[merge]
+  conflictstyle = zdiff3
+
+[color]
+  ui = auto
+[alias]
+  a = add
+  b = branch
+  br = for-each-ref --sort=-committerdate refs/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  c = clone
+  # Clone a repository including all submodules
+	C = clone --recursive
+  ch = checkout
+  cm = commit -m
+  co = checkout
+  count = shortlog -sn
+  d = diff
+  f = fetch
+  i = init
+	l = log
+  ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  m = merge
+  pl = pull
+  pu = push
+  r = reset
+  s = status
+  ss = status -s
+  sw = switch
+  sm = submodule
+  smu = submodule update
+  t = tag
+  tree = log --graph --oneline --all --decorate
+# git 代理用zsh里自定义命令(函数)就行
+# [http]
+# 	proxy = http://127.0.0.1:7890
+# [https]
+# 	proxy = http://127.0.0.1:7890

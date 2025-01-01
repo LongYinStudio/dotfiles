@@ -50,5 +50,6 @@ fi
 [ -x "$(command -v fd)" ] || cargo install fd-find
 [ -x "$(command -v dust)" ] || cargo install du-dust
 [ -x "$(command -v mdcat)" ] || cargo install mdcat
+[ -x "$(command -v git-delta)" ] || cargo install git-delta
 # [ -x "$(command -v yazi)" ] || cargo install --locked yazi-fm yazi-cli
 # [ -x "$(command -v starship)" ] || curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir $HOME/.local/bin
