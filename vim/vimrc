@@ -1,0 +1,183 @@
+set t_Co=256
+set encoding=UTF-8
+set fileencoding=UTF-8
+if has("termguicolors")
+	set termguicolors
+endif
+syntax on "语法高亮
+set hlsearch "查找结果高亮
+set incsearch "查找相关配置
+set ignorecase "查找相关配置
+set smartcase "查找相关配置
+set background=dark
+set mouse=a "启用鼠标
+set mousehide " Hide the mouse cursor while typing
+set number "显示行号
+set relativenumber "相对行号，对跳转行号有帮助
+set tabstop=2 "按tap键自动缩进4个空格
+set softtabstop=2 "tap转为4个空格
+set shiftwidth=2 "按》增加一级缩进 按《取消一级缩机 按==取消全部缩进,每一级的字符数
+set autoindent "换行自动缩
+set cindent "按照C语言语法缩进,自动调整缩机长度
+set cursorline "光标所在行高亮
+set ruler "在状态栏显示光标的当前位置（位于哪一行哪一列）
+set clipboard=unnamedplus " 使用系统剪切版 -> Vim
+set clipboard=unnamed " Vim -> 系统剪切版
+set nocompatible " 去除编辑mode限制
+filetype off " 移除默认的filetype检测，必须位于插件包括之前
+set splitright " create new horizontal split on the right
+set splitbelow " create new vertical split below the current window
+"set wrap           " 自动换行
+"set nowrap         " 不自动换行
+set linebreak       " 整词换行
+set whichwrap=b,s,<,>,[,]
+" 自动补全配置
+" 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+set completeopt=longest,menu
+" 增强模式中的命令行自动完成操作
+set wildmenu
+" 命令行下按tab键自动完成
+set wildmode=list:longest,full
+" tab键的自动完成现在会忽略这些
+set wildignore+=.git,.hg
+set wildignore+=*.class,*.jar
+set wildignore+=node_modules
+" 补全源优先级
+set complete=.,w,b,u,t,i
+" 补全菜单高度
+set pumheight=10
+" 高亮显示匹配括号
+set showmatch
+set matchpairs=(:),{:},[:],':',\":\"
+set matchtime=1
+" 禁用 Vi 兼容模式，启用增强的 Vim 功能
+set nocompatible
+" 其他
+filetype on
+filetype plugin on
+filetype indent on
+
+let mapleader=" " "定义leader键
+
+nmap <leader>nh :set nohlsearch<CR> "--> 退出搜索高亮
+nmap <leader>wv <C-w>v
+nmap <leader>wh <C-w>s
+nmap <leaedr>wd <C-w>c
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+nnoremap <C-S-Left> <C-w><
+nnoremap <C-S-Right> <C-w>>
+nnoremap <C-S-Up> <C-w>+
+nnoremap <C-S-Down> <C-w>-
+nnoremap ; :
+nnoremap c "_c
+vnoremap c "_c
+nnoremap d "_d
+vnoremap d "_d
+nnoremap s "_s
+vnoremap s "_s
+nnoremap x "_x
+vnoremap x "_x
+inoremap jk <Esc>
+" 调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+map <leader>t :terminal<CR>
+
+"先安装 vim-plug
+call plug#begin('~/.vim/plugged')
+Plug 'joshdick/onedark.vim'
+Plug 'preservim/nerdtree' "vim旁边的路径目录
+Plug 'SirVer/ultisnips' "snippets
+Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs' "自动补全()、{}等等
+Plug 'easymotion/vim-easymotion' "跳转
+Plug 'vim-airline/vim-airline' "airline
+Plug 'vim-airline/vim-airline-themes' "airline-theme
+Plug 'ryanoasis/vim-devicons' "图标
+Plug 'gorodinskiy/vim-coloresque' " css/less/sass/html color preview for vim. https://github.com/gko/vim-coloresque
+Plug 'Yggdroot/indentLine'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'scrooloose/nerdcommenter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'Yggdroot/LeaderF'
+call plug#end()
+
+"nerdtree
+map <leader>e :NERDTreeToggle<CR>
+map <leader>f :NERDTreeFind<CR>
+
+"snippets快捷键
+let g:UltiSnipsExpandTrigger="<c-t>"
+let g:UltiSnipsJumpForwardTrigger="<c-d>"
+let g:UltiSnipsJumpBackwardTrigger="<c-a>"
+let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/'] 自定义snippets
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/snippets/']
+
+"easymotion
+nmap f <Plug>(easymotion-s2)
+
+"vim-airline
+set laststatus=2 " 始终显示状态栏
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='onedark'
+let g:airline_powerline_fonts=1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>0 <Plug>AirlineSelectTab0
+nmap H <Plug>AirlineSelectPrevTab
+nmap L <Plug>AirlineSelectNextTab
+
+" AutoComplPop
+let g:acp_enableAtStartup = 1
+
+" nerdcommenter
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+vmap gc <plug>NERDCommenterToggle
+nmap gcc <plug>NERDCommenterToggle
+
+" LeaderF
+nnoremap <leader>ff :LeaderfFile .<cr>
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+let g:Lf_UseCache = 0
+
+silent! colorscheme onedark
+
+" vimrc文件修改之后自动加载, linux
+autocmd! bufwritepost .vimrc source %
+" vimrc文件修改之后自动加载, windows
+autocmd! bufwritepost _vimrc source %
+
+" 定义函数AutoSetFileHead，自动插入文件头
+autocmd BufNewFile *.sh,*.bash exec ":call AutoSetFileHead()"
+function! AutoSetFileHead()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+    endif
+
+    normal G
+    normal o
+    normal o
+endfunc
+
+" 保存文件时自动删除行尾空格或 Tab
+autocmd BufWritePre * :%s/\s\+$//e
+
+" 保存文件时自动删除末尾空行
+autocmd BufWritePre * :%s/^$\n\+\%$//ge

@@ -17,9 +17,7 @@
 
 2. vim
 
-   - 下载.vimrc 和.vim 放在~里，github 搜索安装 `vim-plug`
-   - onedark 主题配置：autoload/onedark.vim 放在\~/.vim/autoload 里，colors/onedark.vim 放在\~/.vim/colors 里
-   - 插件安装：在.vim 里用 `:PlugInstall`
+   - 运行 vim/install.sh 就好了
 
 3. neovim
 

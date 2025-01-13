@@ -25,7 +25,7 @@ export SAVEHIST=10000     #注销后保存的历史纪录条目数量
 setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
 setopt HIST_IGNORE_DUPS   #如果连续输入的命令相同，历史纪录中只保留一个
 
-# 插件配置，zsh-syntax-highlighting和zsh-autosuggestions安装/README.md安装
+# 移除 tmux (没什么用，自己alias就好) z (由zoxide代替)
 plugins=(
 	git                     # git aliases
 	zsh-syntax-highlighting # 命令高亮
@@ -33,8 +33,6 @@ plugins=(
 	sudo                    # 双击esc-->sudo
 	extract                 # x解压
 	universalarchive        # 压缩集合，使用ua+压缩后缀(如:tar.gz、zip等等)+压缩对象
-  z                       # z 跳转目录
-	tmux                    # tmux aliases
 	vi-mode                 # 命令行vim
 	command-not-found       # 命令没安装，显示如何安装
 )
@@ -172,4 +170,4 @@ fi
 
 # starship 不需要source .zshrc,随便输个命令,就会重新加载配置
 [[ $(command -v starship) ]] &&	eval "$(starship init zsh)"
-# [ -x "$(command -v zoxide)" ] && eval "$(zoxide init zsh)"
+[[ $(command -v zoxide) ]] && eval "$(zoxide init zsh)"
