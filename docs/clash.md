@@ -1,5 +1,7 @@
 ## clash
 
+> 主要服务器/开发板用，gui用clash-verge-rev
+
 a. clash 桌面:
 
 1. 先 [Clash Releases](https://www.clash.la/releases/)下载对应的客户端，再运行（可自行创建 clash.desktop，也可以开机自启）

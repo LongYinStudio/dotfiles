@@ -74,6 +74,8 @@ alias vi="nvim"
 alias lv="NVIM_APPNAME=LazyVim nvim"   # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
 alias nv="NVIM_APPNAME=NvChad nvim"    # git clone https://github.com/NvChad/starter ~/.config/NvChad
 alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
+alias kcat="kitty +kitten icat" # 依赖于 ImageMagick
+alias wcat="wezterm imgcat"
 
 # path 环境变量 node 使用的nvm
 source "/etc/environment"
@@ -81,7 +83,7 @@ source "$HOME/.cargo/env"
 bin="$HOME/bin"
 go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
-export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_351
+export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_421
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JRE_HOME=$JAVA_HOME/jre
 
@@ -144,6 +146,12 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'cat'
+
+# 编辑模式下，使用Ctrl+v，使用nvim(默认编辑器)编辑当前命令
+bindkey -v # 键盘绑定模式设置为viins模式
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M viins '^v' edit-command-line
 
 # FZF
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
