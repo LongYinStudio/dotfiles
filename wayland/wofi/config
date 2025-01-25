@@ -1,0 +1,8 @@
+allow_images=true
+no_actions=true
+hide_scroll=true
+width=38%
+height=38%
+show=drun
+prompt=Search...
+term=kitty

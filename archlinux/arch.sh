@@ -16,7 +16,7 @@ aurPkg='yay -S --needed --noconfirm'
 $pacMan adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts \
 	noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
 	ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono-nerd
-# nerd-fonts-complete
+# nerd-fonts-complete otf-font-awesome
 fc-cache -fv
 
 # 终端
@@ -31,19 +31,22 @@ $aurPkg microsoft-edge-stable-bin google-chrome firefox
 xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
 # 图片、视频、音乐相关
-$pacMan gwenview flameshot imagemagick gimp mpv vlc obs-studio kdenlive cava
-# $aurPkg spotify netease-cloud-music qqmusic-bin
+$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # flameshot在hyprland下无法使用，安装flameshot-git(aur)
+# $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
-# 其他工具 (ntfs支持，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 2写盘, kde计算器(qalculate也不错))
+# 其他工具 (ntfs支持，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 2写盘, kde计算器(qalculate也不错), 空间扫描)
 # (写盘, 远程, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo)
-$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer deepin-boot-maker ventoy kcalc
+$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer deepin-boot-maker ventoy kcalc filelight
 # $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin drawio-desktop-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo
 
 # i3wm (rofi需要自行编译支持中文，polkit-gnome显示效果更好些)  # polkit-kde-agent
 $pacMan i3-wm i3status polybar lxappearance polkit polkit-qt5 polkit-gnome \
 	xclip copyq feh dunst picom dolphin networkmanager network-manager-applet
 
-# hyprland
+# hyprland 最好i3和hypr一起安装，有些重复的依赖就没多写一便 paperIcon是dunst需要 wlr-randr,xrandr-wlr-randr,xprop-wdisplays是显示器配置
+$aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hyprland pipewire wireplumber \
+	xdg-desktop-portal swayosd brightnessctl hypridle wlsunset hyprpaper hyprshot cliphist \
+	wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量
 $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android-tools \
@@ -83,6 +86,14 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android
 # newgrp vboxusers
 # $pacMan virt-manager virt-viewer virt-install qemu libvirt edk2-ovmf # KVM
 $pacMan gnome-boxes # 开箱即用
+
+# 蓝牙
+# sudo systemctl start --now bluetooth # 若有,看情况enable(开机自启)
+# $aurPkg bluez bluez-utils blueman
+
+# 解决mimeapps.list不起作用
+# Install archlinux-xdg-menu and run `XDG_MENU_PREFIX=arch- kbuildsycoca6` or add `export XDG_MENU_PREFIX=plasma-` to .xinitrc.
+# $pacMan archlinux-xdg-menu
 
 # game (steam包需要开multilib,即32位)
 # $pacMan steam lutris
