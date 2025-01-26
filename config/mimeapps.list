@@ -1,0 +1,157 @@
+; [Added Associations] 没必要加
+; ln -s ~/.config/mimeapps.list ~/.local/share/applications/mimeapps.list # 部分应用
+; update-desktop-database ~/.local/share/applications
+[Default Applications]
+# link (Browser....)
+x-scheme-handler/http=microsoft-edge.desktop;microsoft-edge-stable.desktop;firefox.desktop;google-chrome.desktop
+x-scheme-handler/https=microsoft-edge.desktop;microsoft-edge-stable.desktop;firefox.desktop;google-chrome.desktop
+x-scheme-handler/about=microsoft-edge.desktop;microsoft-edge-stable.desktop;firefox.desktop;google-chrome.desktop
+x-scheme-handler/unknown=microsoft-edge.desktop;microsoft-edge-stable.desktop;firefox.desktop;google-chrome.desktop
+x-scheme-handler/clash=clash-verge.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-QVJAR2.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-QVJAR2.desktop;
+x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop
+x-scheme-handler/postman=Postman.desktop
+clash=clash-verge-handler.desktop;
+clash-verge=clash-verge-handler.desktop;
+
+# Email
+x-scheme-handler/mailto=org.kde.kmail2.desktop
+
+# Geo 地图
+x-scheme-handler/geo=marble_geo.desktop
+
+# File Manager
+inode/directory=org.kde.dolphin.desktop;org.gnome.Nautilus.desktop;
+
+# Text
+text/plain=org.kde.kate.desktop;org.kde.kwrite.desktop;nvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+text/markdown=typora.desktop;visual-studio-code.desktop;code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;nvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+text/x-cmake=org.kde.kate.desktop;org.kde.kwrite.desktopnvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+text/html=google-chrome.desktop;
+application/x-docbook+xml=org.kde.kate.desktop;org.kde.kwrite.desktop;nvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+application/json=org.kde.kate.desktop;org.kde.kwrite.desktop;nvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+application/x-yaml=org.kde.kate.desktop;org.kde.kwrite.desktop;nvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+application/toml=org.kde.kate.desktop;org.kde.kwrite.desktop;nvim.desktop;org.gnome.TextEditor.desktop;org.gnome.gedit.desktop;
+
+# PDF Viewer
+application/pdf=okularApplication_pdf.desktop;microsoft-edge.desktop;
+
+# Archive Manager
+application/x-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-bzip-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-tarz=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-xz-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-lzma-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-lzip-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-tzo=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-lrzip-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-lz4-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-zstd-compressed-tar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-cd-image=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-bcpio=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-cpio=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-cpio-compressed=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-sv4cpio=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-sv4crc=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-source-rpm=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/vnd.ms-cab-compressed=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-xar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-iso9660-appimage=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-archive=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/vnd.rar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-rar=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-7z-compressed=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/zip=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-compress=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/gzip=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-bzip=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-lzma=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-xz=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/zstd=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+application/x-lha=org.kde.ark.desktop;org.gnome.FileRoller.desktop;
+
+# Image
+image/avif=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;org.gimp.GIMP.desktop;
+image/bmp=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;feh.desktop;org.gimp.GIMP.desktop;
+image/heif=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;feh.desktop;org.gimp.GIMP.desktop;
+image/jpeg=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;feh.desktop;org.gimp.GIMP.desktop;
+image/png=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;feh.desktop;org.gimp.GIMP.desktop;
+image/webp=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;feh.desktop;org.gimp.GIMP.desktop;
+image/x-icns=org.kde.gwenview.desktop;org.gimp.GIMP.desktop;
+image/x-psd=org.gimp.GIMP.desktop;
+image/gif=org.kde.gwenview.destop;
+image/jxl=org.kde.gwenview.desktop;
+image/x-eps=org.kde.gwenview.desktop;
+image/x-ico=org.kde.gwenview.desktop;
+image/x-portable-bitmap=org.kde.gwenview.desktop;
+image/x-portable-graymap=org.kde.gwenview.desktop;
+image/x-portable-pixmap=org.kde.gwenview.desktop;
+image/x-xbitmap=org.kde.gwenview.desktop;
+image/x-xpixmap=org.kde.gwenview.desktop;
+image/tiff=org.kde.gwenview.desktop;
+image/x-webp=org.kde.gwenview.desktop;
+image/x-tga=org.kde.gwenview.desktop;
+image/x-xcf=org.gimp.GIMP.desktop;org.kde.gwenview.desktop;
+application/x-krita=org.kde.krita.desktop;org.kde.gwenview.desktop
+
+# Music Player
+audio/aac=vlc.desktop;mpv.desktop;
+audio/mp4=vlc.desktop;mpv.desktop;
+audio/mpeg=vlc.desktop;mpv.desktop;
+audio/mpegurl=vlc.desktop;mpv.desktop;
+audio/ogg=vlc.desktop;mpv.desktop;
+audio/vnd.rn-realaudio=vlc.desktop;mpv.desktop;
+audio/vorbis=vlc.desktop;mpv.desktop;
+audio/x-flac=vlc.desktop;mpv.desktop;
+audio/x-mp3=vlc.desktop;mpv.desktop;
+audio/x-mpegurl=vlc.desktop;mpv.desktop;
+audio/x-ms-wma=vlc.desktop;mpv.desktop;
+audio/x-musepack=vlc.desktop;mpv.desktop;
+audio/x-oggflac=vlc.desktop;mpv.desktop;
+audio/x-pn-realaudio=vlc.desktop;mpv.desktop;
+audio/x-scpls=vlc.desktop;mpv.desktop;
+audio/x-speex=vlc.desktop;
+audio/x-vorbis=vlc.desktop;mpv.desktop;
+audio/x-vorbis+ogg=vlc.desktop;mpv.desktop;
+audio/x-wav=vlc.desktop;mpv.desktop;
+
+# Video Player
+video/3gp=vlc.desktop;mpv.desktop;
+video/3gpp=vlc.desktop;mpv.desktop;
+video/3gpp2=vlc.desktop;mpv.desktop;
+video/avi=vlc.desktop;mpv.desktop;
+video/divx=vlc.desktop;mpv.desktop;
+video/dv=vlc.desktop;mpv.desktop;
+video/fli=vlc.desktop;mpv.desktop;
+video/flv=vlc.desktop;mpv.desktop;
+video/mp2t=vlc.desktop;mpv.desktop;
+video/mp4=vlc.desktop;mpv.desktop;
+video/mp4v-es=vlc.desktop;mpv.desktop;
+video/mpeg=vlc.desktop;mpv.desktop;
+video/msvideo=vlc.desktop;mpv.desktop;
+video/ogg=vlc.desktop;mpv.desktop;
+video/quicktime=vlc.desktop;mpv.desktop;
+video/vnd.divx=vlc.desktop;mpv.desktop;
+video/vnd.mpegurl=vlc.desktop;mpv.desktop;
+video/vnd.rn-realvideo=vlc.desktop;mpv.desktop;
+video/webm=vlc.desktop;mpv.desktop;
+video/x-avi=vlc.desktop;mpv.desktop;
+video/x-flv=vlc.desktop;mpv.desktop;
+video/x-m4v=vlc.desktop;mpv.desktop;
+video/x-matroska=vlc.desktop;mpv.desktop;
+video/x-mpeg2=vlc.desktop;mpv.desktop;
+video/x-ms-asf=vlc.desktop;mpv.desktop;
+video/x-msvideo=vlc.desktop;mpv.desktop;
+video/x-ms-wmv=vlc.desktop;mpv.desktop;
+video/x-ms-wmx=vlc.desktop;mpv.desktop;
+video/x-ogm=vlc.desktop;mpv.desktop;
+video/x-ogm+ogg=vlc.desktop;mpv.desktop;
+video/x-theora=vlc.desktop;mpv.desktop;
+video/x-theora+ogg=vlc.desktop;mpv.desktop;
+application/x-matroska=vlc.desktop;mpv.desktop;
+
+; # Discover
+; x-scheme-handler/appstream=org.kde.discover.urlhandler.desktop
+; application/vnd.debian.binary-package=org.kde.discover.desktop

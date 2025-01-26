@@ -7,9 +7,11 @@
 ```bash
 sudo pacman -S package_name # 安装软件包
 pacman -Ss # 在同步数据库中搜索包，包括包的名称和描述
+sudo pacman -Qs package_name # 查找已安装
 sudo pacman -Syu # 升级系统。 -y:标记刷新、-yy：标记强制刷新、-u：标记升级动作（一般使用 -Syu 即可）
-sudo pacman -Rns package_name # 删除软件包，及其所有没有被其他已安装软件包使用的依赖包
 sudo pacman -R package_name # 删除软件包，保留其全部已经安装的依赖关系
+sudo pacman -Rs package_name # 删除，删除没用依赖
+sudo pacman -Rns package_name # 删除软件包，及其所有没有被其他已安装软件包使用的依赖包
 pacman -Qi package_name # 检查已安装包的相关信息。-Q：查询本地软件包数据库
 pacman -Qdt # 找出孤立包。-d：标记依赖包、-t：标记不需要的包、-dt：合并标记孤立包
 sudo pacman -Rns $(pacman -Qtdq) # 删除孤立包
@@ -19,6 +21,31 @@ pactree package_name # 查看一个包的依赖树
 sudo pacman -Sc # 删除当前未安装的所有缓存包和未使用的同步数据库（可选）
 sudo pacman -Scc # 从缓存中删除所有文件，这是最激进的方法，不会在缓存文件夹中留下任何内容（一般不使用）
 paccache -r # 删除已安装和未安装包的所有缓存版本，但最近 3 个版本除外
+```
+> archlinuxcn源
+1. 在`/etc/pacman.conf`尾部添加archlinuxcn源
+```bash
+[archlinuxcn]
+# SigLevel = Optional TrustAll # 可选
+Server = http://mirrors.ustc.edu.cn/archlinux/$arch
+Server = http://mirrors.163.com/archlinux-cn/$arch
+```
+2. 导入 GPG key, 并安装pacman-contrib和yay/paru
+```bash
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+sudo pacman -Syy --noconfirm
+sudo pacman -Fyy --noconfirm
+sudo pacman -S --needed --noconfirm pacman-contrib
+sudo pacman -S --needed --noconfirm archlinuxcn-keyring archlinux-keyring
+sudo pacman -S --needed --noconfirm yay paru
+```
+> 配置pacman
+```bash
+sudo sed -i.bak 's/^#Color/Color/' /etc/pacman.conf
+sudo sed -i.bak "s/^#ParallelDownloads .*/ParallelDownloads = 40/" /etc/pacman.conf
+sudo sed -i.bak 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+# sudo sed -i.bak "s/^#\[multilib\]/\[multilib\]/" /etc/pacman.conf #32位应用
+# sudo sed -i.bak '/\[multilib\]/ {n;s/^#//;}' /etc/pacman.conf
 ```
 
 ## yay

@@ -17,5 +17,3 @@ curl -sS https://starship.rs/install.sh | sh
 
 cp my.zsh-theme ~/.oh-my-zsh/custom/themes
 cp zshrc ~/.zshrc
-
-cp ../starship.toml ~/.config

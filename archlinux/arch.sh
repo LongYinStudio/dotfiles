@@ -30,8 +30,8 @@ $aurPkg fcitx5-pinyin-custom-pinyin-dictionary # catppuccin-fcitx5-git fcitx5-me
 $aurPkg microsoft-edge-stable-bin google-chrome firefox
 xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
-# 图片、视频、音乐相关
-$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # flameshot在hyprland下无法使用，安装flameshot-git(aur)
+# 图片、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur)
+$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # blender # blender不仅可3D,还可编辑图片/视频
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
 # 其他工具 (ntfs支持，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 2写盘, kde计算器(qalculate也不错), 空间扫描)
@@ -58,7 +58,7 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android
 # sudo mysql
 # set password for root@localhost = password('新密码'); # exit;
 
-# 社交等等
+# 社交等等 (wechat bwrap需要在~/.config/wechat-universal/binds.list里添加目录才可以传文件，包括拖拽)
 # $aurPkg linuxqq wechat-universal-bwrap wemeet-bin # wemeet-bwrap wemeet-wayland-screenshare-git feishu-bin
 
 # wps
@@ -93,6 +93,7 @@ $pacMan gnome-boxes # 开箱即用
 
 # 解决mimeapps.list不起作用
 # Install archlinux-xdg-menu and run `XDG_MENU_PREFIX=arch- kbuildsycoca6` or add `export XDG_MENU_PREFIX=plasma-` to .xinitrc.
+# 已在hypr/lib/env.conf里添加`env = XDG_MENU_PREFIX,arch-`
 # $pacMan archlinux-xdg-menu
 
 # game (steam包需要开multilib,即32位)
