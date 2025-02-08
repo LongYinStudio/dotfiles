@@ -34,9 +34,9 @@ xdg-settings set default-web-browser microsoft-edge-stable.desktop
 $pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # blender # blender不仅可3D,还可编辑图片/视频
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
-# 其他工具 (ntfs支持，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 2写盘, kde计算器(qalculate也不错), 空间扫描)
-# (写盘, 远程, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo)
-$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer deepin-boot-maker ventoy kcalc filelight
+# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 2写盘, kde计算器(或qalculate), 空间扫描, adb投屏, 划词翻译(archlinuxcn源,或者aur))
+# (写盘, 远程, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo) todesk需要启动服务 escrcpy(scrcpy electron)
+$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer deepin-boot-maker ventoy kcalc filelight scrcpy # pot-translation
 # $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin drawio-desktop-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo
 
 # i3wm (rofi需要自行编译支持中文，polkit-gnome显示效果更好些)  # polkit-kde-agent
@@ -84,8 +84,12 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android
 # yay -S virtualbox-ext-oracle
 # sudo gpasswd -a "$USER" vboxusers
 # newgrp vboxusers
-# $pacMan virt-manager virt-viewer virt-install qemu libvirt edk2-ovmf # KVM
-$pacMan gnome-boxes # 开箱即用
+# KVM 虚拟机内系统要安装一些工具(主要spice-guest-tools,spice-webdavd)主要是windows安装,linux用包管理器安装这些就好:https://www.spice-space.org/download/windows/，或者virtio-vim但是太大了
+# $pacMan virtio-win  # 驱动包位于 /var/lib/libvirt/images/virtio-win.iso，如果找不到，用pacman -Ql virtio-win 查看
+$pacMan qemu libvirt virt-manager virt-viewer virt-install edk2-ovmf dnsmasq bridge-utils # qemu-full
+# sudo usermod -aG kvm,libvirt $USER
+# newgrp libvirt  # 立即生效（或重新登录）
+# $pacMan gnome-boxes # 开箱即用
 
 # 蓝牙
 # sudo systemctl start --now bluetooth # 若有,看情况enable(开机自启)
@@ -98,3 +102,5 @@ $pacMan gnome-boxes # 开箱即用
 
 # game (steam包需要开multilib,即32位)
 # $pacMan steam lutris
+
+$pacMan man-db man-pages man-pages-zh_cn

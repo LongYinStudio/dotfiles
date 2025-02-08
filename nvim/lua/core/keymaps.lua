@@ -69,6 +69,9 @@ keymap("n", "<leader>F", "<cmd>enew<cr>", { desc = "New File" })
 -- number
 -- keymap("n", "<leader>Tn", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 -- keymap("n", "<leader>TN", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+-- terminal
+-- keymap("n", "<leader>th", "<Cmd>sp | terminal<CR>", { desc = "vim term horizontal" })
+-- keymap("n", "<leader>tv", "<Cmd>vsp | terminal<CR>", { desc = "vim term vertical" })
 
 -- -------- toggles --------- ---
 keymap("n", "<leader>Tw", function()

@@ -81,7 +81,7 @@ exec --no-startup-id copyq &
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # 支持透明
 # exec_always --no-startup-id picom --experimental-backends &
-# exec picom --config ~/.config/picom/picom.conf &
+# exec_always picom --config ~/.config/picom/picom.conf &
 # 网络管理
 exec_always --no-startup-id nm-applet &
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
@@ -203,6 +203,13 @@ bindsym $mod+e exec --no-startup-id dolphin
 bindsym $mod+v exec --no-startup-id copyq menu; focus
 # vscode
 bindsym $mod+c exec --no-startup-id code
+# dunst
+bindsym  $alt+Shift+h exec "~/.config/dunst/dunst-show-all-history.sh"
+# close-all 没必要
+bindsym  $alt+Shift+c exec "dunstctl close"
+# bindsym  $alt+Shift+d exec "dunstctl history-rm" # 要传id
+# Open the context menu, presenting all available actions and urls for the currently open notifications.
+bindsym  $alt+Shift+t exec "dunstctl context"
 
 # resize window (you can also use the mouse for that)
 set $resize : [h]  [j]  [k]  [l]

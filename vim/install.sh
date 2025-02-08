@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -f ~/.vimrc ]; then
 	rm -rf ~/.vimrc
@@ -13,6 +13,6 @@ if [ ! -f ~/.vim/autoload/plug.vim ]; then
 	echo '==> Installing vim-plug'
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  echo '==> Installing vim plugins'
-  vim +PlugInstall +qall
+	echo '==> Installing vim plugins'
+	vim +PlugInstall +qall
 fi

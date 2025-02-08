@@ -17,17 +17,17 @@ get_package_manager() {
 pacMan=$(get_package_manager)
 
 #       mysql, sqlite, mysql, redis, postgres
-$pacMan mycli # litecli mssql-cli iredis pgcli
+$pacMan mycli # litecli mssql-cli iredis pgcli # rainfrog
 #       ip计算 计算器
 $pacMan ipcalc bc # qalculate
 # 同步备份
 $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
-$pacMan btop htop cpufetch        # plasma-systemmonitor
+$pacMan btop htop cpufetch duf    # glances plasma-systemmonitor hardinfo2 sysmontask mission-center cpu-x
 $pacMan zsh ffmpeg tree tmux tldr # kdeconnect
 $pacMan figlet net-tools ripgrep fzf jq bat exa curl git wget vim \
 	neofetch onefetch trash-cli imagemagick transmission-cli \
-	unzip unrar p7zip
+	unzip unrar p7zip gping
 #       文件转换
 $pacMan pandoc
 
