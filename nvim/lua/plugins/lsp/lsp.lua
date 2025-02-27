@@ -13,11 +13,132 @@ local languages = {
 		-- },
 	},
 	html = {},
-	emmet_ls = {},
+	emmet_ls = {
+		filetypes = {
+			"html",
+		},
+	},
 	cssls = {},
-	tsserver = {},
+	tsserver = {
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = vim.fn.stdpath("data")
+						.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+					languages = { "vue" },
+				},
+			},
+		},
+		settings = {
+			typescript = {
+				inlayHints = {
+					includeInlayParameterNameHints = "all",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+				},
+			},
+			javascript = {
+				inlayHints = {
+					includeInlayParameterNameHints = "all",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+				},
+			},
+		},
+	},
 	vuels = {},
-	volar = {},
+	volar = {
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+		init_options = {
+			vue = {
+				hybridMode = true,
+			},
+			-- typescript = {
+			-- 	tsdk = vim.fn.getcwd() .. "node_modules/typescript/lib",
+			-- },
+			-- 					typescript = {
+			-- tsdk = vim.fn.expand(
+			-- 	"$HOME/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
+			-- ),
+		},
+		settings = {
+			typescript = {
+				inlayHints = {
+					enumMemberValues = { enabled = true },
+					functionLikeReturnTypes = {
+						enabled = true,
+					},
+					propertyDeclarationTypes = {
+						enabled = true,
+					},
+					parameterTypes = {
+						enabled = true,
+						suppressWhenArgumentMatchesName = true,
+					},
+					variableTypes = { enabled = true },
+				},
+			},
+		},
+	},
+	vtsls = {
+		enabled = false,
+		-- tsserver = {
+		-- 	globalPlugins = {
+		-- 		{
+		-- 			name = "@vue/typescript-plugin",
+		-- 			location = vim.fn.stdpath("data")
+		-- 				.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+		-- 			languages = { "vue" },
+		-- 			configNamespace = "typescript",
+		-- 			enableForWorkspaceTypeScriptVersions = true,
+		-- 		},
+		-- 	},
+		-- },
+		-- filetypes = {
+		-- 	"javascript",
+		-- 	"javascriptreact",
+		-- 	"javascript.jsx",
+		-- 	"typescript",
+		-- 	"typescriptreact",
+		-- 	"typescript.tsx",
+		-- },
+		-- settings = {
+		-- 	complete_function_calls = true,
+		-- 	vtsls = {
+		-- 		enableMoveToFileCodeAction = true,
+		-- 		autoUseWorkspaceTsdk = true,
+		-- 		experimental = {
+		-- 			maxInlayHintLength = 30,
+		-- 			completion = {
+		-- 				enableServerSideFuzzyMatch = true,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	typescript = {
+		-- 		updateImportsOnFileMove = { enabled = "always" },
+		-- 		suggest = {
+		-- 			completeFunctionCalls = true,
+		-- 		},
+		-- 		inlayHints = {
+		-- 			enumMemberValues = { enabled = true },
+		-- 			functionLikeReturnTypes = { enabled = true },
+		-- 			parameterNames = { enabled = "literals" },
+		-- 			parameterTypes = { enabled = true },
+		-- 			propertyDeclarationTypes = { enabled = true },
+		-- 			variableTypes = { enabled = false },
+		-- 		},
+		-- 	},
+		-- },
+	},
 	clangd = {},
 	jsonls = {},
 	tailwindcss = {},
@@ -25,11 +146,11 @@ local languages = {
 	dockerls = {},
 	pyright = {},
 	yamlls = {},
+	jdtls = {}, -- jdtls 需要jdk17
 }
 
 -- 取消部分lsp的自动安装
--- volar单独安装，最新版本2.0.x在neovim不好配置 MasonInstall vue-language-server@1.8.27
-local autoinstall_excluded_servers = { "volar", "vuels", "dockerls", "tailwindcss", "pyright", "yamlls" }
+local autoinstall_excluded_servers = { "vuels", "dockerls", "tailwindcss", "pyright", "yamlls", "jdtls" }
 
 return {
 	{
@@ -142,15 +263,6 @@ return {
 					server.on_attach = on_attach
 					require("lspconfig")[server_name].setup(server)
 				end,
-				-- 下面是为了解决volar@2.0.x，已弃用，改用老版本volar@1.8.27
-				-- 手动配置 volar
-				-- volar = function()
-				-- 	require("lspconfig").volar.setup({
-				-- 		cmd = { "/home/longyinstudio/.nvm/versions/node/v20.11.1/bin/vue-language-server", "--stdio" },
-				-- 		capabilities = capabilities,
-				-- 		on_attach = on_attach,
-				-- 	})
-				-- end,
 			})
 
 			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }

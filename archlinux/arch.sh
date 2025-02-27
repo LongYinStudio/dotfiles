@@ -31,13 +31,19 @@ $aurPkg microsoft-edge-stable-bin google-chrome firefox
 xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
 # 图片、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur)
-$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # blender # blender不仅可3D,还可编辑图片/视频
+$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # krita blender # blender不仅可3D,还可编辑图片/视频
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
-# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 2写盘, kde计算器(或qalculate), 空间扫描, adb投屏, 划词翻译(archlinuxcn源,或者aur))
-# (写盘, 远程, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo) todesk需要启动服务 escrcpy(scrcpy electron)
-$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer deepin-boot-maker ventoy kcalc filelight scrcpy # pot-translation
-# $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin drawio-desktop-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo
+# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏
+# (写盘, 远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
+$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy filelight scrcpy
+# $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
+
+# 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端
+# $pacMan pot-translation tesseract-data-chi_sim tesseract-data-eng gimagereader-qt
+
+# 其他kde应用(系统日志, kde计算器(或qalculate), 颜色拾取, git, 磁盘分区, 下载, 集成开发环境)
+$pacMan ksystemlog kcalc kcolorchooser kommit # partitionmanager ktorrent kdevelop
 
 # i3wm (rofi需要自行编译支持中文，polkit-gnome显示效果更好些)  # polkit-kde-agent
 $pacMan i3-wm i3status polybar lxappearance polkit polkit-qt5 polkit-gnome \
@@ -50,7 +56,7 @@ $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hypr
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量
 $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android-tools \
-	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git
+	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service
@@ -86,7 +92,7 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android
 # newgrp vboxusers
 # KVM 虚拟机内系统要安装一些工具(主要spice-guest-tools,spice-webdavd)主要是windows安装,linux用包管理器安装这些就好:https://www.spice-space.org/download/windows/，或者virtio-vim但是太大了
 # $pacMan virtio-win  # 驱动包位于 /var/lib/libvirt/images/virtio-win.iso，如果找不到，用pacman -Ql virtio-win 查看
-$pacMan qemu libvirt virt-manager virt-viewer virt-install edk2-ovmf dnsmasq bridge-utils # qemu-full
+$pacMan qemu libvirt virt-manager virt-viewer virt-install edk2-ovmf bridge-utils # qemu-full dnsmasq # 最好不安装dnsmasq,弄懂了再用它
 # sudo usermod -aG kvm,libvirt $USER
 # newgrp libvirt  # 立即生效（或重新登录）
 # $pacMan gnome-boxes # 开箱即用
@@ -104,3 +110,8 @@ $pacMan qemu libvirt virt-manager virt-viewer virt-install edk2-ovmf dnsmasq bri
 # $pacMan steam lutris
 
 $pacMan man-db man-pages man-pages-zh_cn
+
+# deb安装
+# $aurPkg debtap
+# sudo sed -i "s|http://ftp.debian.org/debian/dists|https://mirrors.ustc.edu.cn/debian/dists|g" /usr/bin/debtap
+# sudo sed -i "s|http://archive.ubuntu.com/ubuntu/dists|https://mirrors.ustc.edu.cn/ubuntu/dists|g" /usr/bin/debtap

@@ -1,30 +1,28 @@
-# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# # Initialization code that may require console input (password prompts, [y/n]
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may require console input (password prompts, [y/n]
 # # confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-
-ZSH_DISABLE_COMPFIX="true" # 有的版本有引号， 有的版本无引号，自己尝试
-export TERM='xterm-256color'
-export ZSH="$HOME/.oh-my-zsh" # oh-my-zsh安装目录
-# export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
-
 # # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称)) # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 # ZSH_THEME="powerlevel10k/powerlevel10k" # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+ZSH_DISABLE_COMPFIX="true" # 有的版本有引号， 有的版本无引号，自己尝试
+export TERM='xterm-256color'
+export HISTSIZE=10000     #历史纪录条目数量
+export SAVEHIST=10000     #注销后保存的历史纪录条目数量
+setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
+setopt HIST_IGNORE_DUPS   #如果连续输入的命令相同，历史纪录中只保留一个
 # 编辑器
 if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
 else
 	export EDITOR=vim
 fi
-export HISTSIZE=10000     #历史纪录条目数量
-export SAVEHIST=10000     #注销后保存的历史纪录条目数量
-setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
-setopt HIST_IGNORE_DUPS   #如果连续输入的命令相同，历史纪录中只保留一个
+export ZSH="$HOME/.oh-my-zsh" # oh-my-zsh安装目录
+# export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
+# umask 0077 #修改umask值
 
 # 移除 tmux (没什么用，自己alias就好) z (由zoxide代替)
 # 各插件(git aliases) 命令高亮 命令补全 双击esc->sudo x解压 命令没安装，显示如何安装 命令行vim fzf-tab 压缩集合，使用ua+压缩后缀(如:tar.gz、zip等等)+压缩对象
@@ -33,18 +31,13 @@ plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract command-no
 source "$ZSH"/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
 
-# umask 0077 #修改umask值
-
 # alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
 alias apti="sudo apt install"
 alias aptp="sudo apt purge"
 alias aptar="sudo apt autoremove"
 alias apts="apt search"
 alias zshconfig="vim ~/.zshrc"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias ..="cd .." ...="cd ../.." ....="cd ../../.." .....="cd ../../../.."
 alias ~="cd ~"
 alias q="exit"
 alias c="clear"
@@ -110,6 +103,9 @@ export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
 export PATH="$HOME/.fnm:$PATH"
 eval "$(fnm env --use-on-cd)"
+#rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 
 # 开启代理函数
 PROXY_HTTP="http://127.0.0.1:7890"

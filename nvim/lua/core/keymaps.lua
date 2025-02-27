@@ -56,9 +56,8 @@ keymap("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 keymap("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 -- Resize window using <ctrl> arrow keys
--- FIX: Ctrl+Up/Down 和插件 vim-visual-multi 默认的快捷键冲突
--- keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
--- keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 -- 取消高亮

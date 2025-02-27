@@ -71,6 +71,25 @@ local function on_attach(bufnr)
 	keymap("n", "<2-RightMouse>", api.tree.change_root_to_node, opts("CD"))
 end
 
+local function get_system_open_cmd()
+	if vim.fn.has("win32") == 1 then
+		return "start" -- Windows
+	elseif vim.fn.has("mac") == 1 then
+		return "open" -- macOS
+	elseif vim.fn.has("unix") == 1 then
+		-- 检查是否在 WSL 中运行
+		local is_wsl = vim.fn.executable("wslpath") == 1
+		if is_wsl then
+			return "wsl-open" -- 如果是 WSL，使用 wsl-open
+		else
+			return "xdg-open" -- 普通 Linux 系统
+		end
+	else
+		vim.notify("Unsupported OS", vim.log.levels.WARN)
+		return nil
+	end
+end
+
 -- 文件浏览
 return {
 	{
@@ -92,8 +111,10 @@ return {
 				-- https://github.com/4U6U57/wsl-open/
 				-- 没找到默认触发快捷键说明，s 键可以触发
 				system_open = {
-					cmd = "open",
-					-- cmd = "wsl-open",
+					-- cmd = "xdg-open", -- linux
+					-- cmd = "open", -- mac
+					-- cmd = "wsl-open", --wsl
+					cmd = get_system_open_cmd(),
 				},
 				git = { enable = true },
 				modified = {

@@ -27,7 +27,7 @@ return {
 				-- don't allow the popup to overlap with the cursor
 				no_overlap = true,
 				border = "rounded",
-				padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+				padding = { 1, 1 }, -- extra window padding [top/bottom, right/left]
 				title = "Keybindings",
 				title_pos = "center",
 			},

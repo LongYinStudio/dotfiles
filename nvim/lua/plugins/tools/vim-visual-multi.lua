@@ -2,7 +2,7 @@
 return {
 	"mg979/vim-visual-multi",
 	branch = "master",
-	config = function()
+	init = function()
 		vim.g.VM_silent_exit = 1
 		vim.g.VM_show_warnings = 0
 		vim.g.VM_verbose_commands = 1
@@ -15,7 +15,7 @@ return {
 		vim.api.nvim_set_keymap("x", "<C-n>", "<Plug>(VM-Find-Subword-Under)", {})
 		vim.api.nvim_set_keymap("n", "<C-S-Up>", "<Plug>(VM-Add-Cursor-Up)", { desc = "add multi cursor up" })
 		vim.api.nvim_set_keymap("n", "<C-S-Down>", "<Plug>(VM-Add-Cursor-Down)", { desc = "add multi cursor down" })
-		-- -- advance keymap
+		-- advance keymap
 		-- vim.api.nvim_set_keymap("n", "<C-S-Down>", "<Plug>(VM-Select-Next)", {})
 		-- vim.api.nvim_set_keymap("n", "<C-S-Up>", "<Plug>(VM-Select-Prev)", {})
 		-- vim.api.nvim_set_keymap("n", "<C-d>", "<Plug>(VM-Remove-Cursor)", {})

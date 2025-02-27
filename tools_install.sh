@@ -43,7 +43,10 @@ elif command -v brew >/dev/null 2>&1; then
 fi
 
 [ -d "$HOME/.fzf" ] || (git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf && "$HOME"/.fzf/install)
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 [ -x "$(command -v cargo)" ] || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup install stable
 [ -x "$(command -v zoxide)" ] || cargo install zoxide
 [ -x "$(command -v rg)" ] || cargo install ripgrep
 [ -x "$(command -v eza)" ] || cargo install eza # 使用eza替代exa，因为eza基于rust且更新频繁
