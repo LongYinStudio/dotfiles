@@ -1,11 +1,21 @@
 return {
-	"navarasu/onedark.nvim",
-	config = function()
-		vim.cmd([[colorscheme onedark]])
-		-- 修改拼写下划线的样式
-		vim.api.nvim_set_hl(0, "SpellBad", { fg = "#e86671", underline = true, sp = "#e86671" })
-		vim.api.nvim_set_hl(0, "SpellCap", { fg = "#e5c07b", underline = true, sp = "#e5c07b" })
-		vim.api.nvim_set_hl(0, "SpellLocal", { fg = "#61afef", underline = true, sp = "#61afef" })
-		vim.api.nvim_set_hl(0, "SpellRare", { fg = "#c678dd", underline = true, sp = "#c678dd" })
-	end,
+	{
+		"navarasu/onedark.nvim",
+		config = function()
+			vim.cmd([[colorscheme onedark]])
+		end,
+	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		enabled = false,
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = { style = "night" },
+		enabled = false,
+	},
 }

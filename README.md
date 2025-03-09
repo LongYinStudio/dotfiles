@@ -25,10 +25,15 @@
    - 插件管理: lazy.nvim (:Lazy)
 
 3. tmux
+
    - 复制 tmux.conf 到 ~/.tmux.conf
    - 运行：
      1. 执行 tmux 命令(已安装tmux)
      2. - 执行 Ctrl+B :source-file ~/.tmux.conf
         - 或者 直接在tmux的终端里执行 tmux source-file ~/.tmux.conf
 
-4. config/* 直接复制到~/.config/, 里面大多不需要额外配置, 安装软件就好
+4. config/\* 直接复制到~/.config/, 里面大多不需要额外配置, 安装软件就好
+
+5. kde 推荐配置
+   将`置顶`快捷键设置为`Meta(Win)+C`
+   将`显示/隐藏窗口标题栏和框架`快捷键设为`Meta(Win)+M`

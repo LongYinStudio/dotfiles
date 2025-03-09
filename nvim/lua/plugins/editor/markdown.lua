@@ -34,4 +34,21 @@ return {
 			},
 		},
 	},
+	{
+		"Zeioth/markmap.nvim",
+		enabled = function()
+			return vim.fn.executable("markmap") == 1
+		end,
+		-- build = "npm install markmap-cli -g", -- install_dep.sh里安装
+		cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
+		ft = { "markdown" },
+		opts = {
+			html_output = "/tmp/markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
+			hide_toolbar = false, -- (default)
+			grace_period = 3600000, -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
+		},
+		config = function(_, opts)
+			require("markmap").setup(opts)
+		end,
+	},
 }

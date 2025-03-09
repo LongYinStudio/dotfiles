@@ -30,7 +30,7 @@ return {
 					"jsdoc",
 					"json",
 					"json5",
-					"latex",
+					-- "latex",
 					"lua",
 					"luadoc",
 					"markdown",

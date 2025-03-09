@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # node
-npm i -g neovim tree-sitter tree-sitter-cli prettier stylelint
+npm i -g neovim tree-sitter tree-sitter-cli prettier stylelint markmap-cli
 
 # rust
 cargo install stylua

@@ -1,0 +1,72 @@
+# 基础片段
+snippet lo "Localhost" b
+  localhost:${0:3000}
+
+snippet app "JSON Content-Type" b
+  Content-Type: application/json
+
+snippet auth "Bearer Token" b
+  Authorization: Bearer ${0}
+
+snippet cookie "Cookie Header" b
+  Cookie: ${0}
+
+# 基础请求类型
+snippet get "GET Request" b
+  GET ${1:/endpoint} HTTP/1.1
+  Host: ${2:example.com}
+  ${3:Authorization: Bearer ${4:your_token_here}}
+
+snippet post "POST Request" b
+  POST ${1:/endpoint} HTTP/1.1
+  Host: ${2:example.com}
+  Content-Type: application/json
+  ${3:Authorization: Bearer ${4:your_token_here}}
+
+  ${5:{
+    "${6:key}": "${7:value}"${8}
+  \}}
+
+snippet put "PUT Request" b
+  PUT ${1:/endpoint} HTTP/1.1
+  Host: ${2:example.com}
+  Content-Type: application/json
+  ${3:Authorization: Bearer ${4:your_token_here}}
+
+  ${5:{
+    "${6:key}": "${7:value}"${8}
+  \}}
+
+snippet delete "DELETE Request" b
+  DELETE ${1:/endpoint} HTTP/1.1
+  Host: ${2:example.com}
+  ${3:Authorization: Bearer ${4:your_token_here}}
+
+# 带查询参数的 GET
+snippet get_query "GET with Query Params" b
+  GET ${1:/endpoint}?${5:param}=${6:value} HTTP/1.1
+  Host: ${2:example.com}
+  ${3:Authorization: Bearer ${4:your_token_here}}
+
+# 表单提交
+snippet post_form "Form POST" b
+  POST ${1:/endpoint} HTTP/1.1
+  Host: ${2:example.com}
+  Content-Type: application/x-www-form-urlencoded
+  ${3:Authorization: Bearer ${4:your_token_here}}
+
+  ${5:field}=${6:value}${7}
+
+# 文件上传
+snippet post_file "File Upload" b
+  POST ${1:/endpoint} HTTP/1.1
+  Host: ${2:example.com}
+  Content-Type: multipart/form-data; boundary=----${3:WebKitFormBoundary7MA4YWxkTrZu0gW}
+  ${4:Authorization: Bearer ${5:your_token_here}}
+
+  ------${3:WebKitFormBoundary7MA4YWxkTrZu0gW}
+  Content-Disposition: form-data; name="file"; filename="${6:example.txt}"
+  Content-Type: ${7:text/plain}
+
+  < ${8:/path/to/file}
+  ------${3:WebKitFormBoundary7MA4YWxkTrZu0gW}--

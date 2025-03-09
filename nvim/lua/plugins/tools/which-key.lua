@@ -27,7 +27,7 @@ return {
 				-- don't allow the popup to overlap with the cursor
 				no_overlap = true,
 				border = "rounded",
-				padding = { 1, 1 }, -- extra window padding [top/bottom, right/left]
+				-- padding = { 1, 1 }, -- extra window padding [top/bottom, right/left]
 				title = "Keybindings",
 				title_pos = "center",
 			},
@@ -41,6 +41,7 @@ return {
 					{ "<leader>f", group = "Find", icon = { icon = "󰈞 " } }, -- 
 					{ "<leader>g", group = "Git", icon = { icon = " " } }, --   
 					{ "<leader>i", group = "Icon", icon = { icon = "󰥷 " } },
+					{ "<leader>r", group = "Rest", icon = { icon = " ", color = "blue" } },
 					-- { "<leader>s", group = "search/replace", icon = " " },
 					{ "<leader>t", group = "ToggleTerm", icon = { icon = " " } },
 					{ "<leader>T", group = "Toggle", icon = { icon = "  " } },
@@ -75,6 +76,7 @@ return {
 					{ pattern = "toggleterm", icon = " " },
 					{ pattern = "delete", icon = "✘ " },
 					{ pattern = "telescope", icon = " " },
+					{ pattern = "rest", icon = " ", color = "blue" },
 				},
 			},
 		},

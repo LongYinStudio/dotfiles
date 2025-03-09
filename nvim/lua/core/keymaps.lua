@@ -31,6 +31,10 @@ keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
+-- Go to the beginning and end of current line in insert mode quickly
+keymap("i", "<C-A>", "<HOME>")
+keymap("i", "<C-E>", "<END>")
+
 -- save file
 keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 

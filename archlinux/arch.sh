@@ -27,23 +27,23 @@ $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-pinyin-moegi
 $aurPkg fcitx5-pinyin-custom-pinyin-dictionary # catppuccin-fcitx5-git fcitx5-mellow-themes-git
 
 # 浏览器
-$aurPkg microsoft-edge-stable-bin google-chrome firefox
+$aurPkg microsoft-edge-stable-bin google-chrome firefox # zen-browser-bin zen-browser-i18n-zh-cn
 xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
-# 图片、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur)
-$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava # krita blender # blender不仅可3D,还可编辑图片/视频
+# 图片、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur), haruna是kde旗下的一个播放器
+$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava haruna # celluloid krita blender # blender不仅可3D,还可编辑图片/视频
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
-# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏
+# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速
 # (写盘, 远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
-$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy filelight scrcpy
+$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy filelight scrcpy # kdiskmark
 # $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
 
-# 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端
+# 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端 (目前用utools)
 # $pacMan pot-translation tesseract-data-chi_sim tesseract-data-eng gimagereader-qt
 
-# 其他kde应用(系统日志, kde计算器(或qalculate), 颜色拾取, git, 磁盘分区, 下载, 集成开发环境)
-$pacMan ksystemlog kcalc kcolorchooser kommit # partitionmanager ktorrent kdevelop
+# 其他kde应用(系统日志, kde计算器(或qalculate), 颜色拾取, git, 磁盘分区, 下载, 集成开发环境, 阅读器)
+$pacMan ksystemlog kcalc kcolorchooser kommit # partitionmanager ktorrent kdevelop okular
 
 # i3wm (rofi需要自行编译支持中文，polkit-gnome显示效果更好些)  # polkit-kde-agent
 $pacMan i3-wm i3status polybar lxappearance polkit polkit-qt5 polkit-gnome \
@@ -56,7 +56,7 @@ $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hypr
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量
 $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android-tools \
-	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie
+	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service
@@ -71,7 +71,13 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android
 # $aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 wps-office-fonts ttf-ms-win11-auto-zh_cn freetype2-wps # wps-office
 
 # gpu (常用的是intel_gpu_top和intel_gpu_time, 需要sudo)
-# $pacMan intel-gpu-tools
+# $pacMan intel-gpu-tools # radeontop
+# nvtop对intel gpu的支持还不够好
+# git clone https://github.com/Syllo/nvtop.git
+# cd nvtop && mkdir build && cd build
+# cmake -DINTEL_SUPPORT=ON ..
+# make
+# sudo make install
 
 # 打印 cups和cups-browsed需要启动服务
 # $pacMan cups cups-pdf system-config-printer cups-filters # cups-browsed bluez-cups nss-mdns gutenprint
