@@ -34,9 +34,11 @@
     stack_duplicates = true
     hide_duplicate_count = false
     show_indicators = yes
+    icon_theme="Papirus, breeze"
     icon_position = left
     max_icon_size = 32
-    icon_path = /usr/share/icons/Paper/16x16/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/16x16/apps/
+    #icon_path = /usr/share/icons/Paper/16x16/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/16x16/apps/
+    icon_path = /usr/share/icons/Papirus/64x64/mimetypes/:/usr/share/icons/Papirus/64x64/status/:/usr/share/icons/Papirus/64x64/devices/:/usr/share/icons/Papirus/64x64/notifications/:/usr/share/icons/Papirus/64x64/emblems/
     sticky_history = yes
     history_length = 20
     always_run_script = true
@@ -71,3 +73,8 @@ frame_color = "#F5A97F"
     # history = mod1+grave
     # Context menu
     # context = ctrl+shift+period
+
+
+[play_sound]
+    summary = "*"
+    script = "~/.config/dunst/alert.sh"

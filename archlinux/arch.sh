@@ -49,9 +49,9 @@ $pacMan ksystemlog kcalc kcolorchooser kommit # partitionmanager ktorrent kdevel
 $pacMan i3-wm i3status polybar lxappearance polkit polkit-qt5 polkit-gnome \
 	xclip copyq feh dunst picom dolphin networkmanager network-manager-applet
 
-# hyprland 最好i3和hypr一起安装，有些重复的依赖就没多写一便 paperIcon是dunst需要 wlr-randr,xrandr-wlr-randr,xprop-wdisplays是显示器配置
+# hyprland 最好i3和hypr一起安装，有些重复的依赖就没多写一便 paper-icon-theme-git已归档换成papirus-icon-theme(dunst需要) wlr-randr,xrandr-wlr-randr,xprop-wdisplays是显示器配置
 $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hyprland pipewire wireplumber \
-	xdg-desktop-portal swayosd brightnessctl hypridle wlsunset hyprpaper hyprshot cliphist \
+	xdg-desktop-portal swayosd brightnessctl hypridle wlsunset hyprpaper hyprshot cliphist safeeyes \
 	wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量

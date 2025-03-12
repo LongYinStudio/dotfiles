@@ -37,3 +37,9 @@
 5. kde 推荐配置
    将`置顶`快捷键设置为`Meta(Win)+C`
    将`显示/隐藏窗口标题栏和框架`快捷键设为`Meta(Win)+M`
+
+6. `~/config/microsoft-edge-stable-flags.conf`:
+
+   > 解决切换kde到hypr，edge丢失网站登陆状态 https://wiki.archlinux.org/title/KDE_Wallet#KDE_Wallet_for_Chrome_and_Chromium
+
+   > 如果是gnome用gnome-libsecret，还可以是第三方的，等等

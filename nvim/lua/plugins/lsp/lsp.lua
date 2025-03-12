@@ -54,6 +54,11 @@ local languages = {
 				},
 			},
 		},
+		single_file_support = true,
+		file_operations = {
+			willRename = { provider = "tsserver", operation = "rename" },
+			willMove = { provider = "tsserver", operation = "move" },
+		},
 	},
 	vuels = {},
 	volar = {
@@ -263,6 +268,14 @@ return {
 					server.on_attach = on_attach
 					require("lspconfig")[server_name].setup(server)
 				end,
+			})
+
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = "rounded",
+			})
+
+			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+				border = "rounded",
 			})
 
 			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
