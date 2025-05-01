@@ -11,3 +11,7 @@ require("others.neovide")
 
 -- 修改高亮
 require("core.highlights")
+
+-- if vim.g.vscode then
+--   vim.notify("使用vscode")
+-- end

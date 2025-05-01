@@ -1,5 +1,6 @@
 return {
 	"3rd/image.nvim",
+	enabled = false,
 	ft = { "markdown", "norg", "image_nvim", "typst", "html", "css" },
 	opts = {},
 	config = function()

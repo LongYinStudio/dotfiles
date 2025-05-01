@@ -16,7 +16,7 @@ aurPkg='yay -S --needed --noconfirm'
 $pacMan adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts \
 	noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
 	ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono-nerd
-# nerd-fonts-complete otf-font-awesome
+# nerd-fonts-complete otf-font-awesome ttf-maplemono-nf-cn
 fc-cache -fv
 
 # 终端
@@ -40,7 +40,7 @@ $pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-
 # $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
 
 # 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端 (目前用utools)
-# $pacMan pot-translation tesseract-data-chi_sim tesseract-data-eng gimagereader-qt
+# $pacMan pot-translation tesseract-data-chi_sim tesseract-data-eng gimagereader-qt # translate-shell
 
 # 其他kde应用(系统日志, kde计算器(或qalculate), 颜色拾取, git, 磁盘分区, 下载, 集成开发环境, 阅读器)
 $pacMan ksystemlog kcalc kcolorchooser kommit # partitionmanager ktorrent kdevelop okular
@@ -56,7 +56,7 @@ $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hypr
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量
 $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android-tools \
-	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods
+	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service
@@ -112,7 +112,7 @@ $pacMan qemu libvirt virt-manager virt-viewer virt-install edk2-ovmf bridge-util
 # 已在hypr/lib/env.conf里添加`env = XDG_MENU_PREFIX,arch-`
 # $pacMan archlinux-xdg-menu
 
-# game (steam包需要开multilib,即32位)
+# game (steam包需要开multilib,即32位) 主要使用steam的proton兼容层
 # $pacMan steam lutris
 
 $pacMan man-db man-pages man-pages-zh_cn

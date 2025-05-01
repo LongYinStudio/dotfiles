@@ -1,6 +1,6 @@
 return {
 	"folke/snacks.nvim",
-	enabled = false,
+	-- enabled = false,
 	priority = 1000,
 	lazy = false,
 	opts = {
@@ -14,7 +14,22 @@ return {
 		bigfile = { enabled = false },
 		dashboard = { enabled = false },
 		explorer = { enabled = false },
-		indent = { enabled = false },
+		indent = {
+			enabled = true,
+			animate = { enabled = true },
+			chunk = {
+				enabled = true,
+				char = {
+					-- corner_top = "┌",
+					-- corner_bottom = "└",
+					corner_top = "╭",
+					corner_bottom = "╰",
+					horizontal = "─",
+					vertical = "│",
+					arrow = ">",
+				},
+			},
+		},
 		input = { enabled = false },
 		notifier = {
 			enabled = false,
@@ -22,17 +37,71 @@ return {
 		},
 		picker = { enabled = true },
 		quickfile = { enabled = false },
-		scope = { enabled = false },
+		scope = { enabled = true },
 		scroll = { enabled = true },
 		statuscolumn = { enabled = false },
 		words = { enabled = false },
 	},
-	config = function(_, opts)
-		require("snacks").setup(opts)
+	keys = {
+		{
+			"<leader>fn",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "Snacks picker",
+		},
+		{
+			"<leader>is",
+			function()
+				Snacks.picker.icons()
+			end,
+			desc = "Snacks Icons",
+		},
+		{
+			"<leader>cR",
+			function()
+				Snacks.rename.rename_file()
+			end,
+			desc = "Rename File",
+		},
+		{
+			"<leader>n",
+			function()
+				Snacks.scratch({ icon = " ", name = "Todo", ft = "markdown", file = "~/TODO.md" })
+			end,
+			desc = "Todo List",
+		},
+	},
+	init = function()
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "VeryLazy",
+			callback = function()
+				-- Setup some globals for debugging (lazy-loaded)
+				_G.dd = function(...)
+					Snacks.debug.inspect(...)
+				end
+				_G.bt = function()
+					Snacks.debug.backtrace()
+				end
+				vim.print = _G.dd -- Override print to use snacks for `:=` command
 
-		local keymap = vim.keymap.set
-		local snacks = require("snacks")
-		local picker = snacks.picker
-		keymap("n", "<leader>fn", picker.files, { desc = "snacks picker" })
+				-- Create some toggle mappings
+				Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")
+				-- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>Tw")
+				-- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+				Snacks.toggle.diagnostics():map("<leader>Td")
+				-- Snacks.toggle.line_number():map("<leader>Tl")
+				-- Snacks.toggle
+				-- 	.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+				-- 	:map("<leader>uc")
+				Snacks.toggle.treesitter():map("<leader>uT")
+				Snacks.toggle
+					.option("background", { off = "light", on = "dark", name = "Dark/Light" })
+					:map("<leader>Tb")
+				-- Snacks.toggle.inlay_hints():map("<leader>uh")
+				Snacks.toggle.indent():map("<leader>Ti")
+				-- Snacks.toggle.dim():map("<leader>uD")
+			end,
+		})
 	end,
 }

@@ -77,12 +77,13 @@ keymap("n", "<leader>F", "<cmd>enew<cr>", { desc = "New File" })
 -- keymap("n", "<leader>tv", "<Cmd>vsp | terminal<CR>", { desc = "vim term vertical" })
 
 -- -------- toggles --------- ---
+-- NOTE: 另外的在../plugins/tools/snacks.lua 里
 keymap("n", "<leader>Tw", function()
 	require("utils.toggles").wrap()
 end, { desc = "Toggle wrap" })
-keymap("n", "<leader>Ts", function()
-	require("utils.toggles").spell()
-end, { desc = "Toggle spell" })
+-- keymap("n", "<leader>Ts", function()
+-- 	require("utils.toggles").spell()
+-- end, { desc = "Toggle spell" })
 keymap("n", "<leader>Tn", function()
 	require("utils.toggles").number()
 end, { desc = "Toggle number" })

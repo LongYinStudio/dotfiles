@@ -14,18 +14,19 @@ local languages = {
 	},
 	html = {},
 	emmet_ls = {
-		filetypes = {
-			"html",
-		},
+		filetypes = { "html", "typescriptreact", "javascriptreact" },
 	},
 	cssls = {},
 	tsserver = {
+		enabled = false,
 		init_options = {
 			plugins = {
 				{
 					name = "@vue/typescript-plugin",
+					-- location = vim.fn.stdpath("data")
+					-- 	.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
 					location = vim.fn.stdpath("data")
-						.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+						.. "/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin",
 					languages = { "vue" },
 				},
 			},
@@ -55,14 +56,18 @@ local languages = {
 			},
 		},
 		single_file_support = true,
-		file_operations = {
-			willRename = { provider = "tsserver", operation = "rename" },
-			willMove = { provider = "tsserver", operation = "move" },
-		},
+		-- file_operations = {
+		-- 	willRename = { provider = "tsserver", operation = "rename" },
+		-- 	willMove = { provider = "tsserver", operation = "move" },
+		-- },
 	},
 	vuels = {},
 	volar = {
-		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+		-- enabled = false,
+		filetypes = {
+			-- "typescript", "javascript", "javascriptreact", "typescriptreact",
+			"vue",
+		},
 		init_options = {
 			vue = {
 				hybridMode = true,
@@ -95,54 +100,71 @@ local languages = {
 		},
 	},
 	vtsls = {
-		enabled = false,
-		-- tsserver = {
-		-- 	globalPlugins = {
-		-- 		{
-		-- 			name = "@vue/typescript-plugin",
-		-- 			location = vim.fn.stdpath("data")
-		-- 				.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
-		-- 			languages = { "vue" },
-		-- 			configNamespace = "typescript",
-		-- 			enableForWorkspaceTypeScriptVersions = true,
-		-- 		},
-		-- 	},
-		-- },
-		-- filetypes = {
-		-- 	"javascript",
-		-- 	"javascriptreact",
-		-- 	"javascript.jsx",
-		-- 	"typescript",
-		-- 	"typescriptreact",
-		-- 	"typescript.tsx",
-		-- },
-		-- settings = {
-		-- 	complete_function_calls = true,
-		-- 	vtsls = {
-		-- 		enableMoveToFileCodeAction = true,
-		-- 		autoUseWorkspaceTsdk = true,
-		-- 		experimental = {
-		-- 			maxInlayHintLength = 30,
-		-- 			completion = {
-		-- 				enableServerSideFuzzyMatch = true,
-		-- 			},
-		-- 		},
-		-- 	},
-		-- 	typescript = {
-		-- 		updateImportsOnFileMove = { enabled = "always" },
-		-- 		suggest = {
-		-- 			completeFunctionCalls = true,
-		-- 		},
-		-- 		inlayHints = {
-		-- 			enumMemberValues = { enabled = true },
-		-- 			functionLikeReturnTypes = { enabled = true },
-		-- 			parameterNames = { enabled = "literals" },
-		-- 			parameterTypes = { enabled = true },
-		-- 			propertyDeclarationTypes = { enabled = true },
-		-- 			variableTypes = { enabled = false },
-		-- 		},
-		-- 	},
-		-- },
+		-- enabled = false,
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+			"vue",
+		},
+		single_file_support = true,
+		settings = {
+			complete_function_calls = true,
+			vtsls = {
+				autoUseWorkspaceTsdk = true,
+				enableMoveToFileCodeAction = true,
+				experimental = {
+					maxInlayHintLength = 30,
+					completion = {
+						enableServerSideFuzzyMatch = true,
+					},
+				},
+				tsserver = {
+					globalPlugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vim.fn.stdpath("data")
+								.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+							languages = { "vue" },
+							configNamespace = "typescript",
+							enableForWorkspaceTypeScriptVersions = true,
+						},
+					},
+				},
+			},
+			javascript = {
+				updateImportsOnFileMove = { enabled = "always" },
+				suggest = {
+					completeFunctionCalls = true,
+				},
+				inlayHints = {
+					enumMemberValues = { enabled = true },
+					functionLikeReturnTypes = { enabled = true },
+					parameterNames = { enabled = "literals" },
+					parameterTypes = { enabled = true },
+					propertyDeclarationTypes = { enabled = true },
+					variableTypes = { enabled = true },
+				},
+			},
+			typescript = {
+				updateImportsOnFileMove = { enabled = "always" },
+				-- tsdk = "./node_modules/typescript/lib",
+				suggest = {
+					completeFunctionCalls = true,
+				},
+				inlayHints = {
+					enumMemberValues = { enabled = true },
+					functionLikeReturnTypes = { enabled = true },
+					parameterNames = { enabled = "literals" },
+					parameterTypes = { enabled = true },
+					propertyDeclarationTypes = { enabled = true },
+					variableTypes = { enabled = true },
+				},
+			},
+		},
 	},
 	clangd = {},
 	jsonls = {},
@@ -152,10 +174,11 @@ local languages = {
 	pyright = {},
 	yamlls = {},
 	jdtls = {}, -- jdtls 需要jdk17
+	typst_lsp = {},
 }
 
 -- 取消部分lsp的自动安装
-local autoinstall_excluded_servers = { "vuels", "dockerls", "tailwindcss", "pyright", "yamlls", "jdtls" }
+local autoinstall_excluded_servers = { "vuels", "dockerls", "tailwindcss", "pyright", "yamlls", "jdtls", "typst_lsp" }
 
 return {
 	{
@@ -205,14 +228,13 @@ return {
 				end
 
 				require("lsp_signature").on_attach({}, bufnr)
-				-- TODO: 查看LazyVim 的rename_file
 				nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
 				nmap("<F2>", vim.lsp.buf.rename, "Rename")
 				nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 				nmap("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
-				-- nmap("gd", vim.lsp.buf.definition, "Goto Definition")
-				nmap("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+				nmap("gd", vim.lsp.buf.definition, "Goto Definition")
+				-- nmap("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
 				nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
 				nmap("gr", require("telescope.builtin").lsp_references, "Goto References")
 				nmap("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
@@ -278,11 +300,11 @@ return {
 				border = "rounded",
 			})
 
-			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-			end
+			-- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+			-- for type, icon in pairs(signs) do
+			-- 	local hl = "DiagnosticSign" .. type
+			-- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+			-- end
 
 			vim.diagnostic.config({
 				virtual_text = {

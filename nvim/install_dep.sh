@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # node
-npm i -g neovim tree-sitter tree-sitter-cli prettier stylelint markmap-cli
+npm i -g neovim tree-sitter tree-sitter-cli prettier stylelint markmap-cli yarn
 
 # rust
-cargo install stylua
+cargo install stylua # typstfmt
 rustup component add rustfmt
 
 # package manager (yum dnf opkg pkg 很少用了，自行添加)

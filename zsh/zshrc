@@ -14,6 +14,9 @@ export HISTSIZE=10000     #历史纪录条目数量
 export SAVEHIST=10000     #注销后保存的历史纪录条目数量
 setopt INC_APPEND_HISTORY #以附加的方式写入历史纪录
 setopt HIST_IGNORE_DUPS   #如果连续输入的命令相同，历史纪录中只保留一个
+# export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
+# export SUDO_PROMPT="Deploying root access for %u. Password pls: "
+# export BROWSER='firefox'
 # 编辑器
 if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
@@ -32,6 +35,8 @@ source "$ZSH"/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH" # User configuration
 
 # alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
+[[ $(command -v trash) ]] && alias rm="trash"
+alias pacmanlist="LC_ALL=C pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h" # 列出已安软件及大小
 alias apti="sudo apt install"
 alias aptp="sudo apt purge"
 alias aptar="sudo apt autoremove"

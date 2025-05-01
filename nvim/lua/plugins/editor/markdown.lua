@@ -3,12 +3,12 @@ return {
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
-		build = "cd app && npm install",
-		config = function()
-			-- vim.g.mkdp_browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
-			-- vim.g.mkdp_browser = "/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
-			vim.g.mkdp_auto_close = 1
-		end,
+		build = "cd app && yarn install",
+		-- 	config = function()
+		-- 		-- vim.g.mkdp_browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+		-- 		-- vim.g.mkdp_browser = "/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+		-- 		vim.g.mkdp_auto_close = 1
+		-- 	end,
 	},
 	{
 		"MeanderingProgrammer/markdown.nvim",

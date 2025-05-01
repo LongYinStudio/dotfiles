@@ -32,6 +32,7 @@ return {
 					sh = { "shellcheck", "shfmt" },
 					zsh = { "shfmt", "shellcheck" },
 					java = { "clang_format", "google-java-format" }, -- google-java-format 不自动安装
+					-- typst = { "typstfmt" },
 				},
 			})
 			vim.api.nvim_create_user_command("MasonInstallAll", function()

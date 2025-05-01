@@ -24,8 +24,7 @@ return {
 		mac_window_bar = true,
 		title = "CodeSnap.nvim",
 		code_font_family = "JetBrainsMono Nerd Font",
-		-- watermark_font_family = "Pacifico", -- 默认值
-		watermark_font_family = "JetBrainsMono Nerd Font", -- 默认值
+		watermark_font_family = "Pacifico", -- 默认值
 		watermark = "CodeSnap.nvim",
 		---@type theme
 		bg_theme = "bamboo", -- default:"default"

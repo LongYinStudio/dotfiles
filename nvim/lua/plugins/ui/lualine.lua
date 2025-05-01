@@ -91,6 +91,21 @@ return {
 					},
 					lualine_x = {
 						{ get_lsp_str },
+						--  lualine 自带的只能显示buf attached的
+						{
+							"lsp_status",
+							icon = "", -- f013
+							symbols = {
+								-- Standard unicode symbols to cycle through for LSP progress:
+								spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+								-- Standard unicode symbol for when LSP is done:
+								done = "✓",
+								-- Delimiter inserted between LSP names:
+								separator = ", ",
+							},
+							-- List of LSP names to ignore (e.g., `null-ls`):
+							ignore_lsp = {},
+						},
 						{
 							"fileformat",
 							symbols = {
