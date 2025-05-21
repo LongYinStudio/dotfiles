@@ -42,7 +42,7 @@ return {
 					{ "<leader>g", group = "Git", icon = { icon = " " } }, --   
 					{ "<leader>i", group = "Icon", icon = { icon = "󰥷 " } },
 					{ "<leader>r", group = "Rest", icon = { icon = " ", color = "blue" } },
-					-- { "<leader>s", group = "search/replace", icon = " " },
+					{ "<leader>s", group = "search/replace", icon = " " },
 					{ "<leader>t", group = "ToggleTerm", icon = { icon = " " } },
 					{ "<leader>T", group = "Toggle", icon = { icon = "  " } },
 					{ "<leader>u", group = "URL", icon = { icon = "󰌷 ", color = "cyan" } },

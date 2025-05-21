@@ -1,5 +1,5 @@
 return {
-	"rest-nvim/rest.nvim",
+	"rest-nvim/rest.nvim", -- 类似的 https://github.com/mistweaverco/kulala.nvim
 	ft = "http",
 	event = { "VeryLazy" },
 	keys = {

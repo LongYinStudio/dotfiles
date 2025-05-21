@@ -14,3 +14,18 @@
    foomatic-db-ppds
 7. JetBrainsMonoNLNerdFont-Regular.ttf和JetBrainsMonoNerdFont-Regular.ttf区别：
    名字中的"NL"是"No Ligatures"，即不包含连字（连字：两个或多个字符组成一个特殊字符的设计，例如:两个等号==会被渲染成一个长等号）
+8. 解决SDDM里触摸板无法单击切换DE/WM，修改`/etc/X11/xorg.conf.d/20-touchpad.conf`，内容:
+
+```ini
+Section "InputClass"
+        Identifier "libinput touchpad catchall"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+
+        Option "Tapping" "on"
+        Option "NaturalScrolling" "on"
+        Option "MiddleEmulation" "on"
+        Option "DisableWhileTyping" "on"
+EndSection
+```

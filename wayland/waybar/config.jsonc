@@ -9,9 +9,13 @@
     "custom/Arch",
     "hyprland/workspaces#pacman",
     "hyprland/window",
-    "hyprland/submap"
+    "hyprland/submap",
   ],
-  "modules-center": ["custom/wallpaper", "custom/hyprpicker"],
+  "modules-center": [
+    "custom/wallpaper",
+    "custom/hyprpicker",
+    "custom/playerctl",
+  ],
   "modules-right": [
     // "bluetooth",
     // "custom/updater",
@@ -29,20 +33,20 @@
     "battery#bat2",
     "clock",
     "tray",
-    "custom/power"
+    "custom/power",
   ],
   "custom/Arch": {
     "format": " 󰣇 ",
     // "on-click": "pkill wofi; wofi -show drun",
     "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
-    "tooltip": false
+    "tooltip": false,
   },
   "custom/updater": {
     "format": " {}",
     "exec": "checkupdates | wc -l",
     "exec-if": "[[ $(checkupdates | wc -l) ]]",
     "interval": 15,
-    "tooltip": false
+    "tooltip": false,
   },
   "hyprland/workspaces#cnNum": {
     "disable-scroll": true,
@@ -68,8 +72,8 @@
       "10": "十",
       "urgent": "",
       "focused": "",
-      "default": ""
-    }
+      "default": "",
+    },
   },
   "hyprland/workspaces#circle": {
     "active-only": false,
@@ -85,12 +89,12 @@
       "3": [],
       "4": [],
       "5": [],
-      "6": []
+      "6": [],
     },
     "format-icons": {
       "active": "",
-      "default": ""
-    }
+      "default": "",
+    },
   },
   "hyprland/workspaces#pacman": {
     "active-only": false,
@@ -106,23 +110,23 @@
       "3": [],
       "4": [],
       "5": [],
-      "6": []
+      "6": [],
     },
     "format-icons": {
       "active": "󰮯 ",
       "default": "󰊠 ",
-      "persistent": "󰊠 "
-    }
+      "persistent": "󰊠 ",
+    },
   },
   "hyprland/window": {
     "format": " :<b>{}</b>",
     "max-length": 40,
-    "separate-outputs": true
+    "separate-outputs": true,
   },
   "hyprland/submap": {
     "format": "<span font='10' rise='1500'>󰘲 </span>{}",
     "max-length": 30,
-    "tooltip": false
+    "tooltip": false,
   },
   "keyboard-state": {
     "numlock": true,
@@ -130,11 +134,11 @@
     "format": "{name} {icon}",
     "format-icons": {
       "locked": "",
-      "unlocked": ""
-    }
+      "unlocked": "",
+    },
   },
   "hyprland/mode": {
-    "format": "<span style=\"italic\">{}</span>"
+    "format": "<span style=\"italic\">{}</span>",
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
@@ -143,37 +147,37 @@
     "unknown-tag": "N/A",
     "interval": 5,
     "consume-icons": {
-      "on": " "
+      "on": " ",
     },
     "random-icons": {
       "off": "<span color=\"#f53c3c\"></span> ",
-      "on": " "
+      "on": " ",
     },
     "repeat-icons": {
-      "on": " "
+      "on": " ",
     },
     "single-icons": {
-      "on": "1 "
+      "on": "1 ",
     },
     "state-icons": {
       "paused": "",
-      "playing": ""
+      "playing": "",
     },
     "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
+    "tooltip-format-disconnected": "MPD (disconnected)",
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": " ",
-      "deactivated": " "
-    }
+      "deactivated": " ",
+    },
   },
   "tray": {
     "icon-size": 21, // 调整图标大小
     "spacing": 10, // 图标间距
     "show-passive-items": true, // 显示被动图标
-    "exclude": ["Firefox", "Steam"] // 排除不兼容的应用
+    "exclude": ["Firefox", "Steam"], // 排除不兼容的应用
   },
   "clock": {
     // "timezone": "Asia/Shanghai",
@@ -189,23 +193,23 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
     },
     "actions": {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
       "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    }
+      "on-scroll-down": "shift_down",
+    },
   },
   "cpu": {
     "format": "{usage}% ",
-    "tooltip": false
+    "tooltip": false,
   },
   "memory": {
-    "format": "{}% "
+    "format": "{}% ",
   },
   "temperature": {
     // "thermal-zone": 2,
@@ -213,19 +217,19 @@
     "critical-threshold": 80,
     // "format-critical": "{temperatureC}°C {icon}",
     "format": "{temperatureC}°C {icon}",
-    "format-icons": [" ", "", " "]
+    "format-icons": [" ", "", " "],
   },
   "backlight": {
     // "device": "acpi_video1",
     "format": "{percent}% {icon}",
     // "format-icons": ["", "", "", "", "", "", "", "", ""]
-    "format-icons": ["󰃞 ", "󰃝 ", "󰃟 ", "󰃠 "]
+    "format-icons": ["󰃞 ", "󰃝 ", "󰃟 ", "󰃠 "],
   },
   "battery": {
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 20
+      "critical": 20,
     },
     "format": "{capacity}% {icon}",
     "format-full": "{capacity}% {icon}",
@@ -237,10 +241,10 @@
     // "format-icons": ["", "", "", "", ""]
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "tooltip": true,
-    "tooltip-format": "{timeTo} {power}w"
+    "tooltip-format": "{timeTo} {power}w",
   },
   "battery#bat2": {
-    "bat": "BAT2"
+    "bat": "BAT2",
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -250,8 +254,8 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": ""
-    }
+      "power-saver": "",
+    },
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -260,7 +264,7 @@
     "tooltip-format": "{ifname} via {gwaddr}  ",
     "format-linked": "{ifname} (No IP)  ",
     "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
@@ -277,9 +281,9 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", " ", " "]
+      "default": ["", " ", " "],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
   "bluetooth": {
     "format": " {status}",
@@ -289,7 +293,7 @@
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
   },
   "custom/power": {
     "format": "⏻ ",
@@ -304,17 +308,21 @@
       "suspend": "systemctl suspend", // 保存到swap，低功耗状态，未完全关，唤醒快
       "hibernate": "systemctl hibernate", // 保存到硬盘，完全关闭硬件，唤醒慢
       "lock": "hyprlock",
-      "logout": "hyprctl dispatch exit 0"
-    }
+      "logout": "hyprctl dispatch exit 0",
+    },
   },
   "custom/hyprpicker": {
     "format": " ",
     "tooltip": false,
     "on-click": "hyprpicker -a -f hex", // -a/–autocopy need wl-clipboard
-    "on-click-right": "hyprpicker -a -f rgb"
+    "on-click-right": "hyprpicker -a -f rgb",
   },
   "custom/wallpaper": {
     "format": " ",
-    "on-click": "~/.config/hypr/rewall.sh"
-  }
+    "on-click": "~/.config/hypr/rewall.sh",
+  },
+  "custom/playerctl": {
+    "format": "󰐎 ",
+    "on-click": "playerctl --all-players play-pause",
+  },
 }

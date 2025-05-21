@@ -2,21 +2,22 @@
 
 # 先安装[intel|amd]-ucode，配置pacman等等，再运行tools_install.sh
 get_package_manager() {
-	if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-		echo "sudo pacman -S --needed --noconfirm"
-	else
-		echo 'Can not use.'
-		exit 0
-	fi
+  if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
+    echo "sudo pacman -S --needed --noconfirm"
+  else
+    echo 'Can not use.'
+    exit 0
+  fi
 }
 pacMan=$(get_package_manager)
 aurPkg='yay -S --needed --noconfirm'
 
 # 字体
 $pacMan adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts \
-	noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
-	ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono-nerd
-# nerd-fonts-complete otf-font-awesome ttf-maplemono-nf-cn
+  noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
+  ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono-nerd
+# nerd-fonts-complete otf-font-awesome ttf-maplemono-nf-cn ttf-fira-code ttf-firacode-nerd
+
 fc-cache -fv
 
 # 终端
@@ -47,16 +48,16 @@ $pacMan ksystemlog kcalc kcolorchooser kommit # partitionmanager ktorrent kdevel
 
 # i3wm (rofi需要自行编译支持中文，polkit-gnome显示效果更好些)  # polkit-kde-agent
 $pacMan i3-wm i3status polybar lxappearance polkit polkit-qt5 polkit-gnome \
-	xclip copyq feh dunst picom dolphin networkmanager network-manager-applet
+  xclip copyq feh dunst picom dolphin networkmanager network-manager-applet
 
 # hyprland 最好i3和hypr一起安装，有些重复的依赖就没多写一便 paper-icon-theme-git已归档换成papirus-icon-theme(dunst需要) wlr-randr,xrandr-wlr-randr,xprop-wdisplays是显示器配置
 $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hyprland pipewire wireplumber \
-	xdg-desktop-portal swayosd brightnessctl hypridle wlsunset hyprpaper hyprshot cliphist safeeyes \
-	wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh
+  xdg-desktop-portal swayosd brightnessctl hypridle wlsunset hyprpaper hyprshot cliphist safeeyes \
+  wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量
 $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android-tools \
-	reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap
+  reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service

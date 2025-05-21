@@ -7,3 +7,5 @@ return {
 	cmd = { "LiveServerStart", "LiveServerStop" },
 	config = true,
 }
+
+-- 类似的 https://github.com/turbio/bracey.vim

@@ -17,14 +17,16 @@ local languages = {
 		filetypes = { "html", "typescriptreact", "javascriptreact" },
 	},
 	cssls = {},
+	-- ts_ls = {
+	-- 	enabled = false,
+	-- },
 	tsserver = {
 		enabled = false,
 		init_options = {
 			plugins = {
 				{
 					name = "@vue/typescript-plugin",
-					-- location = vim.fn.stdpath("data")
-					-- 	.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+					-- location = vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
 					location = vim.fn.stdpath("data")
 						.. "/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin",
 					languages = { "vue" },
@@ -63,10 +65,8 @@ local languages = {
 	},
 	vuels = {},
 	volar = {
-		-- enabled = false,
 		filetypes = {
-			-- "typescript", "javascript", "javascriptreact", "typescriptreact",
-			"vue",
+			"vue", -- "typescript", "javascript", "javascriptreact", "typescriptreact",
 		},
 		init_options = {
 			vue = {
@@ -74,11 +74,8 @@ local languages = {
 			},
 			-- typescript = {
 			-- 	tsdk = vim.fn.getcwd() .. "node_modules/typescript/lib",
+			--  tsdk = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"),
 			-- },
-			-- 					typescript = {
-			-- tsdk = vim.fn.expand(
-			-- 	"$HOME/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"
-			-- ),
 		},
 		settings = {
 			typescript = {
@@ -100,7 +97,6 @@ local languages = {
 		},
 	},
 	vtsls = {
-		-- enabled = false,
 		filetypes = {
 			"javascript",
 			"javascriptreact",
@@ -216,10 +212,7 @@ return {
 				automatic_installation = true,
 			})
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-			local on_attach = function(_, bufnr)
+			local on_attach = function(client, bufnr)
 				local nmap = function(keys, func, desc)
 					if desc then
 						desc = "LSP: " .. desc
@@ -232,7 +225,6 @@ return {
 				nmap("<F2>", vim.lsp.buf.rename, "Rename")
 				nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 				nmap("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-
 				nmap("gd", vim.lsp.buf.definition, "Goto Definition")
 				-- nmap("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
 				nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
@@ -242,63 +234,85 @@ return {
 
 				-- Diagnostic keymaps
 				nmap("<leader>cD", require("telescope.builtin").diagnostics, "Diagnostics")
-				nmap("]d", vim.diagnostic.goto_next, "Next Diagnostic")
-				nmap("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
-				nmap("]e", function()
-					vim.diagnostic.goto_next({ severity = "ERROR" })
-				end, "Next Error")
+				-- nmap("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+				-- nmap("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
+				-- nmap("]e", function() vim.diagnostic.goto_next({ severity = "ERROR" }) end, "Next Error")
+				-- nmap("[e", function() vim.diagnostic.goto_prev({ severity = "ERROR" }) end, "Prev Error")
+				nmap("[d", function()
+					vim.diagnostic.jump({ count = -1 })
+				end, "Previous diagnostic")
+				nmap("]d", function()
+					vim.diagnostic.jump({ count = 1 })
+				end, "Next diagnostic")
 				nmap("[e", function()
-					vim.diagnostic.goto_prev({ severity = "ERROR" })
-				end, "Prev Error")
+					vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+				end, "Previous error")
+				nmap("]e", function()
+					vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+				end, "Next error")
 				nmap("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
 				nmap("<leader>cq", vim.diagnostic.setloclist, "Set Loc List")
 
-				-- See `:help K` for why this keymap  使用KK聚焦到hover弹框，q隐藏
-				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-				-- P(arameter) L键已经被lualine使用，详情执行 :verbose map L
-				nmap("P", vim.lsp.buf.signature_help, "Signature Documentation")
+				nmap("K", vim.lsp.buf.hover, "Hover Documentation") -- 使用KK聚焦到hover弹框，q隐藏
+				nmap("P", vim.lsp.buf.signature_help, "Signature Documentation") -- P(arameter) L键已经被lualine使用，详情执行 :verbose map L
 
 				-- Lesser used LSP functionality
 				-- nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
 				-- nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 				-- nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-				-- nmap("<leader>wl", function()
-				-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-				-- end, "[W]orkspace [L]ist Folders")
+				-- nmap("<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "[W]orkspace [L]ist Folders")
 
-				nmap("<leader>ch", function()
-					local reversed_value = not vim.lsp.inlay_hint.is_enabled({})
-					vim.lsp.inlay_hint.enable(reversed_value)
-				end, "Toggle Inlay Iint")
+				-- 启用内嵌提示 (Neovim 0.10+)
+				if vim.lsp.inlay_hint and client.supports_method("textDocument/inlayHint") then
+					-- vim.lsp.inlay_hint(bufnr, true)
+					nmap("<leader>ch", function()
+						local reversed_value = not vim.lsp.inlay_hint.is_enabled({})
+						vim.lsp.inlay_hint.enable(reversed_value)
+					end, "Toggle Inlay Iint")
+				end
 
-				vim.api.nvim_buf_create_user_command(bufnr, "LspFormat", function(_)
-					if vim.lsp.buf.format then
-						vim.lsp.buf.format()
-					elseif vim.lsp.buf.formatting then
-						vim.lsp.buf.formatting()
-					end
-				end, { desc = "Format current buffer with LSP" })
-				-- Format on save
-				-- vim.cmd("autocmd BufWritePre <buffer> LspFormat")
-				nmap("<leader>cf", "<cmd>LspFormat<cr>")
+				-- 格式化
+				if client.supports_method("textDocument/formatting") then
+					-- Format on save 由 conform 代替
+					-- vim.api.nvim_create_autocmd("BufWritePre", {
+					-- 	group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+					-- 	buffer = bufnr,
+					-- 	callback = function()
+					-- 		vim.lsp.buf.format({ bufnr = bufnr })
+					-- 	end,
+					-- })
+					-- Format on key
+					vim.api.nvim_buf_create_user_command(bufnr, "LspFormat", function(_)
+						if vim.lsp.buf.format then
+							vim.lsp.buf.format()
+						elseif vim.lsp.buf.formatting then
+							vim.lsp.buf.formatting()
+						end
+					end, { desc = "Format current buffer with LSP" })
+					nmap("<leader>cf", "<cmd>LspFormat<cr>")
+				end
 			end
 
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					local server = languages[server_name] or {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {}, {
+						textDocument = {
+							foldingRange = {
+								dynamicRegistration = false,
+								lineFoldingOnly = true,
+							},
+						},
+					})
 					server.on_attach = on_attach
 					require("lspconfig")[server_name].setup(server)
 				end,
 			})
 
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "rounded",
-			})
-
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-				border = "rounded",
-			})
+			-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {	border = "rounded" })
 
 			-- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 			-- for type, icon in pairs(signs) do
@@ -307,9 +321,49 @@ return {
 			-- end
 
 			vim.diagnostic.config({
+				-- 在侧边栏（sign column）显示诊断符号
+				signs = {
+					text = {
+						-- [vim.diagnostic.severity.ERROR] = " ",
+						-- [vim.diagnostic.severity.WARN] = " ",
+						-- [vim.diagnostic.severity.INFO] = " ",
+						-- [vim.diagnostic.severity.HINT] = "󰠠 ",
+						-- [vim.diagnostic.severity.ERROR] = " ",
+						-- [vim.diagnostic.severity.WARN] = " ",
+						-- [vim.diagnostic.severity.HINT] = " ",
+						-- [vim.diagnostic.severity.INFO] = "󰬐 ",
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.HINT] = " ",
+						[vim.diagnostic.severity.INFO] = "󰬐 ",
+					},
+					texthl = {
+						[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+						[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+						[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+						[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+					},
+					numhl = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN] = "",
+						[vim.diagnostic.severity.INFO] = "",
+						[vim.diagnostic.severity.HINT] = "",
+					},
+				},
+				-- 是否在代码右侧显示诊断信息的虚拟文本（如 `Error: Expected semicolon`） virtual_text=true/false
 				virtual_text = {
 					prefix = "●",
 				},
+				underline = true, -- 是否对诊断范围内的代码添加下划线
+				update_in_insert = false, -- 是否在插入模式下更新诊断信息（如输入时实时反馈）
+				severity_sort = false, -- 诊断信息的严重性排序（按严重程度排序）
+				-- 是否启用虚拟行（virtual lines）显示诊断信息（实验性功能）
+				-- 可结合 virtual_text 实现更灵活的显示方式
+				virtual_lines = false,
+				-- 是否在命令行显示诊断信息（如 `:echo` 输出）
+				message = true,
+				highlight = true, -- 是否启用诊断高亮组
+				line_numbers = true, -- 是否启用诊断行号高亮（在行号列显示诊断颜色）
 			})
 		end,
 	},

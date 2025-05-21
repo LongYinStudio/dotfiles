@@ -1,6 +1,6 @@
 return {
 	{
-		"iamcco/markdown-preview.nvim",
+		"iamcco/markdown-preview.nvim", -- 类似的 https://github.com/toppair/peek.nvim
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
 		build = "cd app && yarn install",
@@ -11,7 +11,7 @@ return {
 		-- 	end,
 	},
 	{
-		"MeanderingProgrammer/markdown.nvim",
+		"MeanderingProgrammer/markdown.nvim", -- 类似的https://github.com/OXY2DEV/markview.nvim
 		main = "render-markdown",
 		name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
 		-- dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
