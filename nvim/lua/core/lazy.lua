@@ -21,6 +21,7 @@ require("lazy").setup({
 		{ import = "plugins/tools" },
 		{ import = "plugins/git" },
 		{ import = "plugins/completion" },
+		{ import = "plugins/dap" },
 	},
 	-- colorscheme that will be used when installing plugins.
 	install = {

@@ -38,6 +38,7 @@ return {
 					{ "<leader>a", group = "Neogen", icon = { icon = " " } },
 					{ "<leader>b", group = "Buffer", icon = { icon = "󰓩 " } }, -- 
 					{ "<leader>c", group = "Code", icon = { icon = "󱃖 " } },
+					{ "<leader>d", group = "Debug", icon = { icon = " " } },
 					{ "<leader>f", group = "Find", icon = { icon = "󰈞 " } }, -- 
 					{ "<leader>g", group = "Git", icon = { icon = " " } }, --   
 					{ "<leader>i", group = "Icon", icon = { icon = "󰥷 " } },
@@ -57,7 +58,7 @@ return {
 					{ "z", group = "fold" },
 					-- better descriptions
 					-- { "gx", desc = "Open with system app" },
-					{ "K", desc = "Documentation", icon = "" },
+					{ "K", desc = "Documentation", icon = " " },
 					{ "<leader>cr", desc = "Rename", icon = { icon = "󰑕 ", color = "purple" } },
 					{ "<leader>L", "<cmd>Lazy<CR>", desc = "Lazy", icon = "󰒲 " },
 					{ "<leader>M", "<cmd>Mason<CR>", desc = "Mason", icon = " " },
