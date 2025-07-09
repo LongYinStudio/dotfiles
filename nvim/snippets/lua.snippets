@@ -1,0 +1,31 @@
+snippet return "新增插件"
+  return {
+    "${1}",
+  }
+
+snippet returnc "新增插件(config)"
+  return {
+    "${1}",
+    config = function()
+      ${2}
+    end,
+  }
+
+snippet returnd "新增插件(dependencies)"
+  return {
+    "${1}",
+    dependencies = {
+      "${2}"
+    },
+  }
+
+snippet returna "新增插件(conf,dep)"
+  return {
+    "${1}",
+    dependencies = {
+      "${2}"
+    },
+    config = function()
+      ${3}
+    end,
+  }

@@ -14,3 +14,13 @@ api.nvim_create_autocmd(
 		end,
 	}
 )
+-- 用o换行不要延续注释
+api.nvim_create_autocmd({ "BufEnter" }, {
+	pattern = "*",
+	callback = function()
+		-- O and o, don't continue comments
+		vim.opt.formatoptions:remove("o")
+		-- But do continue when pressing enter.
+		vim.opt.formatoptions:append("r")
+	end,
+})

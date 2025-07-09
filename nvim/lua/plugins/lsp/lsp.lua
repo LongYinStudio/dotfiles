@@ -1,14 +1,15 @@
 local languages = {
 	lua_ls = {
+		cmd = { "lua-language-server", "--locale=zh-cn" },
 		-- 已安装folke/lazydev.nvim，下面的配置不需要
 		-- settings = {
 		-- 	Lua = {
-		-- 		diagnostics = {
-		-- 			-- Get the language server to recognize the `vim` global
-		-- 			globals = {
-		-- 				"vim",
-		-- 			},
-		-- 		},
+		-- diagnostics = {
+		-- 	-- Get the language server to recognize the `vim` global
+		-- 	globals = {
+		-- 		"vim",
+		-- 	},
+		-- },
 		-- 	},
 		-- },
 	},
@@ -222,7 +223,7 @@ return {
 
 				require("lsp_signature").on_attach({}, bufnr)
 				nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
-				nmap("<F2>", vim.lsp.buf.rename, "Rename")
+				-- nmap("<F2>", vim.lsp.buf.rename, "Rename") -- 禁用，与dap冲突
 				nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 				nmap("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 				nmap("gd", vim.lsp.buf.definition, "Goto Definition")

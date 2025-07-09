@@ -29,3 +29,5 @@ Section "InputClass"
         Option "DisableWhileTyping" "on"
 EndSection
 ```
+
+9. kde 6.4 将wayland和x11分离了，默认wayland，x11需要单独装`plasma-x11-session`

@@ -24,21 +24,16 @@ return {
 		require("plugins.dap.lang-conf.codelldb") -- c/c++
 		require("plugins.dap.lang-conf.python") -- 使用的mason 安装的 debugpy , venv里安装的也行, 当然全局安装的也行
 
-		vim.api.nvim_create_user_command("DapInstallAll", function()
+		vim.api.nvim_create_user_command("InstallAllDap", function()
 			local packages = { "js-debug-adapter", "codelldb", "debugpy" }
 			vim.cmd("MasonInstall " .. table.concat(packages, " "))
 		end, {})
 
 		vfn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
-		vfn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
-		vfn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 󰍩
-		-- vnf.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
-		vfn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
-
-		-- vnf.sign_define("DapBreakpointCondition", { text = "🐛", texthl = "", linehl = "", numhl = "" })
-		-- vnf.sign_define("DapLogPoint", { text = "🇱", texthl = "", linehl = "", numhl = "" }) -- 󰍩
-		vfn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
-		-- vnf.sign_define("DapBreakpointRejected", { text = "⚠️", texthl = "", linehl = "", numhl = "" }) -- ✋
+		vfn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" }) --   🐛
+		vfn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 󰍩 🇱
+		vfn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" }) -- ⭐️
+		vfn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" }) -- ✋ ⚠️
 
 		---@param config {type?:string, args?:string[]|fun():string[]?}
 		local function get_args(config)

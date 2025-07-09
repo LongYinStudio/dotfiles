@@ -1,6 +1,7 @@
 return {
 	{
 		"navarasu/onedark.nvim",
+		-- enabled = false,
 		config = function()
 			vim.cmd([[colorscheme onedark]])
 		end,
@@ -10,6 +11,9 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		enabled = false,
+		config = function()
+			vim.cmd([[colorscheme catppuccin-macchiato]])
+		end,
 	},
 	{
 		"folke/tokyonight.nvim",
@@ -17,5 +21,8 @@ return {
 		priority = 1000,
 		opts = { style = "night" },
 		enabled = false,
+		config = function()
+			vim.cmd([[colorscheme tokyonight-moon]])
+		end,
 	},
 }

@@ -17,12 +17,7 @@ setopt HIST_IGNORE_DUPS   #如果连续输入的命令相同，历史纪录中�
 # export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 # export SUDO_PROMPT="Deploying root access for %u. Password pls: "
 # export BROWSER='firefox'
-# 编辑器
-if command -v nvim &>/dev/null; then
-	export EDITOR=nvim
-else
-	export EDITOR=vim
-fi
+command -v nvim >/dev/null 2>&1 && export EDITOR=nvim || export EDITOR=vim
 export ZSH="$HOME/.oh-my-zsh" # oh-my-zsh安装目录
 # export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 # umask 0077 #修改umask值
@@ -37,10 +32,11 @@ source "$ZSH"/oh-my-zsh.sh
 # alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
 [[ $(command -v trash) ]] && alias rm="trash"
 alias pacmanlist="LC_ALL=C pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h" # 列出已安软件及大小
-alias apti="sudo apt install"
-alias aptp="sudo apt purge"
-alias aptar="sudo apt autoremove"
-alias apts="apt search"
+alias \
+  apti="sudo apt install" \
+  aptp="sudo apt purge" \
+  aptar="sudo apt autoremove" \
+  apts="apt search"
 alias zshconfig="vim ~/.zshrc"
 alias ..="cd .." ...="cd ../.." ....="cd ../../.." .....="cd ../../../.."
 alias ~="cd ~"
@@ -61,16 +57,14 @@ fi
 [[ $(command -v bat) ]] && alias cat="bat"
 alias lg="lazygit"
 alias p="pnpm"
-alias v="nvim"
-alias vi="nvim"
+command -v nvim >/dev/null && alias v="nvim" vi="nvim" vdiff="nvim -d"
 alias lv="NVIM_APPNAME=LazyVim nvim"   # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
 alias nv="NVIM_APPNAME=NvChad nvim"    # git clone https://github.com/NvChad/starter ~/.config/NvChad
 alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
-alias vdiff="nvim -d"
 alias kcat="kitty +kitten icat" # 依赖于 ImageMagick
 alias wcat="wezterm imgcat"
-alias ipv4="curl -4 ip.sb"
-alias ipv6="curl -6 ip.sb"
+alias ipv4="curl -4 ip.sb" ipv6="curl -6 ip.sb"
+alias trans_en_zh='trans -j -d en:zh' trans_zh_en='trans -j -d zh:en'
 
 # path 环境变量 node 使用的fnm
 source "/etc/environment"

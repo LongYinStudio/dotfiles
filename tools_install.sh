@@ -2,16 +2,16 @@
 
 # package manager (yum dnf opkg pkg 很少用了，自行添加)
 get_package_manager() {
-	if command -v apt-get >/dev/null 2>&1; then
-		echo "sudo apt-get install -y"
-	elif command -v pacman >/dev/null 2>&1; then
-		echo "sudo pacman -S --needed --noconfirm"
-	elif command -v brew >/dev/null 2>&1; then
-		echo "brew install"
-	else
-		echo 'Can not use.'
-		exit 0
-	fi
+  if command -v apt-get >/dev/null 2>&1; then
+    echo "sudo apt-get install -y"
+  elif command -v pacman >/dev/null 2>&1; then
+    echo "sudo pacman -S --needed --noconfirm"
+  elif command -v brew >/dev/null 2>&1; then
+    echo "brew install"
+  else
+    echo 'Can not use.'
+    exit 0
+  fi
 }
 
 pacMan=$(get_package_manager)
@@ -23,23 +23,25 @@ $pacMan ipcalc bc # qalculate
 # 同步备份
 $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
-$pacMan btop htop cpufetch duf    # glances plasma-systemmonitor hardinfo2 sysmontask mission-center cpu-x
-$pacMan zsh ffmpeg tree tmux tldr # kdeconnect
+$pacMan btop htop cpufetch duf gdu # glances plasma-systemmonitor hardinfo2 sysmontask mission-center cpu-x
+$pacMan zsh ffmpeg tree tmux tldr  # kdeconnect
 $pacMan figlet net-tools ripgrep fzf jq bat exa curl git wget vim \
-	neofetch onefetch trash-cli imagemagick transmission-cli \
-	unzip unrar p7zip gping
-#       文件转换
-$pacMan pandoc
+  neofetch onefetch trash-cli imagemagick transmission-cli \
+  unzip unrar p7zip gping
+#       文件转换 翻译
+$pacMan pandoc translate-shell
+# 容器 podman-desktop pods
+# $pacMan docker podman lazydocker
 
 if command -v apt-get >/dev/null 2>&1; then
-	sudo apt-get install -y fd-find network-manager traceroute sqlite3 # kitty
-	# ubuntu 需要手动安装 neovim(包旧) lux
+  sudo apt-get install -y fd-find network-manager traceroute sqlite3 # kitty
+  # ubuntu 需要手动安装 neovim(包旧) lux
 elif command -v pacman >/dev/null 2>&1; then
-	sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl # ttf-nerd-fonts-symbols-mono kitty wezterm
+  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl # ttf-nerd-fonts-symbols-mono kitty wezterm
 elif command -v brew >/dev/null 2>&1; then
-	# mac 内置traceroute
-	brew install fd neovim sqlite lux
-	# brew install --cask kitty wezterm
+  # mac 内置traceroute
+  brew install fd neovim sqlite lux
+  # brew install --cask kitty wezterm
 fi
 
 [ -d "$HOME/.fzf" ] || (git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf && "$HOME"/.fzf/install)

@@ -36,7 +36,7 @@ return {
 					-- typst = { "typstfmt" },
 				},
 			})
-			vim.api.nvim_create_user_command("MasonInstallAll", function()
+			vim.api.nvim_create_user_command("InstallAllFormatter", function()
 				local packages = { "google-java-format" }
 				vim.cmd("MasonInstall " .. table.concat(packages, " "))
 			end, {})

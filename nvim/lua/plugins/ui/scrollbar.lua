@@ -1,5 +1,6 @@
 return {
 	"petertriho/nvim-scrollbar",
+	enabled = not vim.g.vscode,
 	event = "VeryLazy",
 	config = function()
 		local scrollbar = require("scrollbar")
