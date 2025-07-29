@@ -16,6 +16,8 @@ return {
 			svelte = { "eslint_d" },
 		}
 
+		lint.linters.codespell.args = { "--ignore-words ~/.config/codespell/ignore_words" }
+
 		vim.api.nvim_create_user_command("InstallAllLinter", function()
 			local packages = { "eslint_d" }
 			vim.cmd("MasonInstall " .. table.concat(packages, " "))

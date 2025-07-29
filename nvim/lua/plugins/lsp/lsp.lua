@@ -71,7 +71,7 @@ local languages = {
 		},
 		init_options = {
 			vue = {
-				hybridMode = true,
+				hybridMode = false,
 			},
 			-- typescript = {
 			-- 	tsdk = vim.fn.getcwd() .. "node_modules/typescript/lib",
@@ -184,6 +184,7 @@ return {
 		dependencies = {
 			{
 				"williamboman/mason.nvim",
+				-- "mason-org/mason.nvim",
 				cmd = "Mason",
 				opts = {
 					ui = {
@@ -199,6 +200,7 @@ return {
 				},
 			},
 			"williamboman/mason-lspconfig.nvim",
+			-- "mason-org/mason-lspconfig.nvim",
 			"folke/neodev.nvim",
 			"j-hui/fidget.nvim",
 		},

@@ -1,11 +1,15 @@
 return {
 	"axelvc/template-string.nvim",
-	event = "InsertEnter",
-	ft = {
-		"javascript",
-		"typescript",
-		"javascriptreact",
-		"typescriptreact",
+	opts = {
+		filetypes = {
+			"html",
+			"typescript",
+			"javascript",
+			"typescriptreact",
+			"javascriptreact",
+			"python",
+			"vue",
+		},
 	},
-	config = true, -- run require("template-string").setup()
+	event = "BufReadPre",
 }

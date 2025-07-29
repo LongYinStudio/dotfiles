@@ -87,3 +87,8 @@ end, { desc = "Toggle wrap" })
 keymap("n", "<leader>Tn", function()
 	require("utils.toggles").number()
 end, { desc = "Toggle number" })
+
+keymap("n", "<leader>uI", function()
+	vim.treesitter.inspect_tree()
+	vim.api.nvim_input("I")
+end, { desc = "Inspect Tree" })

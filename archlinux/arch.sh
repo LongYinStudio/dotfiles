@@ -81,7 +81,7 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android
 # sudo make install
 
 # 打印 cups和cups-browsed需要启动服务
-# $pacMan cups cups-pdf system-config-printer cups-filters # cups-browsed bluez-cups nss-mdns gutenprint
+# $pacMan cups cups-pdf system-config-printer cups-filters ghostscript gsfonts # cups-browsed bluez-cups nss-mdns gutenprint
 
 # 续航 (smartmontools针对有机械硬盘的, tp_smapi[-lts]是Thinkpad电池校准和充电阈值, acpi_call[-lts]和tp_smapi类似但不特指Thinkpad)
 # 推荐配置:用电池下节能模式以及频率，禁用LAN唤醒（默认就是禁用的，LAN唤醒会让电脑在关机状态下电量越来越少）

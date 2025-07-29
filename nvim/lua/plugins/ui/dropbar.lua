@@ -1,6 +1,7 @@
 return {
 	{
 		"Bekaboo/dropbar.nvim",
+		-- pin = true, -- 不出现在更新列表里
 		opts = {
 			general = {
 				---@type boolean|fun(buf: integer, win: integer): boolean

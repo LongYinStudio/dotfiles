@@ -1,23 +1,23 @@
 return {
 	"Wansmer/treesj",
-	enabled = false,
+	enable = false,
 	-- keys = {
 	-- 	{
-	-- 		"<leader>cJ",
+	-- 		"<leader>cJ", -- gJ
 	-- 		function()
 	-- 			require("treesj").join()
 	-- 		end,
 	-- 		desc = "Treesj Join",
 	-- 	},
 	-- 	{
-	-- 		"<leader>cS",
+	-- 		"<leader>cS", -- gS
 	-- 		function()
 	-- 			require("treesj").split()
 	-- 		end,
 	-- 		desc = "Treesj Split",
 	-- 	},
 	-- 	{
-	-- 		"<leader>cT",
+	-- 		"<leader>cT", -- gT
 	-- 		function()
 	-- 			require("treesj").toggle()
 	-- 		end,
@@ -25,18 +25,7 @@ return {
 	-- 	},
 	-- },
 	keys = {
-		{
-			"gJ",
-			function()
-				require("treesj").join()
-			end,
-		},
-		{
-			"gS",
-			function()
-				require("treesj").split()
-			end,
-		},
+		{ "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
 	},
 	opts = {
 		use_default_keymaps = false,

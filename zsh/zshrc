@@ -61,6 +61,7 @@ command -v nvim >/dev/null && alias v="nvim" vi="nvim" vdiff="nvim -d"
 alias lv="NVIM_APPNAME=LazyVim nvim"   # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
 alias nv="NVIM_APPNAME=NvChad nvim"    # git clone https://github.com/NvChad/starter ~/.config/NvChad
 alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
+export MANPAGER='nvim +Man!' # 使用neovim查看manpage
 alias kcat="kitty +kitten icat" # 依赖于 ImageMagick
 alias wcat="wezterm imgcat"
 alias ipv4="curl -4 ip.sb" ipv6="curl -6 ip.sb"

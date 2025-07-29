@@ -18,7 +18,7 @@ pacMan=$(get_package_manager)
 
 #       mysql, sqlite, mysql, redis, postgres
 $pacMan mycli # litecli mssql-cli iredis pgcli # rainfrog
-#       ip计算 计算器
+#       ip计算 计算器 https://github.com/alt-romes/programmer-calculator
 $pacMan ipcalc bc # qalculate
 # 同步备份
 $pacMan rsync rclone # rclone-browser
