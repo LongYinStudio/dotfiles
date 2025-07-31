@@ -8,7 +8,7 @@
 3. 重启firefox即可生效
 
 插件
-Github Code Font Changer  (JetBrainsMono Nerd Font)
+Github Code Font Changer (JetBrainsMono Nerd Font)
 
 好看的自定义界面
 https://github.com/Alan-Kuan/Firefox-Mod-Blur
@@ -38,3 +38,5 @@ Open the Browser Toolbox
 国际服务器:https://accounts.firefox.com
 国内:https://accounts.firefox.com.cn 现在使用
 修改后需要重新登录
+
+> 北京火狐将于 2025 年 9 月 29 日后，正式终止与 Mozilla 及 Firefox 浏览器相关的中国大陆运营。以上的没用了

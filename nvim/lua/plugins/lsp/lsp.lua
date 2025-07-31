@@ -19,8 +19,6 @@ local languages = {
 	},
 	cssls = {},
 	-- ts_ls = {
-	-- 	enabled = false,
-	-- },
 	tsserver = {
 		enabled = false,
 		init_options = {
@@ -66,6 +64,31 @@ local languages = {
 	},
 	vuels = {},
 	volar = {
+		on_init = function(client)
+			client.handlers["tsserver/request"] = function(_, result, context)
+				local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+				if #clients == 0 then
+					vim.notify("Could not find `vtsls` lsp client, required by `vue_ls`.", vim.log.levels.ERROR)
+					return
+				end
+				local ts_client = clients[1]
+
+				local param = unpack(result)
+				local id, command, payload = unpack(param)
+				ts_client:exec_cmd({
+					title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+					command = "typescript.tsserverRequest",
+					arguments = {
+						command,
+						payload,
+					},
+				}, { bufnr = context.bufnr }, function(_, r)
+					local response_data = { { id, r and r.body } }
+					---@diagnostic disable-next-line: param-type-mismatch
+					client:notify("tsserver/response", response_data)
+				end)
+			end
+		end,
 		filetypes = {
 			"vue", -- "typescript", "javascript", "javascriptreact", "typescriptreact",
 		},
@@ -78,91 +101,102 @@ local languages = {
 			--  tsdk = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib"),
 			-- },
 		},
-		settings = {
-			typescript = {
-				inlayHints = {
-					enumMemberValues = { enabled = true },
-					functionLikeReturnTypes = {
-						enabled = true,
-					},
-					propertyDeclarationTypes = {
-						enabled = true,
-					},
-					parameterTypes = {
-						enabled = true,
-						suppressWhenArgumentMatchesName = true,
-					},
-					variableTypes = { enabled = true },
-				},
-			},
-		},
+		-- settings = {
+		-- 	typescript = {
+		-- 		inlayHints = {
+		-- 			enumMemberValues = { enabled = true },
+		-- 			functionLikeReturnTypes = {
+		-- 				enabled = true,
+		-- 			},
+		-- 			propertyDeclarationTypes = {
+		-- 				enabled = true,
+		-- 			},
+		-- 			parameterTypes = {
+		-- 				enabled = true,
+		-- 				suppressWhenArgumentMatchesName = true,
+		-- 			},
+		-- 			variableTypes = { enabled = true },
+		-- 		},
+		-- 	},
+		-- },
 	},
-	vtsls = {
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-			"vue",
-		},
-		single_file_support = true,
-		settings = {
-			complete_function_calls = true,
-			vtsls = {
-				autoUseWorkspaceTsdk = true,
-				enableMoveToFileCodeAction = true,
-				experimental = {
-					maxInlayHintLength = 30,
-					completion = {
-						enableServerSideFuzzyMatch = true,
+	vtsls = (function()
+		return {
+			single_file_support = true,
+			settings = {
+				complete_function_calls = true,
+				vtsls = {
+					autoUseWorkspaceTsdk = true,
+					enableMoveToFileCodeAction = true,
+					experimental = {
+						maxInlayHintLength = 30,
+						completion = {
+							enableServerSideFuzzyMatch = true,
+						},
 					},
-				},
-				tsserver = {
-					globalPlugins = {
-						{
-							name = "@vue/typescript-plugin",
-							location = vim.fn.stdpath("data")
-								.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
-							languages = { "vue" },
-							configNamespace = "typescript",
-							enableForWorkspaceTypeScriptVersions = true,
+					tsserver = {
+						globalPlugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = vim.fn.stdpath("data")
+									.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+								languages = { "vue" },
+								configNamespace = "typescript",
+								enableForWorkspaceTypeScriptVersions = true,
+							},
 						},
 					},
 				},
+				typescript = {
+					tsserver = {
+						-- 一些大型 TS 项目需要分配较多内存以避免 ts_ls 崩溃。若非开发这些项目中，应将这里注释。
+						maxTsServerMemory = 8192,
+					},
+					updateImportsOnFileMove = { enabled = "always" },
+					-- tsdk = "./node_modules/typescript/lib",
+					suggest = {
+						completeFunctionCalls = true,
+					},
+					inlayHints = {
+						enumMemberValues = { enabled = true },
+						functionLikeReturnTypes = { enabled = true },
+						parameterNames = { enabled = "literals" },
+						parameterTypes = { enabled = true },
+						propertyDeclarationTypes = { enabled = true },
+						variableTypes = { enabled = true },
+					},
+					locale = "zh-CN",
+				},
+				javascript = {
+					updateImportsOnFileMove = { enabled = "always" },
+					suggest = {
+						completeFunctionCalls = true,
+					},
+					inlayHints = {
+						enumMemberValues = { enabled = true },
+						functionLikeReturnTypes = { enabled = true },
+						parameterNames = { enabled = "literals" },
+						parameterTypes = { enabled = true },
+						propertyDeclarationTypes = { enabled = true },
+						variableTypes = { enabled = true },
+					},
+					locale = "zh-CN",
+				},
 			},
-			javascript = {
-				updateImportsOnFileMove = { enabled = "always" },
-				suggest = {
-					completeFunctionCalls = true,
-				},
-				inlayHints = {
-					enumMemberValues = { enabled = true },
-					functionLikeReturnTypes = { enabled = true },
-					parameterNames = { enabled = "literals" },
-					parameterTypes = { enabled = true },
-					propertyDeclarationTypes = { enabled = true },
-					variableTypes = { enabled = true },
-				},
+			-- `vtsls` 和也提供 TypeScript LSP，所以不要和 `ts_ls` 或 `typescript-tools` 重复使用。
+			-- 这里仅让 `vtsls` 作用于 Vue 文件。
+			-- filetypes = { "vue" },
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"javascript.jsx",
+				"typescript",
+				"typescriptreact",
+				"typescript.tsx",
+				"vue",
 			},
-			typescript = {
-				updateImportsOnFileMove = { enabled = "always" },
-				-- tsdk = "./node_modules/typescript/lib",
-				suggest = {
-					completeFunctionCalls = true,
-				},
-				inlayHints = {
-					enumMemberValues = { enabled = true },
-					functionLikeReturnTypes = { enabled = true },
-					parameterNames = { enabled = "literals" },
-					parameterTypes = { enabled = true },
-					propertyDeclarationTypes = { enabled = true },
-					variableTypes = { enabled = true },
-				},
-			},
-		},
-	},
+		}
+	end)(),
 	clangd = {},
 	jsonls = {},
 	tailwindcss = {},
