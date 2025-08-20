@@ -37,10 +37,10 @@ if command -v apt-get >/dev/null 2>&1; then
   sudo apt-get install -y fd-find network-manager traceroute sqlite3 # kitty
   # ubuntu 需要手动安装 neovim(包旧) lux
 elif command -v pacman >/dev/null 2>&1; then
-  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl # ttf-nerd-fonts-symbols-mono kitty wezterm
+  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils # ttf-nerd-fonts-symbols-mono kitty wezterm
 elif command -v brew >/dev/null 2>&1; then
   # mac 内置traceroute
-  brew install fd neovim sqlite lux
+  brew install fd neovim sqlite lux inetutils
   # brew install --cask kitty wezterm
 fi
 

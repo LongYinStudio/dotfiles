@@ -67,7 +67,7 @@ return {
 		{
 			"<leader>n",
 			function()
-				Snacks.scratch({ icon = " ", name = "Todo", ft = "markdown", file = "~/TODO.md" })
+				Snacks.scratch({ icon = " ", name = "Todo", ft = "markdown", file = "~/Code/TODO.md" })
 			end,
 			desc = "Todo List",
 		},
@@ -77,6 +77,20 @@ return {
 				Snacks.picker.projects()
 			end,
 			desc = "Projects",
+		},
+		{
+			"<C-S-f>",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Grep",
+		},
+		{
+			"<C-f>",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "Snacks picker",
 		},
 	},
 	init = function()

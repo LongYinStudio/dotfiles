@@ -9,14 +9,18 @@ sudo pacman -S package_name # 安装软件包
 pacman -Ss # 在同步数据库中搜索包，包括包的名称和描述
 pacman -Si # 显示包信息
 pacman -Sl # 列出说有 基本用不到
+pacman -Sw # 用来下载某个软件包，但不安装
 sudo pacman -Qs package_name # 查找已安装
 sudo pacman -Syu # 升级系统。 -y:标记刷新、-yy：标记强制刷新、-u：标记升级动作（一般使用 -Syu 即可）
+sudo pacman -Syu --ignore=vlc # --ignore指定系统更新时，忽略某个软件包。
 sudo pacman -R package_name # 删除软件包，保留其全部已经安装的依赖关系
 sudo pacman -Rs package_name # 删除，删除没用依赖
 sudo pacman -Rns package_name # 删除软件包，及其所有没有被其他已安装软件包使用的依赖包
 pacman -Qi package_name # 检查已安装包的相关信息。-Q：查询本地软件包数据库
+pacman -Ql package_name # 用来查看某个软件包安装的所有文件
 pacman -Qm package_name # 检查手动安装的包（大多是aur的）
 pacman -Qu package_name # 检查可升级的
+pacman -Qo /usr/bin/vlc # 用来查看某个可执行文件属于哪个软件包
 pacman -Qdt # 找出孤立包。-d：标记依赖包、-t：标记不需要的包、-dt：合并标记孤立包
 sudo pacman -Rns $(pacman -Qtdq) # 删除孤立包
 sudo pacman -Fy # 更新命令查询文件列表数据库
@@ -28,15 +32,20 @@ paccache -r # 删除已安装和未安装包的所有缓存版本，但最近 3 
 sudo paccache -rk 1 # 只保留最新的一个版本
 sudo paccache -ruk 0 # 删除已卸载的所有缓存版本 等效于 pacman -Sc
 ```
+
 > archlinuxcn源
+
 1. 在`/etc/pacman.conf`尾部添加archlinuxcn源
+
 ```bash
 [archlinuxcn]
 # SigLevel = Optional TrustAll # 可选
 Server = http://mirrors.ustc.edu.cn/archlinux/$arch
 Server = http://mirrors.163.com/archlinux-cn/$arch
 ```
+
 2. 导入 GPG key, 并安装pacman-contrib和yay/paru
+
 ```bash
 sudo pacman-key --lsign-key "farseerfc@archlinux.org"
 sudo pacman -Syy --noconfirm
@@ -45,7 +54,9 @@ sudo pacman -S --needed --noconfirm pacman-contrib
 sudo pacman -S --needed --noconfirm archlinuxcn-keyring archlinux-keyring
 sudo pacman -S --needed --noconfirm yay paru
 ```
+
 > 配置pacman
+
 ```bash
 sudo sed -i.bak 's/^#Color/Color/' /etc/pacman.conf
 sudo sed -i.bak "s/^#ParallelDownloads .*/ParallelDownloads = 40/" /etc/pacman.conf
@@ -65,6 +76,7 @@ yay -Ps # 打印系统统计信息
 yay -Yc # 清理不需要的依赖
 rm -rf ~/.cache/yay # 清理 yay 缓存
 ```
+
 > 另外，不用官网的编译安装，archlinuxcn里就有yay
 
 ## downgrade

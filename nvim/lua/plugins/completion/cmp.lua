@@ -29,6 +29,7 @@ local M = {
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			event = "InsertEnter",
 		},
+		"lukas-reineke/cmp-rg",
 	},
 	event = "InsertEnter",
 }
@@ -39,6 +40,7 @@ function M.config()
 
 	require("luasnip.loaders.from_vscode").lazy_load()
 	require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snippets" } }) -- 自定义代码片段
+	require("luasnip.loaders.from_lua").lazy_load({ paths = { "./snippets" } }) -- https://zjp-cn.github.io/neovim0.6-blogs/nvim/luasnip/doc1.html
 
 	local check_backspace = function()
 		local col = vim.fn.col(".") - 1
@@ -118,6 +120,7 @@ function M.config()
 			{ name = "path" },
 			{ name = "buffer" },
 			{ name = "nvim_lsp_signature_help" },
+			{ name = "rg" },
 		}),
 		experimental = {
 			ghost_text = true, -- 提示显示第一项全部，灰色显示后半部分

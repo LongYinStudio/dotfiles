@@ -36,9 +36,9 @@ $pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava haruna # cell
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
 # (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速
-# (写盘, 远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
+# (写盘, 2远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
 $pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy filelight scrcpy # kdiskmark
-# $aurPkg balena-etcher todesk-bin baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
+# $aurPkg balena-etcher todesk-bin sunloginclient baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
 
 # 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端 (目前用utools)
 # $pacMan pot-translation tesseract-data-chi_sim tesseract-data-eng gimagereader-qt # translate-shell

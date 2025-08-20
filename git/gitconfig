@@ -3,6 +3,7 @@
 	name = LongYinStudio
 [core]
   editor = nvim
+	ignorecase = false
 # 执行tools_install.sh用cargo安装，默认不启用
 #  pager = delta
 

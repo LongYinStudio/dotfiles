@@ -64,6 +64,9 @@ local languages = {
 	},
 	vuels = {},
 	volar = {
+		before_init = function(params)
+			params.locale = "zh-cn" -- hover 显示中文
+		end,
 		on_init = function(client)
 			client.handlers["tsserver/request"] = function(_, result, context)
 				local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
@@ -328,21 +331,44 @@ return {
 					end, { desc = "Format current buffer with LSP" })
 					nmap("<leader>cf", "<cmd>LspFormat<cr>")
 				end
+
+				if client.name == "vtsls" then
+					local lsp_utils = require("utils.lsp")
+					nmap("gD", function()
+						local params = vim.lsp.util.make_position_params()
+						lsp_utils.execute({
+							command = "typescript.goToSourceDefinition",
+							arguments = { params.textDocument.uri, params.position },
+							open = true,
+						})
+					end, "Goto Source Definition")
+					nmap("gR", function()
+						lsp_utils.execute({
+							command = "typescript.findAllFileReferences",
+							arguments = { vim.uri_from_bufnr(0) },
+							open = true,
+						})
+					end, "File References")
+					nmap("<leader>co", lsp_utils.action["source.organizeImports"], "Organize Imports")
+					nmap("<leader>cM", lsp_utils.action["source.addMissingImports.ts"], "Add missing imports")
+					nmap("<leader>cu", lsp_utils.action["source.removeUnused.ts"], "Remove unused imports")
+					nmap("<leader>cD", lsp_utils.action["source.fixAll.ts"], "Fix all diagnostics")
+					nmap("<leader>cV", function()
+						lsp_utils.execute({ command = "typescript.selectTypeScriptVersion" })
+					end, "Select TS workspace version")
+				end
 			end
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					local server = languages[server_name] or {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {}, {
-						textDocument = {
-							foldingRange = {
-								dynamicRegistration = false,
-								lineFoldingOnly = true,
-							},
-						},
-					})
+					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 					server.on_attach = on_attach
 					require("lspconfig")[server_name].setup(server)
 				end,
