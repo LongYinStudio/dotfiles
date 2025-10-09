@@ -7,6 +7,9 @@
 # 执行tools_install.sh用cargo安装，默认不启用
 #  pager = delta
 
+[commit]
+	template = ~/.gitmessage
+
 # delta 配置
 [delta]
   side-by-side = true

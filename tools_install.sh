@@ -25,7 +25,7 @@ $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
 $pacMan btop htop cpufetch duf gdu # glances plasma-systemmonitor hardinfo2 sysmontask mission-center cpu-x
 $pacMan zsh ffmpeg tree tmux tldr  # kdeconnect
-$pacMan figlet net-tools ripgrep fzf jq bat exa curl git wget vim \
+$pacMan figlet net-tools ripgrep jq bat curl git wget vim \
   neofetch onefetch trash-cli imagemagick transmission-cli \
   unzip unrar p7zip gping
 #       文件转换 翻译
@@ -44,7 +44,7 @@ elif command -v brew >/dev/null 2>&1; then
   # brew install --cask kitty wezterm
 fi
 
-[ -d "$HOME/.fzf" ] || (git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf && "$HOME"/.fzf/install)
+[ -d "$HOME/.fzf" ] || (git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf && "$HOME"/.fzf/install) # apt 安装的比较旧
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 [ -x "$(command -v cargo)" ] || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

@@ -41,17 +41,23 @@ return {
 	}),
 	postfix(".var", {
 		t("var "),
-		i(1, { "Variable" }),
+		r(1, { "Variable" }),
+		t(":"),
+		i(2, { "Type" }),
 		l(" = " .. l.POSTFIX_MATCH .. ";"),
 	}),
 	postfix(".const", {
 		t("const "),
-		i(1, { "Variable" }),
+		r(1, { "Variable" }),
+		t(":"),
+		i(2, { "Type" }),
 		l(" = " .. l.POSTFIX_MATCH .. ";"),
 	}),
 	postfix(".let", {
 		t("let "),
-		i(1, { "Variable" }),
+		r(1, { "Variable" }),
+		t(":"),
+		i(2, { "Type" }),
 		l(" = " .. l.POSTFIX_MATCH .. ";"),
 	}),
 }

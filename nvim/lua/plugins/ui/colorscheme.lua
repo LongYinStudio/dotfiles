@@ -1,7 +1,7 @@
 return {
 	{
 		"navarasu/onedark.nvim",
-		-- enabled = false,
+		enabled = false,
 		config = function()
 			vim.cmd([[colorscheme onedark]])
 		end,
@@ -10,19 +10,31 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
-		enabled = false,
+		-- enabled = false,
 		config = function()
-			vim.cmd([[colorscheme catppuccin-macchiato]])
+			require("catppuccin").setup({
+				flavour = "macchiato", -- latte, frappe, macchiato, mocha
+				background = { -- :h background
+					light = "latte",
+					dark = "mocha",
+				},
+				transparent_background = false, -- disables setting the background color.
+				float = {
+					transparent = false, -- enable transparent floating windows
+					solid = false, -- use solid styling for floating windows, see |winborder|
+				},
+			})
+			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = { style = "night" },
+		-- opts = { style = "night" },
 		enabled = false,
 		config = function()
-			vim.cmd([[colorscheme tokyonight-moon]])
+			vim.cmd([[colorscheme tokyonight-moon]]) -- day | night | moon | storm
 		end,
 	},
 }

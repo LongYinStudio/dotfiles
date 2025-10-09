@@ -1,4 +1,5 @@
 -- 语法高亮
+-- NOTE: 某个出现问题时，修改nvim ~/.local/share/nvim/lazy/nvim-treesitter/lockfile.json里的commit hash到最新，然后执行:TSUpdate! 加对应名称 进行强制重装
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",

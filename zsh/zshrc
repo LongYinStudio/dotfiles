@@ -31,7 +31,7 @@ source "$ZSH"/oh-my-zsh.sh
 
 # alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
 [[ $(command -v trash) ]] && alias rm="trash"
-alias pacmanlist="LC_ALL=C pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h" # 列出已安软件及大小
+pacmanlist() { LC_ALL=C pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h  } # 列出已安软件及大小
 alias \
   apti="sudo apt install" \
   aptp="sudo apt purge" \
@@ -50,9 +50,9 @@ elif [[ "$(uname)" == "Darwin" ]]; then
     alias xvim="arch -x86_64 nvim"
 fi
 if command -v eza &>/dev/null; then # 使用eza替代exa，因为eza基于rust且更新频繁
-	alias ls="eza --icons"
-	alias ll="eza -lah --icons"
-	alias lt="eza --tree --long --icons -I 'node_modules|.git'"
+	alias ls="eza --icons --color=always"
+	alias ll="eza -lah --icons --color=always"
+	alias lt="eza --tree --long --icons --color=always -I 'node_modules|.git'"
 fi
 [[ $(command -v bat) ]] && alias cat="bat"
 alias lg="lazygit"
@@ -185,6 +185,8 @@ zstyle ':completion:*' file-patterns \
 # 缓存耗时补全（如大型项目文件列表）
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path ~/.zsh/cache
+# 解决trash-cli按tab补全一次后就开始补全参数了
+compdef _gnu_generic trash
 
 # homebrew
 if command -v brew &>/dev/null; then
