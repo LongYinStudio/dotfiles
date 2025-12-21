@@ -1,5 +1,6 @@
 return {
 	"nvim-pack/nvim-spectre",
+	enabled = false, -- 由grug-far替换
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},

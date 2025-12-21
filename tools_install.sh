@@ -23,7 +23,7 @@ $pacMan ipcalc bc # qalculate
 # 同步备份
 $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
-$pacMan btop htop cpufetch duf gdu # glances plasma-systemmonitor hardinfo2 sysmontask mission-center cpu-x
+$pacMan btop htop cpufetch duf gdu # glances plasma-systemmonitor hardinfo2 sysmontask mission-center resources cpu-x
 $pacMan zsh ffmpeg tree tmux tldr  # kdeconnect
 $pacMan figlet net-tools ripgrep jq bat curl git wget vim \
   neofetch onefetch trash-cli imagemagick transmission-cli \
@@ -34,13 +34,13 @@ $pacMan pandoc translate-shell
 # $pacMan docker podman lazydocker
 
 if command -v apt-get >/dev/null 2>&1; then
-  sudo apt-get install -y fd-find network-manager traceroute sqlite3 # kitty
+  sudo apt-get install -y fd-find network-manager traceroute sqlite3 dnsutils # kitty xdg-utils
   # ubuntu 需要手动安装 neovim(包旧) lux
 elif command -v pacman >/dev/null 2>&1; then
-  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils # ttf-nerd-fonts-symbols-mono kitty wezterm
+  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils dnsutils # ttf-nerd-fonts-symbols-mono kitty wezterm xdg-utils
 elif command -v brew >/dev/null 2>&1; then
   # mac 内置traceroute
-  brew install fd neovim sqlite lux inetutils
+  brew install fd neovim sqlite lux inetutils coreutils # coreutils includes realpath, ln, etc
   # brew install --cask kitty wezterm
 fi
 

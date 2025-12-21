@@ -21,7 +21,7 @@ $pacMan adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts \
 fc-cache -fv
 
 # 终端
-$pacMan kitty wezterm alacritty
+$pacMan kitty ghostty wezterm # alacritty
 
 # 输入法 fcitx5-im(fcitx5、fcitx5-configtool、fcitx5-gtk、fcitx5-qt)
 $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-pinyin-moegirl fcitx5-table-extra fcitx5-table-other
@@ -53,11 +53,11 @@ $pacMan i3-wm i3status polybar lxappearance polkit polkit-qt5 polkit-gnome \
 # hyprland 最好i3和hypr一起安装，有些重复的依赖就没多写一便 paper-icon-theme-git已归档换成papirus-icon-theme(dunst需要) wlr-randr,xrandr-wlr-randr,xprop-wdisplays是显示器配置
 $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hyprland pipewire wireplumber \
   xdg-desktop-portal swayosd brightnessctl hypridle wlsunset hyprpaper hyprshot cliphist safeeyes \
-  wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh
+  wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh dms-shell-git
 
-# dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量
-$aurPkg visual-studio-code-bin navicat-premium-lite-cs jetbrains-toolbox android-tools \
-  reqable-bin xmind typora zeal-git # rofi-zeal-git tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap
+# dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量。wechat-devtools可以使用appimage。waydroid-image 用aur或archlinuxcn
+$aurPkg visual-studio-code-bin navicat-premium-lite-zh-cn jetbrains-toolbox android-tools typora \
+  xmind reqable-bin zeal-git # rofi-zeal-git apifox tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service

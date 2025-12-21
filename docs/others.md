@@ -31,3 +31,17 @@ EndSection
 ```
 
 9. kde 6.4 将wayland和x11分离了，默认wayland，x11需要单独装`plasma-x11-session`
+
+10. 有 `copilot` 键的，使用`keyd`将其映射为截图键，配置文件:`/etc/keyd/default.conf`:
+
+```ini
+[ids]
+*
+
+[main]
+leftmeta+leftshift+f23 = sysrq
+```
+
+> 需启动服务: `sudo systemctl enable --now keyd`
+
+11. `steam` 无法输入中文时，尝试修改`steam.desktop`: `Exec=env GTK_IM_MODULE=xim /usr/bin/steam %U`

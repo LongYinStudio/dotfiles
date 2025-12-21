@@ -1,13 +1,4 @@
-# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may require console input (password prompts, [y/n]
-# # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-# # 主题(random随机主题(echo $RANDOM_THEME查看随机主题名称)) # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# # 范围随机主题 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# ZSH_THEME="powerlevel10k/powerlevel10k" # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+# 移除 p10k 由starship代替
 ZSH_DISABLE_COMPFIX="true" # 有的版本有引号， 有的版本无引号，自己尝试
 export TERM='xterm-256color'
 export HISTSIZE=10000     #历史纪录条目数量
@@ -73,42 +64,23 @@ source "$HOME/.cargo/env"
 bin="$HOME/bin"
 go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
-export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_421
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export JRE_HOME=$JAVA_HOME/jre
+# export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_421
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar # jdk 11+ 不需要
+export JRE_HOME=$JAVA_HOME/jre # jdk 11+ 不需要
 
 export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-# # place this after nvm initialization!
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-# 	local node_version="$(nvm version)"
-# 	local nvmrc_path="$(nvm_find_nvmrc)"
-# 	if [ -n "$nvmrc_path" ]; then
-# 		local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-# 		if [ "$nvmrc_node_version" = "N/A" ]; then
-# 			nvm install
-# 		elif [ "$nvmrc_node_version" != "$node_version" ]; then
-# 			nvm use
-# 		fi
-# 	elif [ "$node_version" != "$(nvm version default)" ]; then
-# 		echo "Reverting to nvm default version"
-# 		nvm use default
-# 	fi
-# }
-# add-zsh-hook chpwd load-nvmrc
-# load-nvmrc
-# 换用fnm
+# 换用fnm 已移除nvm配置
 # curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.fnm" --skip-shell
-export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
+export FNM_NODE_DIST_MIRROR=https://mirrors.ustc.edu.cn/node # 中科大源 清华源:https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
 export PATH="$HOME/.fnm:$PATH"
-eval "$(fnm env --use-on-cd)"
-#rustup
+[[ $(command -v fnm) ]] && eval "$(fnm env --use-on-cd)"
+# rustup
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+# go
+export GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 
 # 开启代理函数
 PROXY_HTTP="http://127.0.0.1:7890"
@@ -170,9 +142,9 @@ zstyle ':completion:*:git-checkout:*' fzf-preview 'git log --oneline --graph --c
 zstyle ':fzf-tab:complete:git-(diff|restore):*' fzf-preview 'git diff $word | delta'
 zstyle ':completion:*:ssh:*' fzf-preview 'grep -i "^Host ${word}" ~/.ssh/config | sed "s/Host //"; host ${word}'
 zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
-# format='bat --color=always -plyaml <(%s -Qi $word 2>/dev/null || %s -Si $word)'
-# zstyle ':fzf-tab:complete:pacman:*' fzf-preview $(printf "$format" 'pacman' 'pacman')
-# zstyle ':fzf-tab:complete:yay:*' fzf-preview $(printf "$format" 'yay' 'yay')
+format='bat --color=always -plyaml <(%s -Qi $word 2>/dev/null || %s -Si $word)'
+zstyle ':fzf-tab:complete:pacman:*' fzf-preview $(printf "$format" 'pacman' 'pacman')
+zstyle ':fzf-tab:complete:yay:*' fzf-preview $(printf "$format" 'yay' 'yay')
 # zstyle ':fzf-tab:complete:paru:*' fzf-preview $(printf "$format" 'paru' 'paru')
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'

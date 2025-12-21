@@ -80,6 +80,10 @@ export http_proxy=http://127.0.0.1:7890
 export all_proxy=socks5://127.0.0.1:7890
 ```
 
-1. 可以搭配面板控制
+7. 可以搭配面板控制
 
    [haishanh/yacd: Yet Another Clash Dashboard (github.com)](https://github.com/haishanh/yacd)
+
+其他:
+dae也不错
+服务器推荐:[SaladDay/clash-for-lab](https://github.com/SaladDay/clash-for-lab)

@@ -9,6 +9,7 @@ return {
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				-- 为`Snacks`全局变量加载类型声明
 				{ path = "snacks.nvim", words = { "Snacks" } },
+				"lazy.nvim",
 			},
 		},
 	},
