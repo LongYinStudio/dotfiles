@@ -1,0 +1,43 @@
+#!/bin/bash
+# Author: LongYinStudio <1606776851@qq.com> (https://github.com/LongYinStudio)
+# Date: 2025-12-25 21:46:54
+
+# Desc: 进制转换工具脚本
+
+usage() {
+  echo "用法: $0 <选项> <数值>"
+  echo "选项:"
+  echo "  -db  十进制转二进制"
+  echo "  -dh  十进制转十六进制"
+  echo "  -bd  二进制转十进制"
+  echo "  -hd  十六进制转十进制"
+  echo "  -bh  二进制转十六进制"
+  exit 1
+}
+
+if [ $# -ne 2 ]; then
+  usage
+fi
+
+echo "\n"
+
+case $1 in
+-db)
+  echo "obase=2; $2" | bc
+  ;;
+-dh)
+  echo "obase=16; $2" | bc | tr 'a-z' 'A-Z'
+  ;;
+-bd)
+  echo "ibase=2; $2" | bc
+  ;;
+-hd)
+  echo "ibase=16; $2" | bc
+  ;;
+-bh)
+  echo "obase=16; ibase=2; $2" | bc | tr 'a-z' 'A-Z'
+  ;;
+*)
+  usage
+  ;;
+esac

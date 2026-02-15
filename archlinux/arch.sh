@@ -35,9 +35,9 @@ xdg-settings set default-web-browser microsoft-edge-stable.desktop
 $pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava haruna # celluloid krita blender # blender不仅可3D,还可编辑图片/视频
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
-# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速
+# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速, 投屏到电视
 # (写盘, 2远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
-$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy-bin filelight scrcpy # kdiskmark
+$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy-bin filelight scrcpy # kdiskmark gnome-network-displays
 # $aurPkg balena-etcher todesk-bin sunloginclient baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
 
 # 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端 (目前用utools)
@@ -56,8 +56,8 @@ $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hypr
   wl-clipboard qt5-wayland qt6-wayland playerctl jq flameshot-git paper-icon-theme-git hyprprop-git wlr-randr # xrandr-wlr-randr,xprop-wdisplays gnome-calendar pipes.sh dms-shell-git
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量。wechat-devtools可以使用appimage。waydroid-image 用aur或archlinuxcn
-$aurPkg visual-studio-code-bin navicat-premium-lite-zh-cn jetbrains-toolbox android-tools typora \
-  xmind reqable-bin zeal-git # rofi-zeal-git apifox tabby wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
+$aurPkg visual-studio-code-bin navicat-premium-lite-zh-cn jetbrains-toolbox android-tools typora maven \
+  xmind reqable-bin zeal-git # rofi-zeal-git apifox tabby-bin wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service
@@ -122,3 +122,5 @@ $pacMan man-db man-pages man-pages-zh_cn
 # $aurPkg debtap
 # sudo sed -i "s|http://ftp.debian.org/debian/dists|https://mirrors.ustc.edu.cn/debian/dists|g" /usr/bin/debtap
 # sudo sed -i "s|http://archive.ubuntu.com/ubuntu/dists|https://mirrors.ustc.edu.cn/ubuntu/dists|g" /usr/bin/debtap
+
+# $aurPkg input-remapper-bin logiops # 鼠标改映射 罗技linux三方驱动
