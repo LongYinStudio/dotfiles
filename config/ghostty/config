@@ -29,9 +29,10 @@ gtk-single-instance = true
 gtk-tabs-location = top
 gtk-wide-tabs = false
 gtk-toolbar-style = flat
-window-padding-y = 1,0
+window-padding-y = 0,0
 window-padding-balance = true
-window-decoration = false
+# window-decoration = false
+# ....
 
 # ╔══════════════════════════════════════════════════════════╗
 # ║                        Keybindins                        ║
@@ -60,6 +61,10 @@ keybind = super+shift+f=toggle_fullscreen
 keybind = super+shift+m=toggle_maximize
 keybind = ctrl+shift+p=toggle_command_palette
 keybind = ctrl+shift+i=inspector:toggle
+keybind = ctrl+shift+plus=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+shift+0=reset_font_size
+keybind = ctrl+0=reset_font_size
 
 # ╔══════════════════════════════════════════════════════════╗
 # ║                          others                          ║
@@ -74,3 +79,4 @@ clipboard-read = ask
 clipboard-write = ask
 app-notifications = no-clipboard-copy
 mouse-hide-while-typing = true
+term = xterm-256color

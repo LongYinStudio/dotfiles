@@ -1,5 +1,6 @@
 return {
 	"rest-nvim/rest.nvim", -- 类似的 https://github.com/mistweaverco/kulala.nvim
+	enabled = false,
 	ft = "http", -- 写多个请求时中间需要用 ### 注释隔开
 	event = { "VeryLazy" },
 	keys = {

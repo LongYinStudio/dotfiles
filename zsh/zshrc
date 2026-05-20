@@ -65,7 +65,7 @@ bin="$HOME/bin"
 go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
 # export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_421
-export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar # jdk 11+ 不需要
 export JRE_HOME=$JAVA_HOME/jre # jdk 11+ 不需要
 
@@ -88,6 +88,8 @@ function openvpn() {
 	export http_proxy="${PROXY_HTTP}"
 	export https_proxy="${PROXY_HTTP}"
 	export all_proxy=socks5://127.0.0.1:7890
+  export no_proxy="localhost,127.0.0.1,::1,0.0.0.0,*.local,*.lan,192.168.0.0/16,10.0.0.0/8"
+	export NO_PROXY="$no_proxy"
 	git config --global http.proxy "${PROXY_HTTP}"
 	git config --global https.proxy "${PROXY_HTTP}"
 	echo "代理已开"
@@ -98,6 +100,8 @@ function closevpn() {
 	unset https_proxy
 	unset http_proxy
 	unset all_proxy
+  unset no_proxy
+	unset NO_PROXY
 	git config --global --unset http.proxy
 	git config --global --unset https.proxy
 	echo "代理已关"

@@ -31,8 +31,8 @@ $aurPkg fcitx5-pinyin-custom-pinyin-dictionary # catppuccin-fcitx5-git fcitx5-me
 $aurPkg microsoft-edge-stable-bin google-chrome firefox # zen-browser-bin zen-browser-i18n-zh-cn
 xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
-# 图片、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur), haruna是kde旗下的一个播放器
-$pacMan gwenview imagemagick gimp mpv vlc obs-studio kdenlive cava haruna # celluloid krita blender # blender不仅可3D,还可编辑图片/视频
+# 图片 inkscape 代替 Adobe Illustrator(krita也可以)、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur), haruna是kde旗下的一个播放器
+$pacMan gwenview imagemagick gimp inkscape mpv vlc obs-studio kdenlive cava haruna # celluloid krita blender # blender不仅可3D,还可编辑图片/视频
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
 
 # (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速, 投屏到电视
@@ -57,7 +57,7 @@ $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hypr
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量。wechat-devtools可以使用appimage。waydroid-image 用aur或archlinuxcn
 $aurPkg visual-studio-code-bin navicat-premium-lite-zh-cn jetbrains-toolbox android-tools typora maven \
-  xmind reqable-bin zeal-git # rofi-zeal-git apifox tabby-bin wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
+  xmind reqable-bin zeal-git # rofi-zeal-git apifox-appimage tabby-bin wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service
@@ -66,7 +66,7 @@ $aurPkg visual-studio-code-bin navicat-premium-lite-zh-cn jetbrains-toolbox andr
 # set password for root@localhost = password('新密码'); # exit;
 
 # 社交等等 (wechat bwrap需要在~/.config/wechat-universal/binds.list里添加目录才可以传文件，包括拖拽)
-# $aurPkg linuxqq wechat-universal-bwrap wemeet-bin # wemeet-bwrap wemeet-wayland-screenshare-git feishu-bin
+# $aurPkg linuxqq wechat-universal-bwrap wemeet-bin # wemeet-bwrap feishu-bin
 
 # wps
 # $aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 wps-office-fonts ttf-ms-win11-auto-zh_cn freetype2-wps # wps-office
