@@ -151,17 +151,17 @@ return {
 		end
 
 		dap.listeners.before.event_terminated["dapui_config"] = function()
-			api.nvim_command("DapVirtualTextEnable")
+			api.nvim_command("DapVirtualTextDisable")
 			pbp.store_breakpoints()
 			_G.dapui_for_K = false
 		end
 		dap.listeners.before.event_exited["dapui_config"] = function()
-			api.nvim_command("DapVirtualTextEnable")
+			api.nvim_command("DapVirtualTextDisable")
 			pbp.store_breakpoints()
 			_G.dapui_for_K = false
 		end
 		dap.listeners.before.disconnect["dapui_config"] = function()
-			api.nvim_command("DapVirtualTextEnable")
+			api.nvim_command("DapVirtualTextDisable")
 			pbp.store_breakpoints()
 			_G.dapui_for_K = false
 		end

@@ -19,7 +19,6 @@ fi
 
 curl -sS https://starship.rs/install.sh | sh
 
-cp my.zsh-theme ~/.oh-my-zsh/custom/themes
 cp zshrc ~/.zshrc
 
 # 前提安装zsh，然后：

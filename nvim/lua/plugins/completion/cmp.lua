@@ -38,9 +38,10 @@ function M.config()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
 
+	local snippets_path = vim.fn.stdpath("config") .. "/snippets" -- 必须用绝对路径，否则依赖启动时的工作目录
 	require("luasnip.loaders.from_vscode").lazy_load()
-	require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snippets" } }) -- 自定义代码片段
-	require("luasnip.loaders.from_lua").lazy_load({ paths = { "./snippets" } }) -- https://zjp-cn.github.io/neovim0.6-blogs/nvim/luasnip/doc1.html
+	require("luasnip.loaders.from_snipmate").lazy_load({ paths = { snippets_path } }) -- 自定义代码片段
+	require("luasnip.loaders.from_lua").lazy_load({ paths = { snippets_path } }) -- https://zjp-cn.github.io/neovim0.6-blogs/nvim/luasnip/doc1.html
 
 	local check_backspace = function()
 		local col = vim.fn.col(".") - 1
@@ -153,6 +154,19 @@ function M.config()
 				cmp.config.compare.sort_text,
 			},
 		},
+	})
+	-- 命令行补全（替代已移除的 wilder）：注意要等 cmp 加载（InsertEnter）后才生效
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = { { name = "buffer" } },
+	})
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = "path" },
+		}, {
+			{ name = "cmdline" },
+		}),
 	})
 end
 

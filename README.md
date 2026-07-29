@@ -11,9 +11,8 @@
    - 运行zsh/install.sh
    - 主题
 
-     1. 自制主题(zsh/my.zsh-theme) 改 ZSH_THEME="my"
-     2. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
-     3. [starship](https://starship.rs/zh-CN/) 现在在用
+     1. 推荐主题 [romkatv/powerlevel10k: A Zsh theme (github.com)](https://github.com/romkatv/powerlevel10k)
+     2. [starship](https://starship.rs/zh-CN/) 现在在用
 
    - 最后 `source ~/.zshrc`
 

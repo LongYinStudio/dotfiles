@@ -55,7 +55,7 @@ return {
 			desc = "Detach a CLI Session",
 		},
 		{
-			"<leader>ht",
+			"<leader>hT",
 			function()
 				require("sidekick.cli").send({ msg = "{this}" })
 			end,

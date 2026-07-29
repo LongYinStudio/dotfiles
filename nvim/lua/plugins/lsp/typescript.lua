@@ -1,6 +1,7 @@
 return {
 	{
 		"LongYinStudio/ts-error-translator-plus.nvim",
+    enabled = false,
 		opts = {
 			lang = "zh-CN",
 		},

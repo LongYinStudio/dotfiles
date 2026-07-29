@@ -1,81 +1,60 @@
--- 语法高亮
--- NOTE: 某个出现问题时，修改nvim ~/.local/share/nvim/lazy/nvim-treesitter/lockfile.json里的commit hash到最新，然后执行:TSUpdate! 加对应名称 进行强制重装
+-- 语法高亮（nvim-treesitter 已切换到 main 分支重写版的新 API，需 nvim 0.12+）
+-- NOTE: parser 出问题可执行 :TSUpdate[!] <name> 强制更新/重装，:TSInstall <name> 补装
+-- NOTE: 依赖系统级 tree-sitter-cli（>=0.26.1，用包管理器装，不能用 npm 版）、tar、curl、C 编译器
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false, -- 官方明确不支持懒加载
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				modules = {},
-				-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-				ensure_installed = {
-					"arduino",
-					"bash",
-					"c",
-					"cmake",
-					"cpp",
-					"css",
-					"dart",
-					"dot",
-					"func",
-					"git_config",
-					"git_rebase",
-					"gitcommit",
-					"gitignore",
-					"go",
-					"html",
-					"hurl",
-					"java",
-					"javascript",
-					"jq",
-					"jsdoc",
-					"json",
-					"json5",
-					-- "latex",
-					"lua",
-					"luadoc",
-					"markdown",
-					"markdown_inline",
-					"matlab",
-					"passwd",
-					"perl",
-					"php",
-					"phpdoc",
-					"python",
-					"qmljs",
-					"query",
-					"regex",
-					"rego",
-					"rust",
-					"scss",
-					"slint",
-					"sql",
-					"tsx",
-					"typescript",
-					"vim",
-					"vimdoc",
-					"vue",
-					"yaml",
-				},
-				-- Install parsers synchronously (only applied to `ensure_installed`)
-				sync_install = false,
-				-- Automatically install missing parsers when entering buffer
-				-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-				auto_install = true,
-				-- List of parsers to ignore installing (or "all")
-				ignore_install = { "latex" },
-				---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-				-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-				highlight = { enable = true },
-				indent = { enable = true },
-				folding = { enable = true },
-				autotag = { enable = true },
-				-- 不同括号颜色区分
-				-- rainbow = {
-				-- 	enable = true,
-				-- 	extended_mode = true,
-				-- 	max_file_lines = nil,
-				-- },
+			-- 新 API 没有 ensure_installed：这里启动时补装缺失的 parser（已装的自动跳过）
+			require("nvim-treesitter").install({
+				"bash",
+				"c",
+				"cmake",
+				"cpp",
+				"css",
+				"git_config",
+				"git_rebase",
+				"gitcommit",
+				"gitignore",
+				"go",
+				"html",
+				"hurl",
+				"java",
+				"javascript",
+				"jq",
+				"jsdoc",
+				"json",
+				"json5",
+				"lua",
+				"luadoc",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"query",
+				"regex",
+				"rust",
+				"scss",
+				"sql",
+				"tsx",
+				"typescript",
+				"vim",
+				"vimdoc",
+				"vue",
+				"yaml",
+			})
+
+			-- 新 API 不再内置 highlight 模块，需按 FileType 手动启动（buf 已激活则跳过）
+			local group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				group = group,
+				desc = "Start treesitter highlighting",
+				callback = function(args)
+					if not vim.treesitter.highlighter.active[args.buf] then
+						pcall(vim.treesitter.start, args.buf)
+					end
+				end,
 			})
 		end,
 	},

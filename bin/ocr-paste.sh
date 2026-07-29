@@ -39,6 +39,14 @@ image_convert() {
   fi
 }
 
+image_identify() {
+  if have magick; then
+    magick identify "$@"
+  else
+    identify "$@"
+  fi
+}
+
 notify() {
   local title="$1"
   local body="${2:-}"
@@ -51,6 +59,141 @@ debug_log() {
   if ((debug_enabled == 1)); then
     printf 'ocr-paste: %s\n' "$*" >&2
   fi
+}
+
+list_enabled_screens() {
+  if have kscreen-doctor && have jq; then
+    kscreen-doctor -j 2>/dev/null | jq -r '
+      .outputs[]
+      | select(.enabled == true and .connected == true)
+      | [
+          .name,
+          (.pos.x // 0),
+          (.pos.y // 0),
+          (.size.width // 0),
+          (.size.height // 0)
+        ]
+      | @tsv
+    ' 2>/dev/null
+    return 0
+  fi
+
+  if have kscreen-doctor; then
+    kscreen-doctor -o 2>/dev/null | awk '
+      /^Output:/ {
+        current_name = $3
+        current_enabled = 0
+        for (i = 4; i <= NF; i++) {
+          if ($i == "enabled") {
+            current_enabled = 1
+          }
+          if ($i == "disconnected") {
+            current_enabled = 0
+          }
+        }
+        next
+      }
+      /Geometry:/ && current_enabled {
+        if (match($0, /Geometry: ([0-9-]+),([0-9-]+) ([0-9]+)x([0-9]+)/, m)) {
+          print current_name "\t" m[1] "\t" m[2] "\t" m[3] "\t" m[4]
+        }
+      }
+    '
+    return 0
+  fi
+
+  return 1
+}
+
+capture_region_kde_wayland() {
+  local output="$1"
+  local region=""
+  local rx ry rw rh
+  local cx cy
+  local output_name=""
+  local screen_x="" screen_y="" screen_w="" screen_h=""
+  local full_png="${output%.png}.full.png"
+  local image_w image_h
+  local crop_x crop_y crop_w crop_h
+
+  if ! have slurp || ! have kscreen-doctor; then
+    return 1
+  fi
+
+  if ! region="$(slurp 2>/dev/null)" || [[ -z "$region" ]]; then
+    debug_log "region selection cancelled"
+    return 1
+  fi
+
+  if [[ ! "$region" =~ ^([0-9-]+),([0-9-]+)\ ([0-9]+)x([0-9]+)$ ]]; then
+    debug_log "unexpected slurp output: $region"
+    return 1
+  fi
+
+  rx="${BASH_REMATCH[1]}"
+  ry="${BASH_REMATCH[2]}"
+  rw="${BASH_REMATCH[3]}"
+  rh="${BASH_REMATCH[4]}"
+  cx=$((rx + rw / 2))
+  cy=$((ry + rh / 2))
+
+  while IFS=$'\t' read -r name x y w h; do
+    [[ -z "$name" ]] && continue
+    debug_log "detected screen=$name geometry=${x},${y} ${w}x${h}"
+    if ((cx >= x && cx < x + w && cy >= y && cy < y + h)); then
+      output_name="$name"
+      screen_x="$x"
+      screen_y="$y"
+      screen_w="$w"
+      screen_h="$h"
+      break
+    fi
+  done < <(list_enabled_screens)
+
+  if [[ -z "$output_name" ]]; then
+    if ((debug_enabled == 1)) && have kscreen-doctor; then
+      debug_log "raw kscreen-doctor -j:"
+      kscreen-doctor -j 2>&1 | sed 's/^/ocr-paste:   /' >&2 || true
+      debug_log "raw kscreen-doctor -o:"
+      kscreen-doctor -o 2>&1 | sed 's/^/ocr-paste:   /' >&2 || true
+    fi
+    debug_log "could not match selected region to an enabled screen"
+    return 1
+  fi
+
+  debug_log "selected region=$region mapped to screen=$output_name geometry=${screen_x},${screen_y} ${screen_w}x${screen_h}"
+
+  rm -f "$full_png"
+  if ! spectacle --current --background --nonotify --output "$full_png" >/dev/null 2>&1 || [[ ! -s "$full_png" ]]; then
+    debug_log "spectacle current-screen capture failed"
+    return 1
+  fi
+
+  if ! read -r image_w image_h < <(image_identify -format '%w %h' "$full_png" 2>/dev/null); then
+    debug_log "failed to identify captured image size"
+    return 1
+  fi
+
+  crop_x=$(((rx - screen_x) * image_w / screen_w))
+  crop_y=$(((ry - screen_y) * image_h / screen_h))
+  crop_w=$((rw * image_w / screen_w))
+  crop_h=$((rh * image_h / screen_h))
+
+  ((crop_x < 0)) && crop_x=0
+  ((crop_y < 0)) && crop_y=0
+  ((crop_w < 1)) && crop_w=1
+  ((crop_h < 1)) && crop_h=1
+  ((crop_x + crop_w > image_w)) && crop_w=$((image_w - crop_x))
+  ((crop_y + crop_h > image_h)) && crop_h=$((image_h - crop_y))
+
+  if ((crop_w < 1 || crop_h < 1)); then
+    debug_log "computed crop is invalid: ${crop_w}x${crop_h}+${crop_x}+${crop_y}"
+    return 1
+  fi
+
+  debug_log "cropping captured screen ${image_w}x${image_h} to ${crop_w}x${crop_h}+${crop_x}+${crop_y}"
+  image_convert "$full_png" -crop "${crop_w}x${crop_h}+${crop_x}+${crop_y}" +repage "$output"
+  [[ -s "$output" ]]
 }
 
 copy_clipboard() {
@@ -103,11 +246,18 @@ capture_region() {
   local output="$1"
   local preferred=()
   local backend
+  local on_kde_wayland=0
+
+  if [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]] && [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]; then
+    on_kde_wayland=1
+  fi
 
   if [[ "${capture_backend}" != "auto" ]]; then
     preferred=("$capture_backend")
+  elif ((on_kde_wayland == 1)); then
+    preferred=(spectacle flameshot maim)
   elif [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
-    preferred=(flameshot spectacle grim maim)
+    preferred=(flameshot spectacle maim)
   elif [[ "${XDG_CURRENT_DESKTOP:-}" == *Hyprland* ]]; then
     preferred=(hyprshot grim flameshot spectacle maim)
   elif [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]; then
@@ -121,6 +271,13 @@ capture_region() {
     case "$backend" in
       spectacle)
         if have spectacle; then
+          if ((on_kde_wayland == 1)); then
+            if capture_region_kde_wayland "$output"; then
+              return 0
+            fi
+            debug_log "KDE Wayland spectacle region workaround failed"
+            continue
+          fi
           if spectacle --region --background --nonotify --output "$output" >/dev/null 2>&1 && [[ -s "$output" ]]; then
             return 0
           fi

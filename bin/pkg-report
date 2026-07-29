@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+# Author: LongYinStudio <1606776851@qq.com> (https://github.com/LongYinStudio)
+# Date: 2026-08-30 22:48:34
+# Desc: pacman 卫生报告：孤儿包、占用最大的包、包缓存、AUR 包、/etc 下的 pacnew 残留
+
+set -euo pipefail
+
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
+usage() {
+  cat <<'EOF'
+Usage: pkg-report [options]
+
+Pacman hygiene report: orphans, biggest packages, package cache,
+foreign (AUR) packages and leftover .pacnew files in /etc.
+
+Options:
+  -n, --top N       show N biggest packages (default: 20)
+  -e, --explicit    rank only explicitly installed packages
+  -f, --foreign     also list foreign (AUR) packages by name
+  -h, --help        show this help message
+
+Examples:
+  pkg-report
+  pkg-report -n 40 --explicit
+  pkg-report --foreign
+EOF
+}
+
+top_n=20
+explicit_only=false
+list_foreign=false
+
+while (($#)); do
+  case "$1" in
+    -n|--top)
+      [[ $# -ge 2 && "$2" =~ ^[0-9]+$ ]] || { echo "Invalid value for $1." >&2; usage >&2; exit 1; }
+      top_n="$2"
+      shift 2
+      ;;
+    -e|--explicit)
+      explicit_only=true
+      shift
+      ;;
+    -f|--foreign)
+      list_foreign=true
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+    *)
+      echo "Unexpected argument: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
+command -v pacman >/dev/null 2>&1 || { echo "pacman not found." >&2; exit 1; }
+
+total=$(pacman -Q | wc -l)
+explicit=$(pacman -Qeq | wc -l)
+deps=$(pacman -Qdq | wc -l)
+foreign=$(pacman -Qmq | wc -l)
+
+printf '%b== Pacman report ==%b\n' "$CYAN" "$RESET"
+echo "Installed: $total packages ($explicit explicit, $deps as deps, $foreign foreign)"
+
+echo
+printf '%b-- Orphans (installed as deps, no longer required) --%b\n' "$CYAN" "$RESET"
+orphans=$(pacman -Qdtq 2>/dev/null || true)
+if [[ -z "$orphans" ]]; then
+  printf '%bnone%b\n' "$GREEN" "$RESET"
+else
+  echo "$orphans" | awk '{ print "  " $0 }'
+  echo
+  echo "  Remove all with:  sudo pacman -Rns \$(pacman -Qdtq)"
+fi
+
+echo
+if $explicit_only; then
+  printf '%b-- Top %d explicitly installed packages by size --%b\n' "$CYAN" "$top_n" "$RESET"
+else
+  printf '%b-- Top %d installed packages by size --%b\n' "$CYAN" "$top_n" "$RESET"
+fi
+LC_ALL=C pacman -Qi | awk '
+  /^Name[[:space:]]*:/ { name = $3 }
+  /^Install Reason[[:space:]]*:/ { reason = ($0 ~ /Explicitly/) ? "explicit" : "dep" }
+  /^Installed Size[[:space:]]*:/ {
+    v = $(NF - 1); unit = $NF
+    if (v !~ /^[0-9.]+$/) next
+    bytes = v + 0
+    if (unit == "KiB") bytes *= 1024
+    else if (unit == "MiB") bytes *= 1024 * 1024
+    else if (unit == "GiB") bytes *= 1024 * 1024 * 1024
+    print sprintf("%.0f", bytes) "\t" name "\t" reason
+  }
+' | LC_ALL=C sort -t$'\t' -k1,1nr | {
+  if $explicit_only; then
+    awk -F'\t' '$3 == "explicit"'
+  else
+    cat
+  fi
+} | awk -v n="$top_n" 'NR <= n' | awk -F'\t' '
+  BEGIN { split("KiB MiB GiB TiB", u, " ") }
+  function human(n,   i) {
+    for (i = 1; i <= 4 && n >= 1024; i++) n /= 1024
+    return sprintf("%.1f %s", n, u[i - 1])
+  }
+  { printf "%9s  %-40s %s\n", human($1), $2, $3 }
+'
+
+echo
+printf '%b-- Package cache (%s) --%b\n' "$CYAN" "/var/cache/pacman/pkg" "$RESET"
+cache_dir=/var/cache/pacman/pkg
+if [[ -d "$cache_dir" ]]; then
+  cache_size=$(du -sh "$cache_dir" 2>/dev/null | awk '{print $1}') || true
+  cache_count=$(command find "$cache_dir" -maxdepth 1 -name '*.pkg.tar.*' 2>/dev/null | wc -l)
+  echo "  $cache_count package files, $cache_size"
+  if command -v paccache >/dev/null 2>&1; then
+    echo "  Trim with:  paccache -rk1   (keep last version) or  paccache -ruk0   (uninstalled only)"
+  fi
+else
+  echo "  cache directory not found"
+fi
+
+echo
+printf '%b-- Foreign (AUR) packages --%b\n' "$CYAN" "$RESET"
+if ((foreign == 0)); then
+  printf '%bnone%b\n' "$GREEN" "$RESET"
+else
+  echo "  $foreign packages"
+  if $list_foreign; then
+    pacman -Qmq | sed 's/^/  /'
+  fi
+fi
+
+echo
+printf '%b-- .pacnew / .pacsave files under /etc --%b\n' "$CYAN" "$RESET"
+pacnew=$(find /etc -maxdepth 3 \( -name '*.pacnew' -o -name '*.pacsave' \) 2>/dev/null || true)
+if [[ -z "$pacnew" ]]; then
+  printf '%bnone%b\n' "$GREEN" "$RESET"
+else
+  echo "$pacnew" | awk '{ print "  " $0 }'
+  echo
+  echo "  Merge with:  pacdiff   (review each file before overwriting)"
+fi

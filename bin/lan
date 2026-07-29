@@ -1,0 +1,207 @@
+#!/usr/bin/env bash
+# Author: LongYinStudio <1606776851@qq.com> (https://github.com/LongYinStudio)
+# Date: 2026-08-30 22:48:34
+# Desc: 局域网盘点：扫描本网段，列出在线设备的 IP/主机名/MAC/厂商，支持标注常用设备和端口探测
+
+set -euo pipefail
+
+YELLOW='\033[0;33m'
+RESET='\033[0m'
+
+DEFAULT_PORTS="22,80,443,445,3389,5900,8000,8080,9000"
+
+usage() {
+  cat <<'EOF'
+Usage: lan [options] [cidr | interface]
+
+Scan the local network and list live hosts with hostname, MAC and vendor.
+
+Options:
+  -i, --iface IFACE     use this interface (default: the one holding the
+                        default route)
+  -p, --ports [LIST]    also probe TCP ports on live hosts; LIST defaults to
+  -k, --known FILE      known-device file (default: ~/.config/lan/known)
+  -h, --help            show this help message
+
+Known-device file format, one entry per line, matched by MAC or IP:
+
+  aa:bb:cc:dd:ee:ff  orangepi
+  192.168.1.50       printer
+
+Lines starting with # are ignored. Matching hosts get their alias printed.
+
+Examples:
+  lan
+  lan 192.168.1.0/24
+  lan -i wlan0 -p
+  lan -p 22,8090
+EOF
+}
+
+die() {
+  echo "$1" >&2
+  exit 1
+}
+
+[[ $# -gt 0 ]] && { [[ "$1" == "-h" || "$1" == "--help" ]] && { usage; exit 0; }; }
+
+command -v nmap >/dev/null 2>&1 || die "nmap is required (pacman -S nmap)."
+command -v ip >/dev/null 2>&1 || die "ip(8) is required (iproute2)."
+
+iface=""
+do_ports=false
+port_list="$DEFAULT_PORTS"
+known_file="${HOME}/.config/lan/known"
+target=""
+
+while (($#)); do
+  case "$1" in
+    -i|--iface)
+      [[ $# -ge 2 ]] || die "Missing value for $1."
+      iface="$2"
+      shift 2
+      ;;
+    -p|--ports)
+      do_ports=true
+      if [[ $# -ge 2 && "$2" != -* ]]; then
+        port_list="$2"
+        shift
+      fi
+      shift
+      ;;
+    -k|--known)
+      [[ $# -ge 2 ]] || die "Missing value for $1."
+      known_file="$2"
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+    *)
+      [[ -z "$target" ]] || die "Only one target can be provided."
+      target="$1"
+      shift
+      ;;
+  esac
+done
+
+# ARP discovery needs raw sockets; re-exec with sudo when cached credentials
+# allow it, otherwise warn and continue unprivileged (results may be sparse).
+if (( EUID != 0 )); then
+  if command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+    case "$0" in
+      */*) self="$0" ;;
+      *) self="$(command -v -- "$0" || echo "$0")" ;;
+    esac
+    echo "Re-running with sudo for full ARP discovery..." >&2
+    exec sudo "$self" "$@"
+  else
+    printf '%bWarning:%b not root, TCP-probe discovery only; many devices will be missed.\n' "$YELLOW" "$RESET" >&2
+    echo "Run with cached sudo credentials (or as root) for a full ARP scan." >&2
+  fi
+fi
+
+# Resolve target: argument, or interface, or the default-route interface.
+if [[ -z "$target" ]]; then
+  [[ -n "$iface" ]] || iface=$(ip -4 route show default | awk '{for (i=1;i<=NF;i++) if ($i=="dev") {print $(i+1); exit}}')
+  [[ -n "$iface" ]] || die "No default route found; pass a CIDR or interface explicitly."
+  target=$(ip -o -4 addr show dev "$iface" | awk '{split($4, a, "/"); print a[1] "/" (a[2] == "" ? 32 : a[2])}')
+  [[ -n "$target" ]] || die "No IPv4 address on interface $iface."
+fi
+
+own_ips=$(ip -o -4 addr show scope global | awk '{split($4, a, "/"); print a[1]}')
+
+tmp_hosts=$(mktemp)
+tmp_ports=$(mktemp)
+trap 'rm -f "$tmp_hosts" "$tmp_ports"' EXIT
+
+echo "Scanning $target ..."
+nmap -sn -T4 "$target" 2>/dev/null | awk '
+  function emit() { print ip "\t" host "\t" mac "\t" vendor; host = ip = mac = vendor = "" }
+  /^Nmap scan report for / {
+    if (ip != "") emit()
+    rest = substr($0, 22)
+    if (match(rest, /\(.*\)/)) {
+      host = substr(rest, 1, RSTART - 1)
+      ip = substr(rest, RSTART + 1, RLENGTH - 2)
+      gsub(/^[ \t]+|[ \t]+$/, "", host)
+    } else {
+      host = ""
+      ip = rest
+    }
+  }
+  /^MAC Address: / {
+    mac = $3
+    vendor = $4
+    for (i = 5; i <= NF; i++) vendor = vendor " " $i
+    gsub(/[()]/, "", vendor)
+  }
+  END { if (ip != "") emit() }
+' >"$tmp_hosts"
+
+if [[ ! -s "$tmp_hosts" ]]; then
+  echo "No live hosts found."
+  exit 0
+fi
+
+if $do_ports; then
+  mapfile -t live_ips < <(cut -f1 "$tmp_hosts")
+  nmap -Pn -T4 --open -p "$port_list" -- "${live_ips[@]}" 2>/dev/null | awk '
+    /^[0-9]+\/(tcp|udp)/ && $2 == "open" {
+      svc = $3
+      if ($NF != svc && NF >= 3 && $3 !~ /^[0-9]+$/) svc = $3
+      open[cur] = open[cur] (open[cur] == "" ? "" : " ") svc
+    }
+    /^Nmap scan report for / {
+      rest = substr($0, 22)
+      if (match(rest, /\(.*\)/)) cur = substr(rest, RSTART + 1, RLENGTH - 2)
+      else cur = rest
+    }
+    END { for (ip in open) print ip "\t" open[ip] }
+  ' >"$tmp_ports"
+fi
+
+LC_ALL=C sort -t$'\t' -k1,1V -o "$tmp_hosts" "$tmp_hosts"
+
+known_arg=""
+if [[ -f "$known_file" ]]; then
+  known_arg="$known_file"
+fi
+
+printf '%-16s %-19s %s\n' "IP" "MAC" "HOST / VENDOR"
+echo "-------------------------------------------------------------------"
+awk -F'\t' -v known="$known_arg" -v own_ips="$own_ips" '
+  function trim(s) { gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
+  BEGIN {
+    if (known != "") {
+      while ((getline line < known) > 0) {
+        line = trim(line)
+        if (line == "" || line ~ /^#/) continue
+        split(line, kv, /[ \t]+/)
+        alias[tolower(kv[1])] = kv[2]
+      }
+    }
+    n = split(own_ips, a, "\n")
+    for (i = 1; i <= n; i++) if (a[i] != "") mine[a[i]] = 1
+    grn = "\033[0;32m"; cyn = "\033[0;36m"; rst = "\033[0m"
+  }
+  FILENAME == ARGV[1] { ports[$1] = $2; next }
+  {
+    note = ""
+    if ($1 in mine) note = "*"
+    key = tolower($3)
+    if (key == "") key = $1
+    if (key in alias) note = note " " grn "[" alias[key] "]" rst
+    desc = $2
+    if ($4 != "") desc = desc (desc == "" ? "" : " — ") $4
+    if ($1 in mine) desc = desc " " cyn "(this machine)" rst
+    printf "%-16s %-19s %s%s\n", $1, $3, desc, note
+    if ($1 in ports) printf "%16s  ports: %s\n", "", ports[$1]
+  }
+' "$tmp_ports" "$tmp_hosts"

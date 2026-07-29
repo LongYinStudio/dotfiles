@@ -24,7 +24,7 @@ $pacMan ipcalc bc # qalculate
 $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
 $pacMan btop htop cpufetch duf gdu # glances plasma-systemmonitor hardinfo2 sysmontask mission-center resources cpu-x
-$pacMan zsh ffmpeg tree tmux tldr  # kdeconnect
+$pacMan zsh ffmpeg tree tmux tldr  # kdeconnect, tldr 推荐换成 tealdeer
 $pacMan figlet net-tools ripgrep jq bat curl git wget vim \
   neofetch onefetch trash-cli imagemagick transmission-cli \
   unzip unrar p7zip gping

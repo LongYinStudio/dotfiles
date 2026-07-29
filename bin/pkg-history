@@ -1,0 +1,192 @@
+#!/usr/bin/env bash
+# Author: LongYinStudio <1606776851@qq.com> (https://github.com/LongYinStudio)
+# Date: 2026-08-30 22:14:10
+# Desc: 从 pacman 日志查询包的安装/升级/卸载历史，以及文件归属
+
+set -euo pipefail
+
+log_file="${PACMAN_LOG:-/var/log/pacman.log}"
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
+usage() {
+  cat <<'EOF'
+Usage: pkg-history [options] [package]
+       pkg-history --owns <file>
+       pkg-history --bin <command>
+
+Show package lifecycle events from the pacman log.
+
+Modes:
+  package              timeline of install/upgrade/removal for one package
+  -o, --owns FILE      show which installed package owns FILE
+  -b, --bin CMD        resolve a command on PATH to its owning package
+  -r, --recent [N]     last N events across all packages (default: 20)
+
+Options:
+  -l, --log FILE       read FILE instead of /var/log/pacman.log
+  -h, --help           show this help message
+
+Examples:
+  pkg-history linux
+  pkg-history --owns /usr/bin/firefox
+  pkg-history --bin docker
+  pkg-history --recent 30
+EOF
+}
+
+collect_events() {
+  awk '
+    $2 == "[ALPM]" && $3 ~ /^(installed|upgraded|removed|reinstalled)$/ {
+      ts = substr($1, 2, 16)
+      gsub(/T/, " ", ts)
+      detail = ""
+      for (i = 5; i <= NF; i++) detail = detail (i > 5 ? " " : "") $i
+      print ts "\t" $3 "\t" $4 "\t" detail
+    }
+  ' "$log_file"
+}
+
+show_events() {
+  local ts action name detail color
+  while IFS=$'\t' read -r ts action name detail; do
+    case "$action" in
+      installed)   color="$GREEN" ;;
+      upgraded)    color="$YELLOW" ;;
+      reinstalled) color="$CYAN" ;;
+      removed)     color="$RED" ;;
+      *)           color="$RESET" ;;
+    esac
+    printf '%s  %b%-11s%b %s  %s\n' "$ts" "$color" "$action" "$RESET" "$name" "$detail"
+  done
+}
+
+resolve_owner() {
+  local target="$1" owner ver
+  if [[ ! -e "$target" && "$target" != /* ]]; then
+    target="$PWD/$target"
+  fi
+  if [[ ! -e "$target" ]]; then
+    echo "No such file: $target" >&2
+    exit 1
+  fi
+  if ! owner=$(pacman -Qoq -- "$target" 2>/dev/null); then
+    echo "Not owned by any installed package: $target" >&2
+    exit 1
+  fi
+  ver=$(pacman -Q "$owner" 2>/dev/null | awk '{print $2}')
+  printf '%s is owned by %b%s%s %s\n' "$target" "$GREEN" "$owner" "$RESET" "$ver"
+}
+
+mode="package"
+recent=20
+pkg=""
+owns=""
+bin=""
+
+while (($#)); do
+  case "$1" in
+    -o|--owns)
+      [[ $# -ge 2 ]] || { echo "Missing file argument." >&2; usage >&2; exit 1; }
+      mode="owns"
+      owns="$2"
+      shift 2
+      ;;
+    -b|--bin)
+      [[ $# -ge 2 ]] || { echo "Missing command argument." >&2; usage >&2; exit 1; }
+      mode="bin"
+      bin="$2"
+      shift 2
+      ;;
+    -r|--recent)
+      mode="recent"
+      if [[ $# -ge 2 && "$2" =~ ^[0-9]+$ ]]; then
+        recent="$2"
+        shift 2
+      else
+        shift
+      fi
+      ;;
+    -l|--log)
+      [[ $# -ge 2 ]] || { echo "Missing log file argument." >&2; usage >&2; exit 1; }
+      log_file="$2"
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+    *)
+      if [[ -n "$pkg" ]]; then
+        echo "Only one package can be provided." >&2
+        usage >&2
+        exit 1
+      fi
+      pkg="$1"
+      shift
+      ;;
+  esac
+done
+
+if [[ ! -r "$log_file" ]]; then
+  echo "Cannot read pacman log: $log_file" >&2
+  exit 1
+fi
+
+case "$mode" in
+  owns)
+    resolve_owner "$owns"
+    ;;
+  bin)
+    if ! path=$(command -v "$bin" 2>/dev/null); then
+      echo "'$bin' not found on PATH." >&2
+      exit 1
+    fi
+    resolve_owner "$path"
+    ;;
+  recent)
+    events=$(collect_events | tail -n "$recent") || true
+    if [[ -z "$events" ]]; then
+      echo "No package events found in $log_file."
+      exit 1
+    fi
+    show_events <<<"$events"
+    ;;
+  package)
+    events=$(collect_events | awk -F'\t' -v p="$pkg" '$3 == p') || true
+    if [[ -z "$events" ]]; then
+      echo "No install/upgrade/removal events for '$pkg' in $log_file."
+      similar=$(collect_events | awk -F'\t' -v p="$pkg" '
+        tolower($3) ~ tolower(p) && $3 != p { print $3 }' | sort -u | head -5) || true
+      if [[ -n "$similar" ]]; then
+        echo "Did you mean one of:"
+        awk '{ print "  " $0 }' <<<"$similar"
+      fi
+      exit 1
+    fi
+    show_events <<<"$events"
+    awk -F'\t' '{ c[$2]++ }
+      END {
+        printf "Total: "
+        first = 1
+        split("installed reinstalled upgraded removed", order, " ")
+        for (i = 1; i <= 4; i++) {
+          k = order[i]
+          if (k in c) {
+            printf "%s%d %s", (first ? "" : ", "), c[k], k
+            first = 0
+          }
+        }
+        print ""
+      }' <<<"$events"
+    ;;
+esac

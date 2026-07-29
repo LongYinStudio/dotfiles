@@ -1,0 +1,199 @@
+#!/usr/bin/env bash
+# Author: LongYinStudio <1606776851@qq.com> (https://github.com/LongYinStudio)
+# Date: 2026-08-30 22:14:10
+# Desc: git worktree 包装器：list/go/add/rm/prune，worktree 统一放 <repo>-wt/ 下
+
+set -euo pipefail
+
+GREEN='\033[0;32m'
+RESET='\033[0m'
+
+usage() {
+  cat <<'EOF'
+Usage: git-w <command> [args]
+
+git worktree wrapper.
+
+Commands:
+  list                list all worktrees
+  go [query]          pick a worktree with fzf, print its path
+  add <branch>        create a worktree for BRANCH (creates the branch
+                      first if it does not exist yet)
+  rm [-f] [branch]    remove the worktree of BRANCH (fzf pick if omitted)
+  prune               drop worktree records for deleted directories
+
+'go' prints the path because a child process cannot change your shell's
+directory. Add this to your zshrc:
+
+  cdw() { cd "$(git-w go "$@")" }
+
+Examples:
+  git-w list
+  git-w add feature/login
+  git-w rm feature/login
+  cdw                 pick interactively
+  cdw login           pre-filled fzf query
+EOF
+}
+
+require_repo() {
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "Not inside a git repository." >&2
+    exit 1
+  fi
+}
+
+worktree_entries() {
+  git worktree list --porcelain | awk '
+    /^worktree / { path = substr($0, 10); next }
+    /^HEAD /     { head = substr($0, 6); next }
+    /^branch /   { branch = substr($0, 8); sub(/^refs\/heads\//, "", branch); next }
+    /^detached/  { branch = "(detached " substr(head, 1, 7) ")"; next }
+    /^bare/      { branch = "(bare)"; next }
+    /^$/         { print branch "\t" path; branch = ""; path = ""; head = "" }
+    END          { if (path != "") print branch "\t" path }
+  '
+}
+
+pick_worktree() {
+  local entries="$1" query="${2:-}" selected n i branch path
+  if command -v fzf >/dev/null 2>&1; then
+    if ! selected="$(printf '%s\n' "$entries" | fzf \
+      --height=50% --reverse --select-1 \
+      --delimiter=$'\t' --with-nth=1,2 \
+      --query="$query" \
+      --header='branch  path' \
+      --preview='git -C {2..} log --oneline -6 2>/dev/null; echo; git -C {2..} status -sb')"; then
+      return 1
+    fi
+  else
+    echo "fzf not found, falling back to a numbered menu." >&2
+    i=1
+    while IFS=$'\t' read -r branch path; do
+      printf '%3d) %-28s %s\n' "$i" "$branch" "$path" >&2
+      i=$((i + 1))
+    done <<<"$entries"
+    printf 'Number: ' >&2
+    read -r n
+    selected="$(sed -n "${n}p" <<<"$entries")"
+    [[ -n "$selected" ]] || return 1
+  fi
+  printf '%s' "${selected##*$'\t'}"
+}
+
+cmd_list() {
+  local branch path hash here marker
+  here="$(pwd -P)"
+  while IFS=$'\t' read -r branch path; do
+    marker=" "
+    [[ "$path" == "$here" ]] && marker="*"
+    hash=$(git -C "$path" rev-parse --short HEAD 2>/dev/null || echo "-")
+    printf '%s %-32s %-10s %s\n' "$marker" "$branch" "$hash" "$path"
+  done < <(worktree_entries)
+}
+
+cmd_go() {
+  require_repo
+  local entries path
+  entries="$(worktree_entries)"
+  [[ -n "$entries" ]] || { echo "No worktrees found." >&2; exit 1; }
+  if ! path=$(pick_worktree "$entries" "$*"); then
+    echo "No worktree selected." >&2
+    exit 1
+  fi
+  printf '%s\n' "$path"
+}
+
+cmd_add() {
+  require_repo
+  local branch="${1:-}"
+  [[ -n "$branch" ]] || { echo "Usage: git-w add <branch>" >&2; exit 1; }
+  if [[ ! "$branch" =~ ^[A-Za-z0-9._/-]+$ ]]; then
+    echo "Suspicious branch name: $branch" >&2
+    exit 1
+  fi
+  local common main_dir base wt_root wt_path
+  common="$(git rev-parse --path-format=absolute --git-common-dir)"
+  main_dir="$(dirname "${common%/}")"
+  base="$(basename "$main_dir")"
+  wt_root="$(dirname "$main_dir")/${base}-wt"
+  wt_path="$wt_root/${branch//\//-}"
+
+  if [[ -e "$wt_path" ]]; then
+    echo "Path already exists: $wt_path" >&2
+    exit 1
+  fi
+
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git worktree add "$wt_path" "$branch"
+  else
+    echo "Branch '$branch' does not exist, creating it from the current HEAD."
+    git worktree add -b "$branch" "$wt_path"
+  fi
+  echo
+  printf '%bWorktree ready:%b %s\n' "$GREEN" "$RESET" "$wt_path"
+  echo "Enter it with:  cd $wt_path"
+}
+
+cmd_rm() {
+  require_repo
+  local force="" branch="${1:-}" entries path
+  if [[ "$branch" == "-f" || "$branch" == "--force" ]]; then
+    force="--force"
+    branch="${2:-}"
+  fi
+  entries="$(worktree_entries)"
+  [[ -n "$entries" ]] || { echo "No worktrees found." >&2; exit 1; }
+
+  if [[ -z "$branch" ]]; then
+    if ! path=$(pick_worktree "$entries"); then
+      echo "No worktree selected." >&2
+      exit 1
+    fi
+  else
+    path=$(printf '%s\n' "$entries" | awk -F'\t' -v b="$branch" '$1 == b { print $2; exit }')
+    [[ -n "$path" ]] || { echo "No worktree for branch '$branch'." >&2; exit 1; }
+  fi
+
+  git worktree remove $force -- "$path"
+  printf '%bRemoved worktree:%b %s\n' "$GREEN" "$RESET" "$path"
+}
+
+cmd_prune() {
+  require_repo
+  exec git worktree prune -v "$@"
+}
+
+[[ $# -gt 0 ]] || { usage; exit 1; }
+
+case "$1" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  list)
+    require_repo
+    cmd_list
+    ;;
+  go)
+    shift
+    cmd_go "$@"
+    ;;
+  add)
+    shift
+    cmd_add "$@"
+    ;;
+  rm)
+    shift
+    cmd_rm "$@"
+    ;;
+  prune)
+    shift
+    cmd_prune "$@"
+    ;;
+  *)
+    echo "Unknown command: $1" >&2
+    usage >&2
+    exit 1
+    ;;
+esac
