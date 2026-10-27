@@ -1,0 +1,16 @@
+% nginx
+
+# 测试配置语法
+sudo nginx -t
+
+# 打印完整生效的配置
+sudo nginx -T
+
+# 平滑重载配置
+sudo systemctl reload nginx
+
+# 跟踪错误日志
+tail -f /var/log/nginx/error.log
+
+# 跟踪访问日志
+tail -f /var/log/nginx/access.log

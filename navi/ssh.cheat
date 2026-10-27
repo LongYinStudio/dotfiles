@@ -1,0 +1,36 @@
+% ssh
+
+$ host: rg -i '^\s*host\s' ~/.ssh/config | choose 1
+
+# 登录配置文件中的主机
+ssh <host>
+
+# 本地端口转发：访问本地 <port> 即达远程的 <rport>
+ssh -L <port>:localhost:<rport> <host>
+
+# 远程端口转发：远程端访问其 <rport> 即达本地的 <port>
+ssh -R <rport>:localhost:<port> <host>
+
+# 后台静默维持一条本地转发隧道
+ssh -Nf -L <port>:localhost:<rport> <host>
+
+# 建立 SOCKS5 代理，监听本地 1080
+ssh -D 1080 -N <host>
+
+# 经由跳板机登录目标主机
+ssh -J <jump-host> <host>
+
+# 附带 agent 转发，便于在远程继续免密跳转
+ssh -A <host>
+
+# 测试与 github 的 ssh 连通性
+ssh -vT git@github.com
+
+# 从 known_hosts 移除失效的主机指纹
+ssh-keygen -R <host>
+
+# 将默认私钥加入 agent
+ssh-add
+
+# 查看公钥的指纹
+ssh-keygen -lf <pubkey>

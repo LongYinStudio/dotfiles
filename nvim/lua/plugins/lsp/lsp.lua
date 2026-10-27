@@ -238,7 +238,6 @@ return {
 			},
 			"williamboman/mason-lspconfig.nvim",
 			-- "mason-org/mason-lspconfig.nvim",
-			"folke/neodev.nvim",
 			"j-hui/fidget.nvim",
 		},
 		config = function()

@@ -1,0 +1,28 @@
+% kde, wayland
+
+# 查看显示输出信息
+kscreen-doctor -o
+
+# 设置显示器的分辨率与刷新率
+kscreen-doctor output.<output>.mode.<width>x<height>@<refresh>
+
+# 静默截取全屏
+spectacle -b -n -o <file>.png
+
+# 静默截取当前活动窗口
+spectacle -a -n -o <file>.png
+
+# 重启 plasmashell（桌面异常时）
+systemctl --user restart plasma-plasmashell.service
+
+# 查询 KWin 支持信息
+qdbus6 org.kde.KWin /KWin supportInformation
+
+# 列出可用的 kdeconnect 设备
+kdeconnect-cli -a
+
+# 向手机发送文件
+kdeconnect-cli -d <device-id> --send-file <file>
+
+# 刷新 kdeconnect 设备发现
+kdeconnect-cli --refresh

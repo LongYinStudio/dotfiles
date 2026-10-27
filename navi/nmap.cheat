@@ -1,0 +1,334 @@
+% nmap
+
+$ target: printf '192.168.1.1'
+$ ports: printf '22,80,443'
+$ port-range: printf '1-1000'
+$ all-ports: printf '-p-'
+$ interface: ip -br addr | choose 1 | tr -s ' ' "\n" | rg '\S+$'
+$ scan-type: printf 'SYN\nConnect\nUDP\nACK\nFIN\nNULL\nXMAS'
+$ output-file: printf 'scan-result.txt'
+$ script-name: printf 'vuln\nhttp-title\nssh-hostkey'
+$ timing-template: printf 'T3\nT4\nT5'
+
+; 基础扫描
+
+# 快速扫描常用端口
+nmap <target>
+
+# 指定端口扫描
+nmap -p <ports> <target>
+
+# 扫描特定端口范围
+nmap -p <port-range> <target>
+
+# 扫描所有 65535 个端口
+nmap -p- <target>
+
+# 只扫描最快的前 100 个端口
+nmap -F <target>
+
+; 主机发现（Ping 扫描）
+
+# 跳过 Ping 扫描，直接扫描目标
+nmap -Pn <target>
+
+# 列表扫描 - 仅列出目标
+nmap -sL <target>
+
+# Ping 扫描 - 仅检查主机是否在线
+nmap -sn <target>
+
+# TCP SYN Ping 扫描
+nmap -PS22,80,443 <target>
+
+# TCP ACK Ping 扫描
+nmap -PA22,80,443 <target>
+
+# UDP Ping 扫描
+nmap -PU53 <target>
+
+# ICMP Echo Ping 扫描
+nmap -PE <target>
+
+# ICMP Timestamp Ping 扫描
+nmap -PP <target>
+
+# ICMP Netmask Request Ping 扫描
+nmap -PM <target>
+
+; 扫描技术
+
+# TCP SYN 扫描（半开放扫描，快速隐蔽）
+nmap -sS <target>
+
+# TCP Connect 扫描（完整连接，适用于无 root 权限）
+nmap -sT <target>
+
+# UDP 扫描（慢但能发现 UDP 服务）
+nmap -sU <target>
+
+# ACK 扫描（用于探测防火墙规则）
+nmap -sA <target>
+
+# FIN 扫描（隐蔽扫描）
+nmap -sF <target>
+
+# NULL 扫描（隐蔽扫描）
+nmap -sN <target>
+
+# XMAS 扫描（隐蔽扫描）
+nmap -sX <target>
+
+# IP 协议扫描
+nmap -sO <target>
+
+# Maimon 扫描（隐蔽扫描）
+nmap --scanflags MAIMON <target>
+
+; 服务版本检测
+
+# 检测服务版本
+nmap -sV <target>
+
+# 快速版本检测
+nmap --version-light <target>
+
+# 尝试所有版本探针
+nmap --version-all <target>
+
+# 显示版本检测详情
+nmap --version-trace <target>
+
+# 强力模式（版本 +OS+ 脚本 + 路由追踪）
+nmap -A <target>
+
+; 操作系统检测
+
+# 检测操作系统类型
+nmap -O <target>
+
+# 限制 OS 检测到有希望的目標
+nmap --osscan-limit <target>
+
+# 更积极地猜测操作系统
+nmap --osscan-guess <target>
+
+; NSE 脚本扫描
+
+# 运行默认脚本
+nmap -sC <target>
+
+# 运行特定脚本
+nmap --script=<script-name> <target>
+
+# 运行多个脚本（逗号分隔）
+nmap --script=vuln,http-title <target>
+
+# 运行脚本类别
+nmap --script=<category> <target>
+
+; 常用脚本类别
+# safe - 安全的脚本（默认）
+nmap --script=safe <target>
+
+# default - 默认脚本集合
+nmap --script=default <target>
+
+# vuln - 漏洞检测脚本
+nmap --script=vuln <target>
+
+# exploit - 利用脚本
+nmap --script=exploit <target>
+
+# brute - 暴力破解脚本
+nmap --script=brute <target>
+
+# dns - DNS 相关脚本
+nmap --script=dns-* <target>
+
+# http - HTTP 相关脚本
+nmap --script=http-* <target>
+
+# ssh - SSH 相关脚本
+nmap --script=ssh-* <target>
+
+; 特定场景脚本示例
+
+# 检测常见漏洞
+nmap --script=vuln <target>
+
+# 获取网页标题
+nmap --script=http-title <target>
+
+# 获取 SSH 主机密钥
+nmap --script=ssh-hostkey <target>
+
+# SQL 注入检测（仅用于授权测试）
+nmap --script=http-sql-injection <target>
+
+# 检测 SSL/TLS 漏洞
+nmap --script=ssl-* <target>
+
+# SMB 漏洞检测
+nmap --script=smb-* <target>
+
+# FTP 匿名登录检测
+nmap --script=ftp-anon <target>
+
+; 输出格式
+
+# 普通文本格式输出到文件
+nmap -oN <output-file> <target>
+
+# XML 格式输出到文件
+nmap -oX <output-file> <target>
+
+# Grepable 格式输出到文件
+nmap -oG <output-file> <target>
+
+# 同时输出三种格式
+nmap -oA <basename> <target>
+
+; 定时与性能调优
+
+# 设置定时模板 (0-6)
+# T0: Paranoid (最慢，避开 IDS)
+# T1: Sneaky (慢，避开 IDS)
+# T2: Polite (慢，减少带宽和占用时间)
+# T3: Normal (默认)
+# T4: Aggressive (快，假设高速网络)
+# T5: Insane (极快，可能超时或触发 IDS)
+nmap -T<timing-template> <target>
+
+# 设置最小扫描速率（包/秒）
+nmap --min-rate <rate> <target>
+
+# 设置最大扫描速率（包/秒）
+nmap --max-rate <rate> <target>
+
+# 设置主机组大小
+nmap --min-hostgroup 64 --max-hostgroup 128 <target>
+
+# 设置并行扫描数
+nmap --min-parallelism 256 --max-parallelism 300 <target>
+
+# 设置最大重试次数
+nmap --max-retries 3 <target>
+
+# 设置最大 RTT 超时时间
+nmap --max-rtt-timeout 1s <target>
+
+# 设置每个主机的超时时间
+nmap --host-timeout 20m <target>
+
+# 设置扫描延迟
+nmap --scan-delay 500ms <target>
+
+; 防火墙/IDS 规避
+
+# 分片数据包（绕过简单防火墙）
+nmap -f <target>
+
+# 指定 MTU 大小
+nmap --mtu 32 <target>
+
+# 添加随机数据长度
+nmap --data-length 20 <target>
+
+# 使用诱饵 IP 地址（混在扫描中）
+nmap -D RND:10 <target>
+
+# 伪造源 IP 地址
+nmap -S <spoofed-ip> <target>
+
+# 指定源端口（绕过某些防火墙）
+nmap --source-port 53 <target>
+
+# 指定源端口范围
+nmap --source-ports 1024-65535 <target>
+
+# 指定网络接口
+nmap -e <interface> <target>
+
+# MAC 地址欺骗
+nmap --spoof-mac 0 <target>
+
+# 禁用 ARP 缓存
+nmap --disable-arp-ping <target>
+
+; 输入输出控制
+
+# 从文件读取目标列表
+nmap -iL <input-file> <target>
+
+# 随机选择目标
+nmap -iR <num_hosts> <target>
+
+# 排除特定主机
+nmap --exclude <host1,host2> <target>
+
+# 从文件排除主机
+nmap --excludefile <exclude-file> <target>
+
+; IPv6 支持
+
+# IPv6 扫描
+nmap -6 <target>
+
+; 其他实用选项
+
+# 显示详细扫描过程
+nmap -v <target>
+
+# 显示端口状态原因
+nmap --reason <target>
+
+# 禁止 DNS 解析
+nmap -n <target>
+
+# 总是进行 DNS 解析
+nmap -R <target>
+
+# 调试模式
+nmap -d <target>
+
+# 显示 Nmap 版本
+nmap -V
+
+; 组合示例
+
+; 快速内网扫描
+nmap -sn 192.168.1.0/24
+
+; 全端口 SYN 扫描 + 版本检测
+nmap -sS -p- -sV 192.168.1.1
+
+; 强力扫描（所有功能）
+nmap -A -p- 192.168.1.1
+
+; 隐蔽扫描（慢速，避免检测）
+nmap -sS -T2 -f 192.168.1.1
+
+; UDP 服务扫描
+nmap -sU -p U:53,111,137,161,162,500,1900,4500 <target>
+
+; 漏洞扫描
+nmap -sC --script=vuln -p- <target>
+
+; 带输出的全面扫描
+nmap -sS -sV -O -A -p- -oN scan-result.txt -oX scan-result.xml 192.168.1.1
+
+; 扫描多个目标
+nmap -iL targets.txt -oA results/all-scan
+
+; 排除特定主机
+nmap --exclude 192.168.1.1,192.168.1.2 192.168.1.0/24
+
+; 使用诱饵 IP
+nmap -D DEFCON1,RND:10 192.168.1.1
+
+; 通过代理扫描
+nmap --proxies http://127.0.0.1:8080 <target>
+
+; 自定义扫描标志
+nmap --scanflags FIN,ACK <target>

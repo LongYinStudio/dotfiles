@@ -7,7 +7,7 @@
 --  command_mode = "c",
 
 vim.g.mapleader = " "
-vim.g.mapllocalleader = "\\" -- grug-far 插件使用
+vim.g.maplocalleader = "\\" -- grug-far 插件使用
 
 local opts = { noremap = true, silent = true }
 

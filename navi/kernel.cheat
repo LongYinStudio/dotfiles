@@ -1,0 +1,101 @@
+% kernel, hardware
+
+$ module: lsmod --- --column 1 --header-lines 1
+
+; 内核
+
+# 实时跟踪内核日志
+sudo dmesg -wH
+
+# 只看内核日志中的告警与错误
+sudo dmesg --level=err,warn
+
+# 查看本次开机以来的内核日志
+journalctl -k -b
+
+# 查看 PCI 设备及其使用的驱动
+lspci -k
+
+# 查看 USB 设备
+lsusb
+
+# 查看已加载的内核模块
+lsmod
+
+# 查看模块信息
+modinfo <module>
+
+# 加载内核模块
+sudo modprobe <module>
+
+# 卸载内核模块
+sudo modprobe -r <module>
+
+# 查看内核参数
+sysctl <key>
+
+# 临时修改内核参数
+sudo sysctl -w <key>=<value>
+
+# 重新生成 initramfs
+sudo mkinitcpio -P
+
+# 查看启动时传给内核的参数
+cat /proc/cmdline
+
+# 查看内核版本与编译信息
+uname -a
+
+# 查看开机时长与负载
+uptime
+
+; 引导
+
+# 查看 EFI 启动项
+sudo efibootmgr
+
+# 删除指定的 EFI 启动项
+sudo efibootmgr -b <num> -B
+
+# 调整 EFI 启动顺序
+sudo efibootmgr -o <order>
+
+; 设备事件 udev
+
+# 查看设备的 udev 属性
+udevadm info /dev/<device>
+
+# 顺属性链向上查看全部匹配属性（写规则时找键值用）
+udevadm info -a /dev/<device>
+
+# 实时监视设备的插拔事件
+udevadm monitor
+
+# 重新加载全部规则文件
+sudo udevadm control --reload
+
+# 对已在线设备重新触发规则（改完规则后与 reload 配合使用）
+sudo udevadm trigger
+
+; 硬件监控
+
+# 查看内存使用
+free -h
+
+# 每秒输出虚拟内存统计
+vmstat 1
+
+# 查看温度传感器（需 lm_sensors）
+sensors
+
+# 只看有 IO 的进程
+sudo iotop -oP
+
+# 查看电池状态
+upower -i $(upower -e | rg BAT)
+
+# 综合系统监视器
+btop
+
+# 查看 CPU 信息
+cpufetch

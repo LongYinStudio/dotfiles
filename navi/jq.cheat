@@ -1,0 +1,45 @@
+% jq
+
+$ json: fd -c='always' -H -E='.git' -I -t file -e 'json' .
+
+# 美化打印
+jq .
+
+# 紧凑单行输出
+jq -c .
+
+# 取对象字段
+jq '.<key>' <json>
+
+# 以原始字符串输出字段（去引号）
+jq -r '.<key>' <json>
+
+# 遍历数组元素
+jq '.[]' <json>
+
+# 筛选符合条件的对象
+jq '.[] | select(.<key> == "<value>")' <json>
+
+# 提取数组每项的字段
+jq -r '.[].<key>' <json>
+
+# 查看全部键名
+jq 'keys' <json>
+
+# 统计元素个数
+jq 'length' <json>
+
+# 数组字段求和
+jq 'map(.<key>) | add' <json>
+
+# 数组按字段排序
+jq 'sort_by(.<key>)' <json>
+
+# 展开为 key=value
+jq -r 'to_entries[] | "\(.key)=\(.value)"' <json>
+
+# 用命令行变量改写字段
+jq --arg v "<value>" '.<key> = $v' <json>
+
+# 合并多个 JSON 文档再处理
+jq -s 'map(.<key>) | add' <json>

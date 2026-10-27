@@ -1,0 +1,13 @@
+% font
+
+# 列出支持中文的字体族
+fc-list :lang=zh family | sort -u
+
+# 查看某字体族的匹配结果
+fc-match <family>
+
+# 按关键字查找字体文件
+fc-list | rg <keyword>
+
+# 重建字体缓存
+fc-cache -f

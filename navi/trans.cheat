@@ -1,0 +1,16 @@
+% trans
+
+# 翻译成中文
+trans :zh '<text>'
+
+# 只输出译文
+trans -b :zh '<text>'
+
+# 翻译成英文
+trans -b :en '<text>'
+
+# 翻译整个文件
+trans :zh file://<file>
+
+# 进入交互式翻译
+trans -R

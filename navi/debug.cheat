@@ -1,0 +1,39 @@
+% debug
+
+$ process: ps -A --no-headers | choose 3
+
+# 查看崩溃转储列表
+coredumpctl list
+
+# 用 gdb 打开上一次崩溃的现场
+coredumpctl gdb
+
+# 批处理运行到崩溃，直接打印回溯
+gdb -batch -ex run -ex bt --args <command>
+
+# 附着到运行中的进程
+gdb -p <PID>
+
+# 打印运行中进程所有线程的调用栈
+gdb -batch -p <PID> -ex 'thread apply all bt'
+
+# 统计命令的系统调用耗时
+strace -c <command>
+
+# 采样性能并生成热点报告
+perf record -g -- <command> && perf report
+
+# 实时观察全局性能热点
+perf top
+
+# 查看命令的硬件计数统计
+perf stat <command>
+
+# 检测内存泄漏
+valgrind --leak-check=full --show-leak-kinds=all <command>
+
+# 查看进程打开的文件
+lsof -p <PID>
+
+# 查看进程的内存映射
+pmap <PID>

@@ -1,0 +1,45 @@
+% apt
+
+$ package: apt list --installed 2>/dev/null --- --column 1 --delimiter '/'
+
+# 更新软件索引
+sudo apt update
+
+# 升级已安装的包
+sudo apt upgrade
+
+# 智能升级（处理依赖变动）
+sudo apt full-upgrade
+
+# 列出可升级的包
+apt list --upgradable
+
+# 安装
+sudo apt install <package>
+
+# 搜索
+apt search <keyword>
+
+# 查看包信息
+apt show <package>
+
+# 卸载（保留配置）
+sudo apt remove <package>
+
+# 卸载并清除配置
+sudo apt purge <package>
+
+# 清理不再需要的依赖
+sudo apt autoremove
+
+# 清理下载的 deb 缓存
+sudo apt clean
+
+# 修复损坏的依赖
+sudo apt --fix-broken install
+
+# 列出已安装的包
+apt list --installed
+
+# 查询文件属于哪个包
+dpkg -S <file>

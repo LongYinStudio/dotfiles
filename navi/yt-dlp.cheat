@@ -1,0 +1,25 @@
+% yt-dlp
+
+# 下载最佳画质
+yt-dlp <url>
+
+# 列出所有可选格式
+yt-dlp -F <url>
+
+# 下载指定的格式组合
+yt-dlp -f <format> <url>
+
+# 仅提取音频为 mp3
+yt-dlp -x --audio-format mp3 --audio-quality 0 <url>
+
+# 列出可用的字幕
+yt-dlp --list-subs <url>
+
+# 只下载字幕不下载视频
+yt-dlp --write-sub --sub-lang <lang> --skip-download <url>
+
+# 下载整个播放列表（文件名带序号）
+yt-dlp -o '%(playlist_index)s-%(title)s.%(ext)s' <url>
+
+# 限速下载
+yt-dlp --limit-rate 2M <url>

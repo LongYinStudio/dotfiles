@@ -1,0 +1,37 @@
+% curl, http
+
+# 下载并保留远端文件名
+curl -LO <url>
+
+# 断点续传下载
+curl -L --continue-at - -o <output> <url>
+
+# 仅查看响应头
+curl -Is <url>
+
+# 查看 http 状态码与总耗时
+curl -s -o /dev/null -w '%{http_code} %{time_total}s\n' <url>
+
+# GET 并美化 JSON 响应
+curl -s <url> | jq
+
+# POST JSON 数据
+curl -s -X POST -H 'Content-Type: application/json' -d '{"<key>":"<value>"}' <url> | jq
+
+# 以表单上传文件
+curl -F 'file=@<file>' <url>
+
+# Basic 认证请求
+curl -u <user>:<password> -s <url> | jq
+
+# 携带认证请求头
+curl -s -H 'Authorization: Bearer <token>' <url> | jq
+
+# 将域名解析到指定 IP（测试未切 DNS 的服务）
+curl --resolve <origin>:<port>:<ip> -s <url>
+
+# 查看本机公网 IP
+curl -s ifconfig.me && echo
+
+# 重试三次并跟随重定向
+curl -sL --retry 3 <url>

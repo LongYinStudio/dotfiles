@@ -1,0 +1,30 @@
+% bluetooth
+
+$ mac: bluetoothctl devices --- --column 2
+
+# 启动蓝牙控制器
+bluetoothctl power on
+
+# 扫描附近的蓝牙设备
+bluetoothctl scan on
+
+# 列出已知的蓝牙设备
+bluetoothctl devices
+
+# 配对新设备
+bluetoothctl pair <mac>
+
+# 信任设备以便自动重连
+bluetoothctl trust <mac>
+
+# 连接设备
+bluetoothctl connect <mac>
+
+# 断开设备
+bluetoothctl disconnect <mac>
+
+# 查看设备详情
+bluetoothctl info <mac>
+
+# 移除配对记录
+bluetoothctl remove <mac>

@@ -1,6 +1,10 @@
 -- 自动补全
 local M = {
 	"hrsh7th/nvim-cmp",
+	event = {
+		"InsertEnter",
+		"CmdlineEnter",
+	},
 	dependencies = {
 		{
 			"hrsh7th/cmp-nvim-lsp",
@@ -29,9 +33,9 @@ local M = {
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			event = "InsertEnter",
 		},
+		"hrsh7th/cmp-buffer",
 		"lukas-reineke/cmp-rg",
 	},
-	event = "InsertEnter",
 }
 
 function M.config()
@@ -135,6 +139,7 @@ function M.config()
 				-- print(vim.inspect(entry:get_completion_item()))
 				-- vim_item.menu = entry:get_completion_item().detail
 				vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+
 				return vim_item
 			end,
 			expandable_indicator = true, -- Boolean to show the `~` expandable indicator in cmp's floating window.

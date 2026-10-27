@@ -1,0 +1,30 @@
+% rclone
+
+$ remote: rclone listremotes --- --delimiter ':'
+
+# 交互式配置远端
+rclone config
+
+# 列出已配置的远端
+rclone listremotes
+
+# 查看远端的目录
+rclone lsd <remote>:
+
+# 递归列出远端文件与大小
+rclone lsl <remote>:<path>
+
+# 复制到远端（不删除目的端多余文件）
+rclone copy <src> <remote>:<path> -P
+
+# 单向镜像同步（先预览再实跑）
+rclone sync <src> <remote>:<path> --dry-run -P
+
+# 双向同步
+rclone bisync <path1> <remote>:<path2> -P
+
+# 比对本地与远端的差异
+rclone check <src> <remote>:<path>
+
+# 挂载远端到本地目录
+rclone mount <remote>:<path> <dest> --daemon

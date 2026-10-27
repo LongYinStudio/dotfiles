@@ -1,0 +1,24 @@
+% zsh
+
+# 查看命令的来源（别名、函数还是路径）
+whence -v <command>
+
+# 刷新命令哈希表（新装命令找不到时）
+rehash
+
+# 语法检查 shell 配置文件
+zsh -n <file>
+
+# 编译脚本加速加载
+zcompile ~/.zshrc
+
+# 预览提示符转义序列的效果
+print -P '%F{blue}<text>%f'
+
+; zoxide
+
+# 智能跳转目录
+z <path>
+
+# 交互式选择目录跳转
+zi

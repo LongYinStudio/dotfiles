@@ -1,0 +1,16 @@
+% gpu, nvidia
+
+# 查看 GPU 占用与进程
+nvidia-smi
+
+# 逐秒刷新 GPU 状态
+watch -tc -n 1 nvidia-smi
+
+# 查询指定的字段
+nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.used --format=csv
+
+# 查看 GPU 的详细属性
+nvidia-smi -q
+
+# 只看指定编号的 GPU
+nvidia-smi -i <index>

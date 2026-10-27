@@ -1,0 +1,40 @@
+% atuin
+
+# 交互式搜索历史命令
+atuin search
+
+# 按关键字搜索
+atuin search <query>
+
+# 只搜当前目录下执行过的命令
+atuin search --cwd <path>
+
+# 只搜执行失败的命令
+atuin search --exit 1
+
+# 限制结果条数
+atuin search --limit 10 <query>
+
+# 使用统计（高频命令、时段分布）
+atuin stats
+
+# 手动触发同步
+atuin sync
+
+# 查看同步状态
+atuin status
+
+# 打印加密密钥（迁移到新机器时用）
+atuin key
+
+# 在新机器上登录同步账号
+atuin login -u <username>
+
+# 导入既有 shell 历史
+atuin import auto
+
+# 体检，排查常见问题
+atuin doctor
+
+# 打印默认配置（对照调参）
+atuin default-config

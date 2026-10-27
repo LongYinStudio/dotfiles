@@ -1,0 +1,76 @@
+% systemd
+
+$ unit: systemctl list-unit-files --type=service --no-legend --- --column 1
+$ user-unit: systemctl --user list-unit-files --type=service --no-legend --- --column 1
+$ action: printf 'start\nstop\nrestart'
+
+; 系统服务
+
+# 查看指定单元的日志
+journalctl -xeu <unit>
+
+# 查看单元状态
+systemctl status <unit>
+
+# 启停服务
+sudo systemctl <action> <unit>
+
+# 启用并立即启动服务
+sudo systemctl enable --now <unit>
+
+# 列出失败的服务
+systemctl list-units --failed
+
+# 查看单元文件内容
+systemctl cat <unit>
+
+# 编辑单元的 drop-in 覆盖配置
+sudo systemctl edit <unit>
+
+# 修改单元文件后重载
+sudo systemctl daemon-reload
+
+# 查看所有定时器与下次触发时间
+systemctl list-timers
+
+; 用户服务
+
+# 查看用户服务状态
+systemctl --user status <user-unit>
+
+# 启停用户服务
+systemctl --user <action> <user-unit>
+
+# 允许用户服务脱离登录会话常驻
+sudo loginctl enable-linger <user>
+
+; 日志
+
+# 持续跟踪日志
+journalctl -f
+
+# 本次开机的日志
+journalctl -b
+
+# 上一次开机的日志
+journalctl -b -1
+
+# 只看错误及以上级别
+journalctl -p err
+
+# 查看日志占用空间
+journalctl --disk-usage
+
+# 清理日志只保留 500M
+sudo journalctl --vacuum-size=500M
+
+# 清理两周前的日志
+sudo journalctl --vacuum-time=2weeks
+
+; 启动分析
+
+# 各单元启动耗时排行
+systemd-analyze blame
+
+# 查看启动关键链
+systemd-analyze critical-chain <unit>

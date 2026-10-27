@@ -5,9 +5,9 @@ return {
 	lazy = false,
 	opts = {
 		image = {
-			enable = true,
+			enabled = true,
 			doc = {
-				enable = true,
+				enabled = true,
 				inline = true,
 			},
 		},

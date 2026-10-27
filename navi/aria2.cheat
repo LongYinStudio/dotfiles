@@ -1,0 +1,43 @@
+% aria2, download
+
+# 多线程下载文件
+aria2c -x 8 -s 8 <url>
+
+# 断点续传下载
+aria2c -c <url>
+
+# 指定下载目录与文件名
+aria2c -d <dir> -o <filename> <url>
+
+# 从文本文件批量下载（每行一个 URL）
+aria2c -i <urls.txt>
+
+# 限速下载
+aria2c --max-overall-download-limit 2M <url>
+
+# 使用代理下载
+aria2c --all-proxy http://<host>:<port> <url>
+
+# 伪造 User-Agent 和 Referer 下载
+aria2c -U '<user-agent>' --referer <referer> <url>
+
+# 下载并校验文件哈希
+aria2c --checksum sha-256=<hash> <url>
+
+# 通过 RPC 控制已运行的 aria2 下载
+aria2c --enable-rpc --rpc-listen-all --rpc-secret <token>
+
+# 保存/载入会话以断电恢复
+aria2c -c --save-session <session.txt> --input-file <session.txt>
+
+# 下载种子文件
+aria2c --seed-ratio 1.0 <file.torrent>
+
+# 通过磁力链接下载 BT
+aria2c --seed-ratio 1.0 'magnet:?xt=urn:btih:<hash>'
+
+# 下载 metalink 镜像文件
+aria2c <file.meta4>
+
+# 下载后自动校验 BT 分段哈希
+aria2c --check-integrity <file.torrent>

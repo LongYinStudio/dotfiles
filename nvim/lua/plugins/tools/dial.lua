@@ -223,7 +223,7 @@ return {
 			})
 		)
 
-		local lua = default
+    local lua = vim.deepcopy(default)
 		table.insert(
 			lua,
 			augend.constant.new({

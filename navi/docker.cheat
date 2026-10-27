@@ -1,0 +1,55 @@
+% docker
+
+# 运行镜像并打开交互终端（root 用户）
+docker run -it -u root <image_id> <shell>
+
+# 运行镜像并打开交互终端
+docker run -it <image_id> <shell>
+
+# 打开容器交互终端（root 用户）
+docker exec -it -u root <container_id> <shell>
+
+# 打开容器交互终端
+docker exec -it <container_id> <shell>
+
+# 批量删除含有指定关键字的镜像
+docker rmi -f $(docker images | grep "<image_keyword>" | awk '{print $3}') 
+
+# 批量删除编译失败的镜像
+docker rmi -f $(docker images | grep "none" | awk '{print $3}') 
+
+# 删除所有未被使用的镜像
+docker image prune -a
+
+# 删除所有未被使用的容器
+docker container prune
+
+# 删除所有未被使用的网络
+docker network prune
+
+# 删除所有未被使用的存储卷
+docker volume prune
+
+# 删除所有未被使用的对象：包括镜像、容器、网络和存储卷
+docker system prune --volumes
+
+# 删除所有未被使用的对象（除存储卷）：包括镜像、容器、网络
+docker system prune
+
+# 获取所有容器 IP 地址
+docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
+
+
+% docker, docker-compose
+
+# 启动所有编排容器服务
+docker-compose up -d
+
+# 查看正在运行中的容器
+docker-compose ps
+
+# 查看运行中的容器日志，继续持续输出日志，并显示时间戳
+docker-compose logs -f -t
+
+# 停止所有up命令启动的容器
+docker-compose down

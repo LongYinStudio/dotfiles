@@ -1,0 +1,32 @@
+% jvm
+
+# 给定类的路径，生成 JNI 头文件 (需要 java8)
+javah -classpath <directory> <class>
+
+# 查看指定类的 JNI 签名
+javap -p -s <class>
+
+; 密钥与证书
+
+# 生成 JKS 密钥对
+keytool -genkeypair -alias <alias> -keyalg RSA -keysize 4096 -keystore <keystore>.jks -validity 3650
+
+# 查看 JKS 内容
+keytool -list -v -keystore <keystore>.jks
+
+# 导入 CA 证书到 JKS
+keytool -importcert -alias <alias> -file <cert>.crt -keystore <keystore>.jks
+
+; 进程诊断
+
+# 列出运行中的 JVM 进程
+jps -l
+
+# 打印进程的线程栈（排查卡死）
+jstack <pid>
+
+# 打印进程的堆内存直方图
+jmap -histo <pid>
+
+# 查看进程的垃圾回收概况
+jcmd <pid> GC.heap_info

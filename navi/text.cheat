@@ -1,0 +1,39 @@
+% text
+
+$ file: fd -c='always' -H -E='.git' -I -t file .
+
+# 原地替换文本
+sed -i 's/<old>/<new>/g' <file>
+
+# 去除 Windows 换行符
+sed -i 's/\r$//' <file>
+
+# 按分隔符累加某一列
+awk -F '<sep>' '{sum += $<n>} END {print sum}' <file>
+
+# 各行去重并统计出现次数，倒序
+sort <file> | uniq -c | sort -rn
+
+# 对齐列显示
+column -t <file>
+
+# GBK 转 UTF-8
+iconv -f GBK -t UTF-8 <file> -o <output>
+
+# base64 编码（单行输出）
+base64 -w0 <file>
+
+# base64 解码
+base64 -d <file> -o <output>
+
+# 十六进制查看
+xxd <file>
+
+# 十六进制还原
+xxd -r <file> > <output>
+
+# 统计行数词数字符数
+wc <file>
+
+# 对比两个已排序文件的异同（需先 sort）
+comm <file1> <file2>

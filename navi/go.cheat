@@ -1,0 +1,40 @@
+% go
+
+; 构建
+
+# 编译时去除符号和调试信息
+go build -ldflags "-s -w"
+
+# 交叉编译
+GOOS=linux GOARCH=arm64 go build -o <output>
+
+# 查看逃逸分析与内联决策
+go build -gcflags='-m' <package>
+
+; 测试
+
+# 运行匹配的测试并显示详细输出
+go test -run <test> -v ./...
+
+# 显示测试覆盖率
+go test -cover ./...
+
+; 工程
+
+# 整理模块依赖
+go mod tidy
+
+# 检查哪些文件未格式化
+gofmt -l .
+
+# 格式化并简化代码
+gofmt -w -s <file>
+
+# 安装可执行的包
+go install <package>@latest
+
+# 静态检查
+go vet ./...
+
+# 查看包文档
+go doc <package>

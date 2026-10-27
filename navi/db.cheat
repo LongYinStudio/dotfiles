@@ -1,0 +1,34 @@
+% mysql, sqlite
+
+# 登录本机 MySQL
+mysql -u root -p
+
+# 列出数据库
+mysql -u root -p -e 'show databases'
+
+# 列出指定库的数据表
+mysql -u root -p <database> -e 'show tables'
+
+# 查看当前连接与线程
+mysql -u root -p -e 'show processlist'
+
+# 导出数据库为压缩 SQL
+mysqldump -u root -p <database> | gzip > <dump>.sql.gz
+
+# 导出指定表
+mysqldump -u root -p <database> <table> > <dump>.sql
+
+# 恢复压缩的 SQL 备份
+gunzip < <dump>.sql.gz | mysql -u root -p <database>
+
+# 查看 sqlite 的表
+sqlite3 <db>.db '.tables'
+
+# 查看 sqlite 表结构
+sqlite3 <db>.db '.schema <table>'
+
+# 以列对齐与表头模式查询
+sqlite3 -header -column <db>.db '<sql>'
+
+# 导出 sqlite 数据库为 SQL
+sqlite3 <db>.db '.dump' > <dump>.sql

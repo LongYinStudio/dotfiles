@@ -19,7 +19,7 @@ local icons = {
 
 local get_lsp_str = function()
 	local lsps = {}
-	for _, lsp in ipairs(vim.lsp.get_clients()) do
+	for _, lsp in ipairs(vim.lsp.get_clients()) do -- vim.lsp.get_clients({ bufnr = 0 }) 只会显示当前buffer激活的lsp
 		table.insert(lsps, lsp.name)
 	end
 	return icons.LSP .. "[" .. table.concat(lsps, ", ") .. "]"
@@ -64,15 +64,15 @@ return {
 								"hint",
 							},
 							diagnostic_color = {
-								error = { fg = "DiaganosticError" },
+								error = { fg = "DiagnosticError" },
 								warn = { fg = "DiagnosticWarn" },
-								info = { fg = "DiaganosticInfo" },
-								hint = { fg = "DiaganosticHint" },
+								info = { fg = "DiagnosticInfo" },
+								hint = { fg = "DiagnosticHint" },
 							},
 							colored = true,
 							update_in_insert = true,
 							always_visible = true,
-							symbols = icons.diagnostic,
+							symbols = icons.diagnostics,
 						},
 						{
 							"diff",

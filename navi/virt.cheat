@@ -1,0 +1,33 @@
+% virsh, libvirt
+
+$ domain: virsh list --all --- --column 2 --header-lines 2 --delimiter '\s+'
+
+# 列出所有虚拟机
+virsh list --all
+
+# 启动虚拟机
+virsh start <domain>
+
+# 正常关机
+virsh shutdown <domain>
+
+# 强制断电
+virsh destroy <domain>
+
+# 连接虚拟机的串口控制台
+virsh console <domain>
+
+# 设置虚拟机随 libvirt 自启
+virsh autostart <domain>
+
+# 取消自启
+virsh autostart --disable <domain>
+
+# 查看虚拟机信息
+virsh dominfo <domain>
+
+# 设置默认网络随 libvirt 自启
+virsh net-autostart default
+
+# 用 GUI 打开虚拟机管理器
+virt-manager

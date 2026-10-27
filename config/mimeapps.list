@@ -155,3 +155,6 @@ application/x-matroska=vlc.desktop;mpv.desktop;
 ; # Discover
 ; x-scheme-handler/appstream=org.kde.discover.urlhandler.desktop
 ; application/vnd.debian.binary-package=org.kde.discover.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=wps-office-wps.desktop
+[Added Associations]
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=wps-office-wps.desktop

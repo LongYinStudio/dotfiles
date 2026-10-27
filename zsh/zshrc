@@ -22,7 +22,8 @@ source "$ZSH"/oh-my-zsh.sh
 
 # alias 别名 run "alias"可以查看系统，插件，主题等等所有别名
 [[ $(command -v trash) ]] && alias rm="trash"
-pacmanlist() { LC_ALL=C pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h  } # 列出已安软件及大小
+pacmanlist() { LC_ALL=C pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h; } # 列出已安软件及大小
+alias pm="pacman"
 alias \
   apti="sudo apt install" \
   aptp="sudo apt purge" \
@@ -35,15 +36,15 @@ alias q="exit"
 alias c="clear"
 alias ip="ip -color"
 if [[ "$(uname)" == "Linux" ]]; then
-    alias o='xdg-open'
+  alias o='xdg-open'
 elif [[ "$(uname)" == "Darwin" ]]; then
-    alias o='open'
-    alias xvim="arch -x86_64 nvim"
+  alias o='open'
+  alias xvim="arch -x86_64 nvim"
 fi
 if command -v eza &>/dev/null; then # 使用eza替代exa，因为eza基于rust且更新频繁
-	alias ls="eza --icons --color=always"
-	alias ll="eza -lah --icons --color=always"
-	alias lt="eza --tree --long --icons --color=always -I 'node_modules|.git'"
+  alias ls="eza --icons --color=always"
+  alias ll="eza -lah --icons --color=always"
+  alias lt="eza --tree --long --icons --color=always -I 'node_modules|.git'"
 fi
 [[ $(command -v bat) ]] && alias cat="bat"
 alias lg="lazygit"
@@ -52,8 +53,9 @@ command -v nvim >/dev/null && alias v="nvim" vi="nvim" vdiff="nvim -d"
 alias lv="NVIM_APPNAME=LazyVim nvim"   # git clone https://github.com/LazyVim/starter ~/.config/LazyVim
 alias nv="NVIM_APPNAME=NvChad nvim"    # git clone https://github.com/NvChad/starter ~/.config/NvChad
 alias av="NVIM_APPNAME=AstroNvim nvim" # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
-export MANPAGER='nvim +Man!' # 使用neovim查看manpage
-alias kcat="kitty +kitten icat" # 依赖于 ImageMagick
+alias sy="NVIM_APPNAME=sy nvim"        # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/AstroNvim
+export MANPAGER='nvim +Man!'           # 使用neovim查看manpage
+alias kcat="kitty +kitten icat"        # 依赖于 ImageMagick
 alias wcat="wezterm imgcat"
 alias ipv4="curl -4 ip.sb" ipv6="curl -6 ip.sb"
 alias trans_en_zh='trans -j -d en:zh' trans_zh_en='trans -j -d zh:en'
@@ -65,9 +67,14 @@ bin="$HOME/bin"
 go="$HOME/dev-tools/go/bin"
 mysql="/usr/local/mysql/bin" # mac dmg安装的mysql
 # export JAVA_HOME=$HOME/dev-tools/jdk1.8.0_421
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar # jdk 11+ 不需要
-export JRE_HOME=$JAVA_HOME/jre # jdk 11+ 不需要
+export JRE_HOME=$JAVA_HOME/jre                                    # jdk 11+ 不需要
+export HBUILDERX_CLI_PATH="/home/longyinstudio/dev-tools/HBuilderX/cli"
+export ANDROID_HOME=$HOME/.android-sdk
+export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$JAVA_HOME/bin:$bin:$go:$mysql:$PATH"
 
@@ -85,26 +92,26 @@ export GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 # 开启代理函数
 PROXY_HTTP="http://127.0.0.1:7890"
 function openvpn() {
-	export http_proxy="${PROXY_HTTP}"
-	export https_proxy="${PROXY_HTTP}"
-	export all_proxy=socks5://127.0.0.1:7890
+  export http_proxy="${PROXY_HTTP}"
+  export https_proxy="${PROXY_HTTP}"
+  export all_proxy=socks5://127.0.0.1:7890
   export no_proxy="localhost,127.0.0.1,::1,0.0.0.0,*.local,*.lan,192.168.0.0/16,10.0.0.0/8"
-	export NO_PROXY="$no_proxy"
-	git config --global http.proxy "${PROXY_HTTP}"
-	git config --global https.proxy "${PROXY_HTTP}"
-	echo "代理已开"
+  export NO_PROXY="$no_proxy"
+  git config --global http.proxy "${PROXY_HTTP}"
+  git config --global https.proxy "${PROXY_HTTP}"
+  echo "代理已开"
 }
 
 # 关闭代理函数
 function closevpn() {
-	unset https_proxy
-	unset http_proxy
-	unset all_proxy
+  unset https_proxy
+  unset http_proxy
+  unset all_proxy
   unset no_proxy
-	unset NO_PROXY
-	git config --global --unset http.proxy
-	git config --global --unset https.proxy
-	echo "代理已关"
+  unset NO_PROXY
+  git config --global --unset http.proxy
+  git config --global --unset https.proxy
+  echo "代理已关"
 }
 
 # 编辑模式下，使用Ctrl+v，使用nvim(默认编辑器)编辑当前命令
@@ -121,11 +128,11 @@ export FZF_DEFAULT_OPTS=" \
   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,dist,vendor} --type f"
 if command -v fzf &>/dev/null; then
-	source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion (版本0.54以上)
-	alias fv='vim $(fzf)'
-	alias fn='nvim $(fzf)'
-	alias fp="fzf --preview 'bat --color=always {}'"
-	alias fh='history | fzf'
+  source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion (版本0.54以上)
+  alias fv='vim $(fzf)'
+  alias fn='nvim $(fzf)'
+  alias fp="fzf --preview 'bat --color=always {}'"
+  alias fh='history | fzf'
 fi
 
 # Completion styling
@@ -166,13 +173,15 @@ compdef _gnu_generic trash
 
 # homebrew
 if command -v brew &>/dev/null; then
-	export HOMEBREW_INSTALL_FROM_API=1
-	export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
-	export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
-	export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
-	export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+  export HOMEBREW_INSTALL_FROM_API=1
+  export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+  export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+  export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+  export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
 fi
 
 # starship 不需要source .zshrc,随便输个命令,就会重新加载配置
-[[ $(command -v starship) ]] &&	eval "$(starship init zsh)"
+[[ $(command -v starship) ]] && eval "$(starship init zsh)"
 [[ $(command -v zoxide) ]] && eval "$(zoxide init zsh)"
+[[ $(command -v atuin) ]] && eval "$(atuin init zsh --disable-up-arrow)"
+[[ $(command -v navi) ]] && eval "$(navi widget zsh)" && export NAVI_PATH="$HOME/dotfiles/navi:/another/folder"

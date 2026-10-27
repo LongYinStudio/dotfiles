@@ -1,0 +1,141 @@
+% arch
+
+$ local-package: pacman -Qq
+$ file: fd -c='always' -H -E='.git' -I --type file .
+$ d1: printf '\n-d 1'
+$ aur-helper: printf 'yay\nparu'
+
+
+
+; 包查询 -Q/F
+
+# 查询命令所属的本地包
+pacman -Qo <command>
+
+# 查询命令所属的包
+pacman -F <command>
+
+# 本地包的文件树
+pacman -Ql <local-package> | choose 1 | tree -C --fromfile | bat
+
+# 本地包的依赖树
+pactree <d1> <local-package> | bat
+
+# 本地包的供养树
+pactree <d1> -r <local-package> | bat
+
+# 包的文件树
+pacman -Fl <package> | choose 1 | tree -C --fromfile | bat
+
+# 包的依赖树
+pactree <d1> -s <package> | bat
+
+# 包的供养树
+pactree <d1> -s -r <package> | bat
+
+# 列印无供养的包
+pacman -Qt
+
+# 查询 AUR 包
+pacman -Qem
+
+# 本地包的元信息
+pacman -Qi <local-package>
+
+# 关键字搜索本地包
+pacman -Qs <keyword>
+
+# 列出手动安装的包
+pacman -Qe
+
+# 列出可升级的包
+pacman -Qu
+
+
+
+; 同步 -S
+
+# 下载
+sudo pacman -S <package>
+
+# 全量更新
+sudo pacman -Syu
+
+# 关键字搜索云端包
+pacman -Ss <keyword>
+
+# 更新包管理密钥
+sudo pacman -Sy archlinux-keyring
+
+# 查看云端包信息
+pacman -Si <package>
+
+# 按清单下载
+sudo pacman -S --needed - <  <list>
+
+# 将包下载到 /var/cache/pacman/pkg
+sudo pacman -Sw <package>
+
+
+
+; 移除 -R
+
+# 卸载
+sudo pacman -Rs <local-package>
+
+# 清理孤儿依赖
+pacman -Qtdq | sudo pacman -Rs -
+
+# 正则匹配清理
+pacman -Qsq <package> | sudo pacman -Rdd -
+
+# 清理包缓存
+sudo pacman -Sc
+
+# 清理包缓存，仅保留最近 3 个版本
+sudo paccache -r
+
+# 清理包缓存，仅保留最近 1 个版本
+sudo paccache -rk1
+
+
+
+; 打包安装
+
+# 编译 PKGBUILD
+makepkg --printsrcinfo > .SRCINFO
+
+# 构建软件包
+makepkg
+
+# 从软件包文件安装
+sudo pacman -U <file>
+
+# 回滚到缓存中的旧版本
+sudo pacman -U <cache-pkg>
+
+# 下载依赖，构建，安装软件包
+makepkg -si
+
+# 抓取包的 PKGBUILD
+paru -G <package>
+
+; AUR 助手
+
+# 全量更新（仓库 + AUR）
+<aur-helper> -Syu
+
+# 关键字搜索（含 AUR）
+<aur-helper> -Ss <keyword>
+
+# 安装（仓库没有时自动回退到 AUR）
+<aur-helper> -S <package>
+
+# 只更新 AUR 包
+<aur-helper> -Sua
+
+# 列出可更新的 AUR 包
+<aur-helper> -Qua
+
+# 清理不再需要的依赖
+<aur-helper> -c

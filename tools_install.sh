@@ -25,22 +25,23 @@ $pacMan rsync rclone # rclone-browser
 # 各种查看系统信息的软件
 $pacMan btop htop cpufetch duf gdu # glances plasma-systemmonitor hardinfo2 sysmontask mission-center resources cpu-x
 $pacMan zsh ffmpeg tree tmux tldr  # kdeconnect, tldr 推荐换成 tealdeer
-$pacMan figlet net-tools ripgrep jq bat curl git wget vim \
+$pacMan figlet net-tools ripgrep jq jd bat curl git wget vim \
   neofetch onefetch trash-cli imagemagick transmission-cli \
-  unzip unrar p7zip gping
+  unzip unrar p7zip gping navi choose aria2
 #       文件转换 翻译
 $pacMan pandoc translate-shell
 # 容器 podman-desktop pods
 # $pacMan docker podman lazydocker
 
 if command -v apt-get >/dev/null 2>&1; then
-  sudo apt-get install -y fd-find network-manager traceroute sqlite3 dnsutils # kitty xdg-utils
+  sudo apt-get install -y fd-find network-manager traceroute sqlite3 dnsutils github-cli # kitty xdg-utils
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
   # ubuntu 需要手动安装 neovim(包旧) lux
 elif command -v pacman >/dev/null 2>&1; then
-  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils dnsutils # ttf-nerd-fonts-symbols-mono kitty wezterm xdg-utils
+  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils dnsutils atuin github-cli # ttf-nerd-fonts-symbols-mono kitty wezterm xdg-utils
 elif command -v brew >/dev/null 2>&1; then
   # mac 内置traceroute
-  brew install fd neovim sqlite lux inetutils coreutils # coreutils includes realpath, ln, etc
+  brew install fd neovim sqlite lux inetutils coreutils atuin gh # coreutils includes realpath, ln, etc
   # brew install --cask kitty wezterm
 fi
 

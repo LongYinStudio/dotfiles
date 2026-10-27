@@ -1,0 +1,71 @@
+% file system
+
+$ device: lsblk -do NAME,SIZE,TYPE,RM --- --column 1 --header-lines 1 --delimiter '\s+'
+
+; 磁盘镜像
+
+# 分配一段空间
+fallocate -l <size> <stem>.img
+
+# 映射文件为带分区的回环设备
+sudo losetup -P -f --show <file>
+
+# 查看映射设备
+ls -l /dev/mapper
+
+# 只读挂载 ISO 镜像
+sudo mount -o loop,ro <iso> <dest>
+
+; 磁盘
+
+# 查看块设备与文件系统类型
+lsblk -f
+
+# 查看设备的 UUID
+blkid
+
+# 挂载分区
+sudo mount <device> <dest>
+
+# 查看挂载树
+findmnt
+
+# 将 ISO 写入 U 盘
+sudo dd if=<iso> of=<device> bs=4M status=progress oflag=direct conv=fsync
+
+# 清理设备上的文件系统签名
+sudo wipefs <device>
+
+# 查看磁盘 SMART 健康概况（需 smartmontools）
+sudo smartctl -H -A <device>
+
+; 回收站
+
+# 移入回收站
+trash-put <file>
+
+# 列出回收站内容
+trash-list
+
+# 还原回收站文件
+trash-restore
+
+# 清空回收站
+trash-empty
+
+; 空间占用
+
+# 各子目录占用排序
+du -h --max-depth=1 <dir> | sort -h
+
+# 查看挂载点容量
+df -h
+
+# 表格显示挂载点容量
+duf
+
+# 树状可视化目录占用
+dust <dir>
+
+# 交互式分析目录占用
+gdu <dir>

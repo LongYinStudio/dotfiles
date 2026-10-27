@@ -1,0 +1,269 @@
+% gpg, security, crypto
+
+# 查看 GPG 版本
+gpg --version
+
+# 查看所有公钥
+gpg --list-keys
+
+# 查看所有私钥
+gpg --list-secret-keys
+
+# 查看详细的密钥信息
+gpg --list-keys --keyid-format LONG
+
+# 查看私钥详细信息
+gpg --list-secret-keys --keyid-format LONG
+
+# 查看某个密钥
+gpg --list-keys <key>
+
+# 查看密钥指纹
+gpg --fingerprint <key>
+
+# 查看所有密钥指纹
+gpg --fingerprint
+
+
+% gpg, key
+
+# 生成新的 GPG 密钥
+gpg --full-generate-key
+
+# 快速生成密钥
+gpg --quick-generate-key "<name> <email>" default default <expire>
+
+# 生成 RSA 密钥
+gpg --quick-generate-key "<name> <email>" rsa2048 default <expire>
+
+# 修改密钥
+gpg --edit-key <key>
+
+# 删除公钥
+gpg --delete-key <key>
+
+# 删除私钥
+gpg --delete-secret-key <key>
+
+# 导出公钥
+gpg --armor --export <key>
+
+# 导出公钥到文件
+gpg --armor --export <key> > <file>
+
+# 导出私钥
+gpg --armor --export-secret-keys <key> > <file>
+
+# 导出指定子密钥
+gpg --armor --export-secret-subkeys <key> > <file>
+
+
+% gpg, encrypt
+
+# 加密文件
+gpg --encrypt --recipient <key> <file>
+
+# 加密文件并输出 ASCII Armor
+gpg --armor --encrypt --recipient <key> <file>
+
+# 指定多个收件人
+gpg --encrypt --recipient <key1> --recipient <key2> <file>
+
+# 加密为指定文件
+gpg --output <output> --encrypt --recipient <key> <file>
+
+# 对称加密
+gpg --symmetric <file>
+
+# ASCII Armor 对称加密
+gpg --armor --symmetric <file>
+
+
+% gpg, decrypt
+
+# 解密文件
+gpg --decrypt <file>
+
+# 解密并输出到指定文件
+gpg --output <output> --decrypt <file>
+
+# 解密 ASCII Armor
+gpg --decrypt <file>
+
+
+% gpg, sign
+
+# 签名文件
+gpg --sign <file>
+
+# 创建 ASCII 签名
+gpg --armor --sign <file>
+
+# 分离签名
+gpg --detach-sign <file>
+
+# 创建 ASCII 分离签名
+gpg --armor --detach-sign <file>
+
+# 签名并压缩
+gpg --sign --compress-algo zlib <file>
+
+# 签名并加密
+gpg --sign --encrypt --recipient <key> <file>
+
+# ASCII Armor 签名并加密
+gpg --armor --sign --encrypt --recipient <key> <file>
+
+
+% gpg, verify
+
+# 验证签名
+gpg --verify <signature> <file>
+
+# 验证分离签名
+gpg --verify <signature> <file>
+
+# 查看签名文件
+gpg --list-packets <file>
+
+
+% gpg, keyserver
+
+# 从 Keyserver 搜索密钥
+gpg --keyserver hkps://keys.openpgp.org --search-keys <email>
+
+# 从 Keyserver 导入密钥
+gpg --keyserver hkps://keys.openpgp.org --recv-keys <key>
+
+# 上传公钥到 Keyserver
+gpg --keyserver hkps://keys.openpgp.org --send-keys <key>
+
+
+% gpg, import
+
+# 导入公钥
+gpg --import <file>
+
+# 导入私钥
+gpg --import <file>
+
+# 导入 ASCII Armor 公钥
+gpg --import <file>
+
+
+% gpg, export
+
+# 导出公钥 ASCII Armor
+gpg --armor --export <key>
+
+# 导出全部公钥
+gpg --armor --export
+
+# 导出全部私钥
+gpg --armor --export-secret-keys
+
+# 导出完整 GPG 目录
+tar -czf <output> ~/.gnupg
+
+
+% gpg, trust
+
+# 编辑密钥信任
+gpg --edit-key <key>
+
+# 在交互模式中查看密钥
+gpg --edit-key <key>
+
+# 查看密钥有效性
+gpg --list-keys <key>
+
+
+% gpg, symmetric
+
+# 对称加密文件
+gpg --symmetric <file>
+
+# 解密对称加密文件
+gpg --decrypt <file>
+
+# 使用 AES256 对称加密
+gpg --cipher-algo AES256 --symmetric <file>
+
+
+% gpg, git
+
+# 查看 Git 签名密钥
+git config --get user.signingkey
+
+# 查看 Git 签名配置
+git config --get commit.gpgsign
+
+# 设置 Git 签名密钥
+git config --global user.signingkey <key>
+
+# 开启 Git 自动签名
+git config --global commit.gpgsign true
+
+# 使用 GPG 签名提交
+git commit -S -m "<message>"
+
+# 验证最近一次提交
+git log --show-signature -1
+
+# 验证 Git 标签
+git tag -v <tag>
+
+
+% gpg, ssh
+
+# 查看 GPG 公钥
+gpg --armor --export <key>
+
+# 查看 SSH 使用的 GPG agent
+gpgconf --list-dirs agent-ssh-socket
+
+# 查看 GPG Agent
+gpg-connect-agent /bye
+
+# 重启 GPG Agent
+gpgconf --kill gpg-agent
+
+# 启动 GPG Agent
+gpgconf --launch gpg-agent
+
+
+% gpg, troubleshooting
+
+# 查看 GPG Agent 状态
+gpg-connect-agent "getinfo version" /bye
+
+# 重启 GPG Agent
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
+
+# 查看 GPG 配置目录
+gpgconf --list-dirs
+
+# 查看 GPG home
+gpgconf --list-dirs homedir
+
+# 查看正在运行的 GPG 进程
+pgrep -a gpg
+
+# 查看 GPG Agent 进程
+pgrep -a gpg-agent
+
+# 检查 GPG Socket
+gpgconf --list-dirs agent-socket
+
+
+% gpg, cleanup
+
+# 删除公钥
+gpg --delete-key <key>
+
+# 删除私钥
+gpg --delete-secret-key <key>
+
+# 删除指定密钥的所有相关数据
+gpg --delete-secret-and-public-key <key>

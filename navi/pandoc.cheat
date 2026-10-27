@@ -1,0 +1,16 @@
+% pandoc
+
+# Markdown 转 docx
+pandoc <in>.md -o <out>.docx
+
+# Markdown 转 PDF（中文需 xelatex 与中文字体）
+pandoc <in>.md -o <out>.pdf --pdf-engine=xelatex -V CJKmainfont='<font>'
+
+# Markdown 转独立 HTML
+pandoc <in>.md -s -o <out>.html
+
+# docx 转 Markdown
+pandoc <in>.docx -t gfm -o <out>.md
+
+# Markdown 转 epub
+pandoc <in>.md -o <out>.epub

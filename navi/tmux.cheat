@@ -1,0 +1,24 @@
+% tmux
+
+$ session: tmux ls --- --column 1 --delimiter ':'
+
+# 新建会话
+tmux new -s <name>
+
+# 接入或新建同名会话
+tmux new -A -s <name>
+
+# 列出会话
+tmux ls
+
+# 接入指定会话
+tmux attach -t <session>
+
+# 强制接入并踢掉其它终端
+tmux attach -d -t <session>
+
+# 结束指定会话
+tmux kill-session -t <session>
+
+# 结束整个 tmux 服务
+tmux kill-server

@@ -1,0 +1,104 @@
+% git
+
+$ difftool: printf '\n--ext-diff'
+$ opt-name-only: printf '\n--name-only'
+$ opt-b: printf '\n-b'
+$ opt-f: printf '\n--force'
+$ worktree-path: git worktree list --- --column 1
+$ commit: git log --pretty=format:"%h %s" --- --column 1 --delimiter ' '
+
+# 追踪文件之树
+git ls-tree -r main --name-only | tree -Ca --fromfile
+
+# 清理缓存，以便重新建立忽略规则
+git rm -r --cached .
+
+# 深层墓场
+git reflog
+
+# 交互式清理未跟踪文件与忽略文件
+git clean -fxi
+
+# 历次提交的文件变化
+git log --stat
+
+# 历次提交的详细变化情况
+git log <difftool> --stat -p -W <path>
+
+# 查看某次提交的内容
+git show <opt-name-only> <commit>
+
+# 历史树
+git log --graph --oneline --decorate --all
+
+# 清除已失效的远程分支
+git remote prune origin
+
+# 拉取项目的git子模块
+git submodule update --init
+
+# 开辟一个新的工作树
+git worktree add <path> <opt-b> <branch>
+
+# 移除工作树
+git worktree remove <opt-f> <worktree-path>
+
+# 修改最新的提交消息
+git commit --amend
+
+# 获取仓库的版本戳
+git describe --long --abbrev=7
+
+# 从<commit>到HEAD需要经历几次提交
+git rev-list --count <commit>..HEAD
+
+# 使用mailmap文件替换邮箱
+#
+# 格式：
+# <name> <新邮箱> <旧邮箱>
+git filter-repo --mailmap <mailmap>
+
+# 最小化拉取
+git clone --depth=1 --sparse --filter=blob:none <url>
+
+# 查看忽略的文件
+git status --ignored
+
+# 查看忽略的文件的规则来源
+git check-ignore -v <path>
+
+# 新建并切换分支
+git switch -c <branch>
+
+# 收藏改动（含未跟踪文件）
+git stash -u
+
+# 取出最近一次收藏
+git stash pop
+
+# 逐行追溯改动来源（忽略空白与代码搬移）
+git blame -w -C <file>
+
+# 开始二分定位，标记当前为坏、<commit> 为好
+git bisect start; git bisect bad; git bisect good <commit>
+
+# 自动化二分（命令退出码 0 为好，非 0 为坏）
+git bisect run <command>
+
+# 结束二分，回到原分支
+git bisect reset
+
+# 提交时标记为指定提交的修正
+git commit --fixup <commit>
+
+# 交互变基并自动合并 fixup
+git rebase -i --autosquash <base>
+
+# 安全强推（不覆盖他人的新提交）
+git push --force-with-lease
+
+# 按作者统计提交数
+git shortlog -sn
+
+# 在终端查看仓库统计
+onefetch

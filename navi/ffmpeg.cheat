@@ -1,0 +1,49 @@
+% ffmpeg
+
+$ audio: fd -c='always' -H -E='.git' -I -t file .
+$ video: fd -c='always' -H -E='.git' -I -t file .
+$ mp4: fd -c='always' -H -E='.git' -I -t file -e 'mp4' .
+$ m4a: fd -c='always' -H -E='.git' -I -t file -e 'm4a' .
+
+# 查看音频元信息
+ffprobe -v quiet -show_format -of json <audio>
+
+# 查看音频比特率
+ffprobe -v quiet -select_streams 'a:0' -show_entries 'stream=bit_rate' -of 'compact=p=0:nk=1' <audio>
+
+# 查看视频元信息
+ffprobe -v quiet -select_streams v -show_entries 'format=duration,size,bit_rate,filename' -show_streams -of json <video>
+
+# 提取视频的音频到mp3
+ffmpeg -i <video> -vn -c:a mp3 -q:a 0 -map a <output>
+
+# 合并音视频
+ffmpeg -i <mp4> -i <m4a> -c copy <output>.mp4
+
+# 以最小损失压缩视频
+ffmpeg -i <video> -c:v libx264 -crf 18 -preset slow -c:a copy <output>
+
+# 无损裁剪视频片段
+ffmpeg -ss <start> -to <end> -i <video> -c copy <output>
+
+# 视频转 GIF
+ffmpeg -i <video> -vf 'fps=12,scale=640:-1:flags=lanczos' <output>.gif
+
+# 按 concat 清单无损拼接视频
+#
+# 清单格式：
+# file '片段1.mp4'
+# file '片段2.mp4'
+ffmpeg -f concat -safe 0 -i <list> -c copy <output>
+
+# 每秒抽一帧为图片
+ffmpeg -i <video> -r 1 <output>-%04d.png
+
+# 烧录字幕进视频
+ffmpeg -i <video> -vf "subtitles=<srt>" -c:a copy <output>
+
+# 调整音频音量（倍数）
+ffmpeg -i <audio> -af 'volume=<gain>' <output>
+
+# 从指定时间起截取音频
+ffmpeg -ss <start> -t <duration> -i <audio> -c copy <output>

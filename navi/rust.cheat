@@ -1,0 +1,75 @@
+% rust
+
+; rust语言相关
+
+$ target: rustc --print target-list
+$ local-toolchain: rustup toolchain list
+
+# 列印所有目标平台
+rustc --print target-list
+
+# 测试时显示输出
+cargo test -- --nocapture
+
+# 测试隐藏的函数
+cargo test -- --ignored
+
+# 编译器切换成 nightly
+rustup override set nightly
+
+# 添加编译目标
+rustup target add <target>
+
+# 交叉编译指定目标
+cargo build --release --target <target>
+
+# 安装可执行的 crate
+cargo install <crate>
+
+# 安装工具链
+rustup toolchain install <toolchain>
+
+# 卸载工具链
+rustup toolchain uninstall <local-toolchain>
+
+# 以树状图追踪一个包为何存在
+cargo tree -i <crate>
+
+# 读取文件的 object 信息
+rust-readobj -h <object>
+
+# 反汇编指定段
+rust-objdump --section=<section> --source <object>
+
+# 读取符号表（若有）
+rust-objdump --syms <object>
+
+# 查看项目的全部文档
+cargo doc --document-private-items --open
+
+# 展开主函数
+cargo expand main
+
+# 列印会推送的文件
+cargo package --list
+
+# 本地打开std文档
+rustup doc --std
+
+# 打开某个 crate 的文档
+cargo doc --open -p <crate>
+
+# 代码静态检查（警告即失败）
+cargo clippy -- -D warnings
+
+# 自动格式化
+cargo fmt
+
+# 添加依赖
+cargo add <crate>
+
+# 以发布模式运行
+cargo run --release -- <args>
+
+# 运行基准测试
+cargo bench

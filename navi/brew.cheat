@@ -1,0 +1,128 @@
+% brew
+
+$ package: brew list --formula --- --column 1
+$ cask: brew list --cask --- --column 1
+$ service: brew services list --- --column 1 --header-lines 1
+$ tap: brew tap --- --column 1
+
+; 基础
+
+# 更新 brew 自身与软件索引
+brew update
+
+# 列出可升级的包
+brew outdated
+
+# 升级所有已安装的包
+brew upgrade
+
+# 升级所有 GUI 应用
+brew upgrade --cask
+
+# 升级指定的包
+brew upgrade <package>
+
+# 清理旧版本与缓存（-n 只预览将删除的内容）
+brew cleanup -n
+
+# 彻底清理全部下载缓存
+brew cleanup --prune=all
+
+# 体检诊断
+brew doctor
+
+# 查看环境与版本配置
+brew config
+
+; 安装卸载
+
+# 安装命令行包
+brew install <package>
+
+# 安装 GUI 应用
+brew install --cask <cask>
+
+# 搜索
+brew search <keyword>
+
+# 查看包信息
+brew info <package>
+
+# 重装（修复损坏的安装）
+brew reinstall <package>
+
+# 卸载
+brew uninstall <package>
+
+# 卸载 GUI 应用
+brew uninstall --cask <cask>
+
+# 卸载 GUI 应用并连配置缓存一起删除
+brew uninstall --zap --cask <cask>
+
+# 卸载不再被依赖的包
+brew autoremove
+
+; 查询
+
+# 列出已安装的包
+brew list
+
+# 列出已安装的 GUI 应用
+brew list --cask
+
+# 列出手动安装且不被其它包依赖的顶层包
+brew leaves
+
+# 查看哪些已安装的包依赖它（卸载前确认）
+brew uses --installed <package>
+
+# 查看依赖树
+brew deps --tree <package>
+
+# 查看已安装的版本
+brew list --versions <package>
+
+; 版本锁定
+
+# 固定版本，不参与升级
+brew pin <package>
+
+# 解除固定
+brew unpin <package>
+
+; 服务
+
+# 列出服务与开机自启状态
+brew services list
+
+# 启动服务并设为开机自启
+brew services start <service>
+
+# 启动服务（不设自启）
+brew services run <service>
+
+# 重启服务
+brew services restart <service>
+
+# 停止服务
+brew services stop <service>
+
+; 源 tap
+
+# 列出已添加的第三方源
+brew tap
+
+# 添加第三方源
+brew tap <user>/<repo>
+
+# 移除第三方源
+brew untap <tap>
+
+; Brewfile
+
+# 导出已安装清单到 Brewfile（配合 dotfiles）
+brew bundle dump --file=<brewfile>
+
+# 按 Brewfile 安装
+brew bundle --file=<brewfile>

@@ -1,0 +1,37 @@
+% qemu
+
+$ disk-img: fd -c='always' -H -I -t file -e 'qcow2' -e 'img' -e 'raw' .
+$ iso: fd -c='always' -H -I -t file -e 'iso' .
+
+# 创建 qcow2 虚拟磁盘
+qemu-img create -f qcow2 <disk>.qcow2 20G
+
+# 扩容虚拟磁盘
+qemu-img resize <disk-img> +10G
+
+# 转换磁盘格式
+qemu-img convert -O qcow2 <disk-img> <output>.qcow2
+
+# 查看虚拟磁盘信息
+qemu-img info <disk-img>
+
+# 启动 x86_64 虚拟机（KVM 加速，GTK 窗口）
+qemu-system-x86_64 -enable-kvm -cpu host -m 4G -smp 4 -drive file=<disk-img>,format=raw -cdrom <iso> -display gtk
+
+# 无窗口启动，串口交互
+qemu-system-x86_64 -nographic -m 2G -drive file=<disk-img>,format=raw
+
+# 端口转发：宿主 2222 通向虚拟机 22
+qemu-system-x86_64 -enable-kvm -m 4G -drive file=<disk-img>,format=raw -nic user,hostfwd=tcp::2222-:22 -display gtk
+
+# 以 9p 协议共享宿主目录（虚拟机内挂载：mount -t 9p -o trans=virtio hostshare /mnt/share）
+qemu-system-x86_64 -enable-kvm -m 4G -drive file=<disk-img>,format=raw -virtfs local,path=<src>,mount_tag=hostshare,security_model=none,id=hostshare -display gtk
+
+# 试运行：所有写入不落盘
+qemu-system-x86_64 -enable-kvm -m 4G -drive file=<disk-img>,format=raw -snapshot -display gtk
+
+# 启动 RISC-V 虚拟机（串口输出内核日志）
+qemu-system-riscv64 -nographic -machine virt -kernel <kernel> -append 'console=ttyS0 root=/dev/vda' -drive file=<rootfs>,format=raw,if=virtio
+
+# 冻结启动，等待 gdb 连接 localhost:1234（-s 开放 gdbstub，-S 暂停执行）
+qemu-system-riscv64 -nographic -machine virt -kernel <kernel> -s -S

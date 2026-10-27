@@ -1,0 +1,90 @@
+% network
+
+$ local-ssid: nmcli --get-values 'NAME' connection show
+$ ssid: nmcli --get-values SSID device wifi | rg -v '^$' | uniq
+
+# 查看网络设备
+nmcli device status
+
+# 确认 WIFI 连接功能已启动
+nmcli radio wifi
+
+# 查看附近 WIFI
+nmcli device wifi list --rescan <N-Y>
+$ N-Y: printf 'no\nyes'
+
+# 以冒号分割，打印附近wifi的列表
+nmcli --terse device wifi
+
+# 连接 WIFI
+nmcli device wifi connect <ssid> password <password>
+
+# 遗忘网络连接
+nmcli connection delete <local-ssid>
+
+# 检查端口占用
+lsof -i:<port>
+
+# 查看本机IP地址
+ip address
+
+# 统计socket连接信息
+ss --tcp --udp --listening --processes --numeric
+
+# 开通虚拟机的网桥
+sudo virsh net-start default
+
+# 注册证书签发挂名的邮箱
+acme.sh --register-account -m <email>
+
+# 为域名签发TLS证书
+with-env {
+    Tencent_SecretId: '<SecretId>',
+    Tencent_SecretKey: '<SecretKey>',
+} {
+    acme.sh --issue --dns dns_tencent -d <origin>
+}
+
+# 通过 TLS 协议，测试指定域名的证书是否齐全
+openssl s_client -connect <origin>:<port> -servername <origin> -showcerts
+
+; 连通性
+
+# 图形化 ping 多个主机
+gping <host1> <host2>
+
+# 持续探测连通性，逐条标出丢失
+ping -O <host>
+
+# 起一个 iperf3 服务端
+iperf3 -s
+
+# 测量到指定主机的带宽（持续 10 秒）
+iperf3 -c <host> -t 10
+
+# 查看到指定地址实际走的路由
+ip route get <ip>
+
+# 计算网段的掩码与主机范围
+ipcalc <cidr>
+
+# 查询域名的解析记录
+dig +short <origin>
+
+# 指定 DNS 服务器查询
+dig @<dns> <origin> +short
+
+# 查询 TXT 记录
+dig <origin> TXT +short
+
+# 查看系统的 DNS 配置状态
+resolvectl status
+
+# 抓取指定端口的包并写入文件（供 wireshark 分析）
+sudo tcpdump -i <iface> -nn port <port> -w <file>.pcap
+
+# 实时查看指定主机的明文流量
+sudo tcpdump -i <iface> -nn -A host <ip> and port 80
+
+# 开启 Wi-Fi 热点
+nmcli device wifi hotspot ssid <ssid> password <password>

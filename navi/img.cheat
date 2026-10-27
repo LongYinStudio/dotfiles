@@ -1,0 +1,33 @@
+% imagemagick, image
+
+$ image: fd -c='always' -H -E='.git' -I -t file -e 'jpg' -e 'jpeg' -e 'png' -e 'webp' -e 'bmp' .
+
+# 查看图片元信息
+identify <image>
+
+# 缩放到指定宽度，等比
+convert <image> -resize 1280x <output>
+
+# 旋转 90 度
+convert <image> -rotate 90 <output>
+
+# 去除隐私元信息
+convert <image> -strip <output>
+
+# webp 转 png
+convert <image> <output>.png
+
+# 提取 PDF 第一页为图片
+convert '<pdf>[0]' <output>.png
+
+# 批量压缩 jpg 到指定目录
+mogrify -path <dest> -quality 85 -strip *.jpg
+
+# 垂直拼接两张图
+convert -append <image1> <image2> <output>
+
+# 水平拼接两张图
+convert +append <image1> <image2> <output>
+
+# 帧序列合成 GIF
+convert -delay 10 -loop 0 'frame-*.png' <output>.gif

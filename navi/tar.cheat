@@ -1,0 +1,52 @@
+% tar, archive
+
+$ dir: fd -c='always' -H -E='.git' -I --type directory -d 3 .
+$ archive: fd -c='always' -H -E='.git' -I -t file -e 'tar.gz' -e 'tgz' -e 'tar.zst' -e 'tar.xz' -e 'tar.bz2' -e 'zip' -e '7z' .
+
+# 打包目录为 gzip 压缩包
+tar -czf <output>.tar.gz <dir>
+
+# 打包目录为 zstd 压缩包（多核压缩）
+tar --use-compress-program='zstd -T0' -cf <output>.tar.zst <dir>
+
+# 打包时排除指定路径
+tar -czf <output>.tar.gz --exclude='.git' --exclude='node_modules' <dir>
+
+# 自动识别格式解包
+tar -xf <archive>
+
+# 解包到指定目录
+tar -xf <archive> -C <dest>
+
+# 预览压缩包内容
+tar -tvf <archive>
+
+# 单文件压缩为 zstd
+zstd -T0 <file>
+
+# 解压 zstd
+unzstd <file>.zst
+
+# 单文件高压缩比 xz
+xz -T0 -9 <file>
+
+# 解压 xz
+unxz <file>.xz
+
+# 打包为 zip 并排除 .git
+zip -r <output>.zip <dir> -x '*.git*'
+
+# 预览 zip 内容
+unzip -l <archive>
+
+# 分卷打包（每卷 2G）
+tar -czf - <dir> | split -b 2G - <output>.tar.gz.part-
+
+# 合并分卷解包
+cat <output>.tar.gz.part-* | tar -xzf -
+
+# 打包为带密码的 7z（交互输入密码）
+7z a -p <output>.7z <dir>
+
+# 预览 7z 内容
+7z l <archive>

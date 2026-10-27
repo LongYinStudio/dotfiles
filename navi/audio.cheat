@@ -1,0 +1,21 @@
+% audio, wpctl
+
+$ vol: printf '5%%+\n5%%-' --- --column 1 --delimiter '\s+'
+
+# 查看音频设备与音量树
+wpctl status
+
+# 查看默认输出的音量
+wpctl get-volume @DEFAULT_AUDIO_SINK@
+
+# 调节默认输出音量（-l 限制上限 150%）
+wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ <vol>
+
+# 静音切换默认输出
+wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# 查看默认输入（麦克风）的音量
+wpctl get-volume @DEFAULT_AUDIO_SOURCE@
+
+# 设置指定设备为默认输出
+wpctl set-default <device-id>

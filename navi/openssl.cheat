@@ -1,0 +1,37 @@
+% openssl
+
+# 生成 RSA 私钥
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out <key>.pem
+
+# 生成 Ed25519 私钥
+openssl genpkey -algorithm ED25519 -out <key>.pem
+
+# 从私钥提取公钥
+openssl pkey -in <key>.pem -pubout -out <pub>.pem
+
+# 生成证书签名请求
+openssl req -new -key <key>.pem -out <csr>.csr -subj '/CN=<origin>'
+
+# 自签发一年期证书
+openssl req -x509 -new -key <key>.pem -days 365 -out <cert>.crt -subj '/CN=<origin>'
+
+# 查看证书内容
+openssl x509 -in <cert>.crt -noout -text
+
+# 查看证书有效期
+openssl x509 -in <cert>.crt -noout -dates
+
+# 查看远端服务的证书有效期
+openssl s_client -connect <origin>:<port> -servername <origin> 2>/dev/null | openssl x509 -noout -dates
+
+# 校验证书与私钥是否配对
+diff <(openssl x509 -in <cert>.crt -pubkey -noout) <(openssl pkey -in <key>.pem -pubout) && echo 匹配
+
+# 转换 PEM 为 DER
+openssl x509 -in <cert>.crt -outform der -out <cert>.der
+
+# 打包为 PKCS12（供 JVM 使用）
+openssl pkcs12 -export -in <cert>.crt -inkey <key>.pem -out <keystore>.p12 -name <alias>
+
+# 查看 PKCS12 内容
+openssl pkcs12 -in <keystore>.p12 -info -nokeys

@@ -1,0 +1,53 @@
+% podman
+
+$ container: podman container list -a --- --column 1 --header-lines 1 --delimiter '\s+'
+$ image: podman images --format '{{.Repository}}:{{.Tag}}'
+$ from-dockerfile: printf '\n-f Dockerfile'
+
+# 查看容器的日志
+podman container logs <container>
+
+# 实例化 image，启用交互式终端在后台运行容器
+podman run -itd --name <cname> <image>
+
+# 启用交互式终端让容器运行命令
+podman exec -it <container> <command>
+
+# 显示全部容器的ID
+podman ps -a
+
+# 重启已有的容器
+podman restart <container>
+
+# 构建新镜像
+podman build -t <name> <from-dockerfile>
+
+# 清理所有外部死容器
+buildah rm --all
+
+# 查看容器或镜像的详细配置
+podman inspect <container>
+
+# 在容器与宿主间复制文件
+podman cp <container>:<src> <dest>
+
+# 查看容器资源占用快照
+podman stats --no-stream
+
+# 查看镜像与容器的磁盘占用
+podman system df
+
+# 导出镜像为 tar 包
+podman save -o <file>.tar <image>
+
+# 导入 tar 包为镜像
+podman load -i <file>.tar
+
+# 登录镜像仓库
+podman login <registry>
+
+# 为镜像打标签
+podman tag <image> <registry>/<name>:<tag>
+
+# 推送镜像到仓库
+podman push <registry>/<name>:<tag>

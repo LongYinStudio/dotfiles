@@ -1,0 +1,52 @@
+% rg, fd
+
+$ file: fd -c='always' -H -E='.git' -I -t file .
+
+; rg
+
+# 只列出匹配的文件
+rg -l <pattern> <path>
+
+# 显示匹配行的上下文
+rg -C 2 <pattern> <path>
+
+# 整词匹配
+rg -w <pattern> <path>
+
+# 以 PCRE2 语法匹配（支持环视）
+rg -P '<pattern>' <path>
+
+# 只输出匹配到的片段
+rg -o <pattern> <path>
+
+# 统计每个文件的匹配行数
+rg -c <pattern> <path>
+
+# 列出没有匹配的文件
+rg --files-without-match <pattern> <path>
+
+# 只在指定类型的文件中搜索
+rg -t <type> <pattern>
+
+# 查看可用的文件类型
+rg --type-list
+
+# 搜索隐藏与被忽略的文件
+rg --no-ignore --hidden <pattern>
+
+; fd
+
+# 批量对结果执行命令（{} 为路径，{.} 为去扩展名路径）
+fd -e '<ext>' -x <command> {} {.}
+
+# 找出超过指定大小的文件
+fd -S +<size>
+
+# 找出一天内改动的文件
+fd --changed-within 1d
+
+# 只搜目录
+fd -t d
+
+# 只搜符号链接
+fd -t l

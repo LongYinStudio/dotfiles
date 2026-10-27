@@ -33,7 +33,8 @@ xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
 # 图片 inkscape 代替 Adobe Illustrator(krita也可以)、视频、音乐相关 flameshot在hyprland下无法使用，安装flameshot-git(aur), haruna是kde旗下的一个播放器
 $pacMan gwenview imagemagick gimp inkscape mpv vlc obs-studio kdenlive cava haruna # celluloid krita blender # blender不仅可3D,还可编辑图片/视频
-# $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste
+# $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste moekoemusic-bin
+$aurPkg photocraft-bin lightcraft-bin filmcraft-bin vectorcraft-bin # pdfcraft effectcraft-bin wordcraft gridcraft deckcraft
 
 # (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速, 投屏到电视
 # (写盘, 2远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
@@ -57,7 +58,7 @@ $aurPkg hyprland waybar wofi wlogout hyprlock hyprpicker xdg-desktop-portal-hypr
 
 # dev 最好用toolbox，这样arch滚的时候不用更新jet的IDE(包括Android Studio)，太大费流量。wechat-devtools可以使用appimage。waydroid-image 用aur或archlinuxcn
 $aurPkg visual-studio-code-bin dbx-bin navicat-premium-lite-zh-cn jetbrains-toolbox android-tools typora maven \
-  xmind reqable-bin zeal-git # rofi-zeal-git apifox-appimage tabby-bin wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
+  xmind reqable-bin zeal-git devcrate # rofi-zeal-git apifox-appimage tabby-bin wechat-devtools-bin archbuilder-git github-desktop-bin httpie pods nmap waydroid waydroid-image
 # $pacMan mariadb # MariaDB由MySQL的一些原始开发者创建，目的是确保MySQL在被Oracle收购后仍然保持开源。
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 # sudo systemctl enable mariadb.service
@@ -85,6 +86,7 @@ $aurPkg visual-studio-code-bin dbx-bin navicat-premium-lite-zh-cn jetbrains-tool
 
 # 续航 (smartmontools针对有机械硬盘的, tp_smapi[-lts]是Thinkpad电池校准和充电阈值, acpi_call[-lts]和tp_smapi类似但不特指Thinkpad)
 # 推荐配置:用电池下节能模式以及频率，禁用LAN唤醒（默认就是禁用的，LAN唤醒会让电脑在关机状态下电量越来越少）
+# cat /sys/firmware/acpi/platform_profile # 查看当前性能模式 performance, balanced, low-power
 # $pacMan tlp tlp-rdw x86_energy_perf_policy ethtool # smartmontools tp_smapi acpi_call
 # $aurPkg tlpui
 # sudo systemctl start tlp.service NetworkManager-dispatcher.service

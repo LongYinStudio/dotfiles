@@ -1,0 +1,79 @@
+% adb
+
+$ biset: printf '0 关\n1 开' --- --column 1 --delimiter '\s+'
+
+; 开发者选项
+
+# 开关指针位置显形
+adb shell settings put system pointer_location <biset>
+
+# 开关触点显形
+adb shell settings put system show_touches <biset>
+
+; 设备与文件
+
+# 列出连接的设备
+adb devices -l
+
+# 开启无线调试（需先用 USB 连接）
+adb tcpip 5555
+
+# 连接无线设备
+adb connect <ip>:5555
+
+# 安装 apk（覆盖安装）
+adb install -r <apk>
+
+# 卸载应用
+adb uninstall <package>
+
+# 按关键字查询包名
+adb shell pm list packages | rg <keyword>
+
+# 推送文件到设备
+adb push <file> /sdcard/
+
+# 从设备拉取文件
+adb pull /sdcard/<file> <local-dest>
+
+; 采集
+
+# 查看实时日志
+adb logcat -T 1
+
+# 按标签过滤日志
+adb logcat -s <tag>
+
+# 截屏并导出
+adb exec-out screencap -p > <output>.png
+
+# 录屏（Ctrl+C 结束）
+adb shell screenrecord /sdcard/<output>.mp4
+
+# 导出录屏
+adb pull /sdcard/<output>.mp4 <local-dest>
+
+; 自动化
+
+# 注入文本
+adb shell input text '<string>'
+
+# 模拟点击
+adb shell input tap <x> <y>
+
+# 模拟滑动
+adb shell input swipe <x1> <y1> <x2> <y2> <duration-ms>
+
+# 模拟按键（如返回键 KEYCODE_BACK=4）
+adb shell input keyevent <keycode>
+
+; scrcpy
+
+# 投屏并录制为 mp4
+scrcpy --record <output>.mp4
+
+# 投屏时熄灭手机屏幕
+scrcpy --turn-screen-off
+
+# 投屏时保持手机唤醒
+scrcpy --stay-awake

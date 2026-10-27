@@ -1,0 +1,25 @@
+% kitty
+
+$ image: fd -c='always' -H -E='.git' -I -t file -e 'jpg' -e 'jpeg' -e 'png' -e 'webp' -e 'gif' .
+$ theme: kitty +kitten themes --dump-theme-names --- --column 1
+
+# 终端内显示图片
+kitty +kitten icat <image>
+
+# 交互式换主题（写入 current-theme.conf）
+kitty +kitten themes
+
+# 直接应用指定主题
+kitty +kitten themes <theme>
+
+# 并排对比两个文件
+kitty +kitten diff <file1> <file2>
+
+# grep 并生成可点击跳转的结果
+kitty +kitten hyperlinked_grep <pattern> <path>
+
+# 带终端集成环境的 ssh
+kitty +kitten ssh <user>@<host>
+
+# 检查配置与启动告警
+kitty --debug-config
