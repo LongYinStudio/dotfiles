@@ -36,10 +36,10 @@ $pacMan gwenview imagemagick gimp inkscape mpv vlc obs-studio kdenlive cava haru
 # $aurPkg spotify netease-cloud-music qqmusic-bin listen1 snipaste moekoemusic-bin
 $aurPkg photocraft-bin lightcraft-bin filmcraft-bin vectorcraft-bin # pdfcraft effectcraft-bin wordcraft gridcraft deckcraft
 
-# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速, 投屏到电视
-# (写盘, 2远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
-$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy-bin filelight scrcpy # kdiskmark gnome-network-displays fluxcast-git
-# $aurPkg balena-etcher todesk-bin sunloginclient baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
+# (ntfs，压缩, 备份, 显示快捷键, 视频缩略图-文件管理器里, 3写盘, 空间扫描, adb投屏, 硬盘测速, 投屏到电视 linux-icloud平替
+# (写盘, 3远程, 网盘, 下载, 有道云笔记, anki, utools, 传文件, 两腾讯云cos, picgo, drawio可以用PWA) todesk需要启动服务 escrcpy(scrcpy electron)
+$pacMan ntfs-3g ark timeshift screenkey ffmpegthumbnailer isoimagewriter deepin-boot-maker ventoy-bin filelight scrcpy skykeep-bin # kdiskmark gnome-network-displays fluxcast-git
+# $aurPkg balena-etcher todesk-bin rustdesk sunloginclient baidunetdisk-bin motrix-bin # ynote-desktop-bin anki utools localsend-bin cosfs cosbrowser picgo drawio-desktop-bin archlinux-tweak-tool-git
 
 # 划词翻译(archlinuxcn源,或者aur)), tesseract qt前端 (目前用utools)
 # $pacMan pot-translation tesseract-data-chi_sim tesseract-data-eng gimagereader-qt # translate-shell

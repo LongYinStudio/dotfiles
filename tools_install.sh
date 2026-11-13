@@ -38,10 +38,10 @@ if command -v apt-get >/dev/null 2>&1; then
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
   # ubuntu 需要手动安装 neovim(包旧) lux
 elif command -v pacman >/dev/null 2>&1; then
-  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils dnsutils atuin github-cli # ttf-nerd-fonts-symbols-mono kitty wezterm xdg-utils
+  sudo pacman -S --needed fd networkmanager traceroute neovim sqlite lux-dl inetutils dnsutils atuin github-cli vhs # ttf-nerd-fonts-symbols-mono kitty wezterm xdg-utils
 elif command -v brew >/dev/null 2>&1; then
   # mac 内置traceroute
-  brew install fd neovim sqlite lux inetutils coreutils atuin gh # coreutils includes realpath, ln, etc
+  brew install fd neovim sqlite lux inetutils coreutils atuin gh vhs # coreutils includes realpath, ln, etc
   # brew install --cask kitty wezterm
 fi
 
